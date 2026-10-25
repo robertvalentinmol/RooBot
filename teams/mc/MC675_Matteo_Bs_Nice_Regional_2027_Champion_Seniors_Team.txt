@@ -1,0 +1,54 @@
+Charizard-Mega-Y @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Weather Ball  
+- Heat Wave  
+- Ancient Power  
+- Protect  
+
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Tailwind  
+- Encore  
+- Protect  
+
+Basculegion (M) @ Life Orb  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Farigiraf @ Rocky Helmet  
+Ability: Armor Tail  
+Level: 50  
+Bold Nature  
+- Psychic  
+- Helping Hand  
+- Trick Room  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Flare Blitz  
+- Throat Chop  
+- Parting Shot  
+
+Mawile-Mega @ Mawilite  
+Ability: Hyper Cutter  
+Level: 50  
+Adamant Nature  
+- Play Rough  
+- Brick Break  
+- Rock Slide  
+- Protect  
+

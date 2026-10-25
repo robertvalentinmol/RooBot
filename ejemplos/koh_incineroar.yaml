@@ -1,0 +1,32 @@
+# ¿Qué reparto de Stat Points necesita Incineroar para aguantar los dobles ataques típicos?
+# Ejecutar:  python -m vgclab.calc ejemplos/koh_incineroar.yaml
+defender: ../teams/floette_balance.txt:Incineroar
+
+sets:
+  chomp: ../teams/koh_mc_inspired.txt:Garchomp
+  rilla: ../teams/rain_offense.txt:Rillaboom
+  basc: ../teams/rain_offense.txt:Basculegion
+  floette: ../teams/floette_balance.txt:Floette-Eternal
+  sylveon: ../teams/koh_mc_inspired.txt:Sylveon
+
+scenarios:
+  - name: "Garchomp Terremoto + Rillaboom Mazazo (Campo de Hierba)"
+    weight: 2
+    attacks:
+      - {attacker: chomp, move: Earthquake, terrain: grassy}
+      - {attacker: rilla, move: Wood Hammer, terrain: grassy}
+
+  - name: "Basculegion Envite Acuático en lluvia (+0)"
+    weight: 2
+    attacks:
+      - {attacker: basc, move: Wave Crash, weather: rain}
+
+  - name: "Mega Floette Luz Aniquiladora + Sylveon Vozarrón"
+    weight: 1
+    attacks:
+      - {attacker: floette, move: Light of Ruin, atkMega: true}
+      - {attacker: sylveon, move: Hyper Voice}
+
+optimize:
+  fixed: {atk: 2}
+  top: 6

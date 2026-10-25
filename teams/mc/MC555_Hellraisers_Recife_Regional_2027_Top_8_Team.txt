@@ -1,0 +1,54 @@
+Torkoal @ Charcoal  
+Ability: Drought  
+Level: 50  
+Quiet Nature  
+- Eruption  
+- Heat Wave  
+- Earth Power  
+- Protect  
+
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Adamant Nature  
+- Flare Blitz  
+- Darkest Lariat  
+- Fake Out  
+- Parting Shot  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+Sassy Nature  
+- Psychic  
+- Helping Hand  
+- Trick Room  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Gunk Shot  
+- Fake Out  
+- Protect  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Yawn  
+- Detect  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Draco Meteor  
+- Flamethrower  
+- Power Gem  
+- Protect  
+

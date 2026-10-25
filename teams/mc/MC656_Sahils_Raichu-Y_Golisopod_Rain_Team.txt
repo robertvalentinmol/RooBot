@@ -1,0 +1,60 @@
+Vivillon @ Focus Sash  
+Ability: Compound Eyes  
+Level: 50  
+EVs: 2 HP / 32 SpA / 32 Spe  
+Timid Nature  
+- Protect  
+- Sleep Powder  
+- Hurricane  
+- Tailwind  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+EVs: 28 HP / 5 Def / 10 SpD / 23 Spe  
+Timid Nature  
+- Fake Out  
+- Protect  
+- Focus Blast  
+- Zap Cannon  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+EVs: 32 HP / 32 Atk / 2 SpD  
+Adamant Nature  
+- Leech Life  
+- Drill Run  
+- Liquidation  
+- Iron Head  
+
+Pelipper @ Life Orb  
+Ability: Drizzle  
+Level: 50  
+EVs: 32 HP / 32 SpA / 2 Spe  
+Modest Nature  
+- Wide Guard  
+- Weather Ball  
+- Hurricane  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+EVs: 32 HP / 1 Def / 1 SpA / 25 SpD / 7 Spe  
+Bold Nature  
+- Electro Shot  
+- Dragon Pulse  
+- Snarl  
+- Protect  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+EVs: 25 HP / 30 Def / 11 SpD  
+Relaxed Nature  
+- Protect  
+- Trick Room  
+- Helping Hand  
+- Psychic  
+

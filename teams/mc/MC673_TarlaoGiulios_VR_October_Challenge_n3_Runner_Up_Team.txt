@@ -1,0 +1,54 @@
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Throat Chop  
+
+Charizard @ Charizardite Y  
+Ability: Solar Power  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Ancient Power  
+- Weather Ball  
+- Protect  
+
+Venusaur @ Focus Sash  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Leaf Storm  
+- Sludge Bomb  
+- Sleep Powder  
+- Protect  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Fake Out  
+- Zap Cannon  
+- Focus Blast  
+- Protect  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Quick Attack  
+- Protect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Earthquake  
+- Dragon Claw  
+- Rock Slide  
+- Stomping Tantrum  
+

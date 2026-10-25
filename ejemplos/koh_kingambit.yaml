@@ -1,0 +1,54 @@
+# Escenario estilo Marcus Koh: ¿aguanta mi Kingambit los dobles ataques más comunes?
+# Ejecutar:  python -m vgclab.calc ejemplos/koh_kingambit.yaml --optimizar
+#
+# defender / attacker aceptan: texto de Showdown, un nombre de "sets", o "archivo.txt:Especie"
+defender: ../teams/koh_mc_inspired.txt:Kingambit
+
+sets:
+  chomp: |
+    Garchomp @ Life Orb
+    Ability: Rough Skin
+    EVs: 2 HP / 32 Atk / 32 Spe
+    Jolly Nature
+    - Earthquake
+    - Dragon Claw
+    - Rock Slide
+    - Protect
+  incin: ../teams/floette_balance.txt:Incineroar
+  sneasler: ../teams/floette_balance.txt:Sneasler
+  zard: ../teams/koh_mc_inspired.txt:Charizard
+  archa: ../teams/rain_offense.txt:Archaludon
+
+scenarios:
+  - name: "Terremoto de Garchomp (spread)"
+    weight: 1
+    attacks:
+      - {attacker: chomp, move: Earthquake}
+
+  - name: "Sneasler A Bocajarro + Envite Ígneo de Incineroar"
+    weight: 2
+    attacks:
+      - {attacker: sneasler, move: Close Combat}
+      - {attacker: incin, move: Flare Blitz}
+
+  - name: "Mega Charizard Y: Onda Ígnea al sol + Terremoto de Garchomp"
+    weight: 2
+    attacks:
+      - {attacker: zard, move: Heat Wave, atkMega: true, weather: sun}
+      - {attacker: chomp, move: Earthquake, weather: sun}
+
+  - name: "Archaludon Electrorrayo bajo lluvia (sin carga)"
+    weight: 1
+    attacks:
+      - {attacker: archa, move: Electro Shot, weather: rain}
+
+recursion:
+  - name: "Kingambit recibiendo Onda Ígnea al sol cada turno, con Restos (1/16)"
+    attacks_per_turn:
+      - {attacker: zard, move: Heat Wave, atkMega: true, weather: sun}
+    heal_per_turn: 0.0625
+    turns: 5
+
+optimize:
+  fixed: {atk: 32}   # mantenemos 32 en Ataque; el resto (34 SP) se reparte en PS/Def/DefEsp
+  top: 6

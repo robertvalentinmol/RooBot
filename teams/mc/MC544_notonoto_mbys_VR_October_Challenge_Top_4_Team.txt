@@ -1,0 +1,54 @@
+Grimmsnarl @ Light Clay  
+Ability: Prankster  
+Level: 50  
+Careful Nature  
+- Spirit Break  
+- Parting Shot  
+- Reflect  
+- Light Screen  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Flare Blitz  
+- Will-O-Wisp  
+- Fake Out  
+- Parting Shot  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Dragon Claw  
+- Stomping Tantrum  
+- Earthquake  
+- Rock Slide  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Draining Kiss  
+- Calm Mind  
+- Protect  
+
+Milotic @ Leftovers  
+Ability: Competitive  
+Level: 50  
+Calm Nature  
+- Muddy Water  
+- Coil  
+- Hypnosis  
+- Life Dew  
+
+Volcarona @ Rocky Helmet  
+Ability: Flame Body  
+Level: 50  
+Timid Nature  
+- Overheat  
+- Struggle Bug  
+- Rage Powder  
+- Tailwind  
+

@@ -1,0 +1,54 @@
+Vivillon @ Focus Sash  
+Ability: Compound Eyes  
+Level: 50  
+Timid Nature  
+- Sleep Powder  
+- Rage Powder  
+- Hurricane  
+- Protect  
+
+Politoed @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Calm Nature  
+- Weather Ball  
+- Perish Song  
+- Encore  
+- Protect  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Sludge Bomb  
+- Perish Song  
+- Protect  
+
+Incineroar @ Passho Berry  
+Ability: Intimidate  
+Level: 50  
+Relaxed Nature  
+- Protect  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+
+Rillaboom @ Occa Berry  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- U-turn  
+- Protect  
+
+Kommo-o @ Leftovers  
+Ability: Soundproof  
+Level: 50  
+Modest Nature  
+- Clanging Scales  
+- Clangorous Soul  
+- Aura Sphere  
+- Protect  
+

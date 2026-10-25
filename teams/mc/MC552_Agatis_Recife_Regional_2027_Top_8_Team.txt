@@ -1,0 +1,54 @@
+Gholdengo @ Life Orb  
+Ability: Good as Gold  
+Level: 50  
+Modest Nature  
+- Protect  
+- Make It Rain  
+- Shadow Ball  
+- Nasty Plot  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Impish Nature  
+- Parting Shot  
+- Flare Blitz  
+- Darkest Lariat  
+- Fake Out  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Protect  
+- Dragon Pulse  
+- Earth Power  
+- Power Gem  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Wood Hammer  
+- High Horsepower  
+- Grassy Glide  
+- Fake Out  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Protect  
+- Dazzling Gleam  
+- Moonblast  
+- Calm Mind  
+
+Volcarona @ Grassy Seed  
+Ability: Flame Body  
+Level: 50  
+Modest Nature  
+- Protect  
+- Heat Wave  
+- Giga Drain  
+- Quiver Dance  
+

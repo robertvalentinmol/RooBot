@@ -1,0 +1,54 @@
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Dire Claw  
+- Close Combat  
+- Protect  
+
+Rillaboom @ Eject Button  
+Ability: Grassy Surge  
+Level: 50  
+Sassy Nature  
+- Fake Out  
+- Grassy Glide  
+- U-turn  
+- Protect  
+
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Sassy Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Protect  
+
+Kommo-o @ Leftovers  
+Ability: Bulletproof  
+Level: 50  
+Modest Nature  
+- Clanging Scales  
+- Aura Sphere  
+- Clangorous Soul  
+- Protect  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Swords Dance  
+- Protect  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Sludge Bomb  
+- Perish Song  
+- Protect  
+

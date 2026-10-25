@@ -1,0 +1,54 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Weather Ball  
+- Ancient Power  
+- Protect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Rock Slide  
+- Dragon Claw  
+- Stomping Tantrum  
+- Earthquake  
+
+Toxapex @ Leftovers  
+Ability: Regenerator  
+Level: 50  
+Bold Nature  
+- Toxic  
+- Infestation  
+- Wide Guard  
+- Baneful Bunker  
+
+Venusaur @ Life Orb  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Leaf Storm  
+- Sludge Bomb  
+- Earth Power  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Impish Nature  
+- Flare Blitz  
+- Snarl  
+- Parting Shot  
+- Fake Out  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Yawn  
+- Detect  
+

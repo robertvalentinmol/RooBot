@@ -1,0 +1,54 @@
+Incineroar @ White Herb  
+Ability: Intimidate  
+Level: 50  
+Brave Nature  
+- Flare Blitz  
+- Darkest Lariat  
+- Fake Out  
+- Parting Shot  
+
+Camerupt @ Cameruptite  
+Ability: Solid Rock  
+Level: 50  
+Quiet Nature  
+- Heat Wave  
+- Earth Power  
+- Ancient Power  
+- Protect  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Zap Cannon  
+- Focus Blast  
+- Fake Out  
+- Protect  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Moonblast  
+- Calm Mind  
+- Detect  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+Bold Nature  
+- Psychic  
+- Helping Hand  
+- Trick Room  
+- Protect  
+
+Rillaboom @ Life Orb  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Wood Hammer  
+- Grassy Glide  
+- Fake Out  
+- U-turn  
+

@@ -1,0 +1,54 @@
+Sneasler @ Psychic Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Rock Tomb  
+- Dire Claw  
+- Close Combat  
+
+Armarouge @ Focus Sash  
+Ability: Weak Armor  
+Level: 50  
+Timid Nature  
+- Armor Cannon  
+- Expanding Force  
+- Wide Guard  
+- Protect  
+
+Gardevoir @ Gardevoirite  
+Ability: Trace  
+Level: 50  
+Timid Nature  
+- Expanding Force  
+- Shadow Ball  
+- Hyper Voice  
+- Protect  
+
+Indeedee-F @ Rocky Helmet  
+Ability: Psychic Surge  
+Level: 50  
+Bold Nature  
+- Psyshock  
+- Follow Me  
+- Helping Hand  
+- Protect  
+
+Kommo-o @ Life Orb  
+Ability: Bulletproof  
+Level: 50  
+Modest Nature  
+- Clanging Scales  
+- Aura Sphere  
+- Flamethrower  
+- Protect  
+
+Talonflame @ Expert Belt  
+Ability: Gale Wings  
+Level: 50  
+Jolly Nature  
+- Brave Bird  
+- Protect  
+- Flare Blitz  
+- Tailwind  
+

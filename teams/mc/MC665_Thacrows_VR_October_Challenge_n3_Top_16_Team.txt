@@ -1,0 +1,54 @@
+Basculegion @ Life Orb  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Kingambit @ Black Glasses  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Swords Dance  
+- Protect  
+
+Froslass @ Froslassite  
+Ability: Cursed Body  
+Level: 50  
+Timid Nature  
+- Blizzard  
+- Shadow Ball  
+- Aurora Veil  
+- Protect  
+
+Raichu @ Raichunite X  
+Ability: Lightning Rod  
+Level: 50  
+Jolly Nature  
+- Volt Tackle  
+- Volt Switch  
+- Fake Out  
+- Feint  
+
+Scovillain @ Scovillainite  
+Ability: Moody  
+Level: 50  
+Bold Nature  
+- Overheat  
+- Giga Drain  
+- Rage Powder  
+- Protect  
+
+Sneasler @ Focus Sash  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Rock Slide  
+- Protect  
+

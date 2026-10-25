@@ -1,0 +1,54 @@
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Tailwind  
+- Moonblast  
+- Encore  
+- Sunny Day  
+
+Venusaur @ Wide Lens  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Protect  
+- Sleep Powder  
+- Sludge Bomb  
+- Leaf Storm  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Darkest Lariat  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Protect  
+- Heat Wave  
+- Solar Beam  
+- Weather Ball  
+
+Garchomp @ Life Orb  
+Ability: Rough Skin  
+Level: 50  
+Jolly Nature  
+- Protect  
+- Rock Slide  
+- Dragon Claw  
+- Stomping Tantrum  
+
+Milotic @ Leftovers  
+Ability: Competitive  
+Level: 50  
+Calm Nature  
+- Protect  
+- Coil  
+- Muddy Water  
+- Icy Wind  
+

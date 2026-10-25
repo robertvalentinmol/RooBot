@@ -1,0 +1,54 @@
+Arcanine-Hisui @ Focus Sash  
+Ability: Rock Head  
+Level: 50  
+Jolly Nature  
+- Rock Slide  
+- Protect  
+- Flare Blitz  
+- Head Smash  
+
+Gardevoir @ Gardevoirite  
+Ability: Synchronize  
+Level: 50  
+Modest Nature  
+- Protect  
+- Expanding Force  
+- Thunderbolt  
+- Hyper Voice  
+
+Indeedee-F @ Rocky Helmet  
+Ability: Psychic Surge  
+Level: 50  
+Relaxed Nature  
+- Psychic  
+- Trick Room  
+- Follow Me  
+- Helping Hand  
+
+Milotic @ Sitrus Berry  
+Ability: Competitive  
+Level: 50  
+Modest Nature  
+- Scald  
+- Ice Beam  
+- Icy Wind  
+- Protect  
+
+Sneasler @ Psychic Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Throat Chop  
+- Rock Slide  
+- Protect  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Timid Nature  
+- Sludge Bomb  
+- Shadow Ball  
+- Protect  
+- Focus Blast  
+

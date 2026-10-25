@@ -1,0 +1,22 @@
+# Simulador de Showdown: lo descarga y compila instalar.bat
+server/pokemon-showdown/
+
+# Datos personales y descargas (historial, errores, repeticiones, calibraciones)
+logs/
+equipos_nuevos.txt
+.cache_pastes/
+
+# Sprites de Pokémon (propiedad de Nintendo/Game Freak): se descargan con mantenimiento.bat
+web/sprites/
+
+# Python / Node
+__pycache__/
+*.pyc
+node_modules/
+
+# Restos locales
+_a_borrar/
+limpiar_v*.bat
+checkpoints/
+Mantenimiento.pdf
+*.lnk

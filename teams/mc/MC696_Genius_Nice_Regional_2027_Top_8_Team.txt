@@ -1,0 +1,54 @@
+Garchomp @ Life Orb  
+Ability: Rough Skin  
+Level: 50  
+Jolly Nature  
+- Earthquake  
+- Dragon Claw  
+- Rock Slide  
+- Protect  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Iron Head  
+- Sucker Punch  
+- Low Kick  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+- Protect  
+
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Encore  
+- Tailwind  
+- Protect  
+
+Basculegion @ Mystic Water  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Rock Tomb  
+- Protect  
+

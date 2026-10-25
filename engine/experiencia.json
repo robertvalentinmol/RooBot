@@ -1,0 +1,1015 @@
+{
+ "activo": true,
+ "beta": 0.0,
+ "fecha": "2026-10-25 11:39",
+ "names": [
+  "prior_heur",
+  "mega",
+  "atk",
+  "atk_dmg",
+  "atk_ko",
+  "atk_spread",
+  "atk_prio",
+  "atk_debil",
+  "atk_aliado",
+  "atk_x_peligro",
+  "atk_x_rapido",
+  "atk_objetivo_amenaza",
+  "atk_objetivo_tocado",
+  "atk_pivote",
+  "prot",
+  "prot_x_peligro",
+  "prot_repetido",
+  "prot_x_dos_amenazas",
+  "prot_turno1",
+  "cambio",
+  "cambio_x_peligro",
+  "cambio_entra_peligro",
+  "cambio_entra_pega",
+  "cambio_renuncia",
+  "cambio_vida",
+  "cambio_stats_bajadas",
+  "cambio_entra_intimidate",
+  "cambio_entra_fakeout",
+  "fakeout",
+  "fakeout_valido",
+  "fakeout_x_amenaza",
+  "preparar",
+  "preparar_x_peligro",
+  "preparar_x_vida",
+  "estado",
+  "estado_valido",
+  "estado_dormir",
+  "estado_x_amenaza",
+  "velocidad",
+  "velocidad_falta",
+  "velocidad_sobra",
+  "redireccion",
+  "redireccion_x_aliado",
+  "apoyo",
+  "otro_estado",
+  "peligro",
+  "vida",
+  "rapido",
+  "turno1"
+ ],
+ "w": [
+  1.74173,
+  0.17417,
+  -0.80632,
+  0.27972,
+  -0.60051,
+  0.50367,
+  0.33195,
+  -0.50197,
+  0.53099,
+  -0.85556,
+  0.78556,
+  0.35142,
+  -0.61785,
+  0.79231,
+  -0.29525,
+  0.09128,
+  -0.37511,
+  0.87713,
+  -0.13855,
+  -1.01511,
+  0.50501,
+  -0.13374,
+  0.05379,
+  0.20097,
+  0.19639,
+  0.27379,
+  0.29381,
+  0.40665,
+  -0.07893,
+  0.60726,
+  0.51986,
+  0.19126,
+  -0.8596,
+  1.76193,
+  -1.77764,
+  0.67544,
+  0.56148,
+  0.4563,
+  -0.05009,
+  0.07383,
+  -0.12392,
+  0.00596,
+  0.46758,
+  -0.12277,
+  -0.09074,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "l2": 3.0,
+ "metricas": {
+  "prueba": {
+   "acierto": 0.3408,
+   "logp": -1.7551348594832268,
+   "n": 2500
+  },
+  "heuristico": {
+   "acierto": 0.3092,
+   "logp": -1.899139624932966,
+   "n": 2500
+  },
+  "azar": {
+   "acierto": 0.13851508164178442,
+   "logp": -2.0287119172863
+  },
+  "decisiones": 46468
+ },
+ "rescate": {
+  "perdida": 0.1,
+  "p": 0.3
+ },
+ "evaluacion": {
+  "tabla": [
+   {
+    "beta": 0.0,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 64.4,
+     "todas": 64.0,
+     "ladder": 65.0,
+     "eval": 63.5
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.3,
+    "partidas": 159
+   },
+   {
+    "beta": 0.0,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 64.6,
+     "todas": 64.4,
+     "ladder": 65.5,
+     "eval": 63.8
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.0,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 64.8,
+     "todas": 64.7,
+     "ladder": 66.3,
+     "eval": 63.9
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.3,
+    "partidas": 159
+   },
+   {
+    "beta": 0.0,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 64.4,
+     "todas": 64.2,
+     "ladder": 65.3,
+     "eval": 63.7
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.3,
+    "partidas": 159
+   },
+   {
+    "beta": 0.0,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 64.4,
+     "todas": 64.3,
+     "ladder": 65.5,
+     "eval": 63.7
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.3,
+    "partidas": 159
+   },
+   {
+    "beta": 0.0,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 64.4,
+     "todas": 64.2,
+     "ladder": 65.0,
+     "eval": 63.8
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.005,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 64.2,
+     "todas": 63.8,
+     "ladder": 65.3,
+     "eval": 63.0
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.005,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 64.6,
+     "todas": 64.0,
+     "ladder": 65.5,
+     "eval": 63.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 51.6,
+    "partidas": 159
+   },
+   {
+    "beta": 0.005,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 64.6,
+     "todas": 64.3,
+     "ladder": 66.3,
+     "eval": 63.4
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.005,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 64.2,
+     "todas": 64.0,
+     "ladder": 65.7,
+     "eval": 63.1
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.005,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 64.2,
+     "todas": 64.0,
+     "ladder": 65.9,
+     "eval": 63.1
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.005,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 64.2,
+     "todas": 63.9,
+     "ladder": 65.3,
+     "eval": 63.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 50.9,
+    "partidas": 159
+   },
+   {
+    "beta": 0.01,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 64.0,
+     "todas": 63.3,
+     "ladder": 64.6,
+     "eval": 62.6
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.01,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 64.2,
+     "todas": 63.5,
+     "ladder": 64.8,
+     "eval": 62.7
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.7,
+    "partidas": 159
+   },
+   {
+    "beta": 0.01,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 64.2,
+     "todas": 63.7,
+     "ladder": 65.3,
+     "eval": 62.8
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.01,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 64.0,
+     "todas": 63.4,
+     "ladder": 64.8,
+     "eval": 62.7
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.01,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 64.0,
+     "todas": 63.5,
+     "ladder": 65.0,
+     "eval": 62.7
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.01,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 64.0,
+     "todas": 63.5,
+     "ladder": 64.6,
+     "eval": 62.8
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.02,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 62.6,
+     "todas": 61.6,
+     "ladder": 62.5,
+     "eval": 60.9
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.02,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 62.9,
+     "todas": 61.9,
+     "ladder": 63.0,
+     "eval": 61.1
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.02,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 62.9,
+     "todas": 62.0,
+     "ladder": 63.2,
+     "eval": 61.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.02,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 62.6,
+     "todas": 61.7,
+     "ladder": 62.7,
+     "eval": 61.0
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.02,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 62.6,
+     "todas": 61.9,
+     "ladder": 62.9,
+     "eval": 61.3
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.02,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 62.6,
+     "todas": 61.8,
+     "ladder": 62.5,
+     "eval": 61.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.03,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.7,
+     "ladder": 61.5,
+     "eval": 60.0
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.03,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 62.2,
+     "todas": 60.9,
+     "ladder": 61.9,
+     "eval": 60.0
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.03,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 62.2,
+     "todas": 61.1,
+     "ladder": 62.1,
+     "eval": 60.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.03,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.8,
+     "ladder": 61.7,
+     "eval": 60.0
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.03,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 61.0,
+     "ladder": 61.9,
+     "eval": 60.3
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.03,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.9,
+     "ladder": 61.5,
+     "eval": 60.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.05,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.0,
+     "ladder": 61.1,
+     "eval": 58.8
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 48.4,
+    "partidas": 159
+   },
+   {
+    "beta": 0.05,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.0,
+     "ladder": 61.1,
+     "eval": 58.9
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 48.4,
+    "partidas": 159
+   },
+   {
+    "beta": 0.05,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.4,
+     "ladder": 61.3,
+     "eval": 59.4
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 48.4,
+    "partidas": 159
+   },
+   {
+    "beta": 0.05,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.2,
+     "ladder": 61.1,
+     "eval": 59.1
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 48.4,
+    "partidas": 159
+   },
+   {
+    "beta": 0.05,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.2,
+     "ladder": 61.3,
+     "eval": 59.1
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 48.4,
+    "partidas": 159
+   },
+   {
+    "beta": 0.05,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 62.0,
+     "todas": 60.2,
+     "ladder": 61.1,
+     "eval": 59.1
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 49.1,
+    "partidas": 159
+   },
+   {
+    "beta": 0.08,
+    "rescate": null,
+    "acuerdo": {
+     "hoja": 61.5,
+     "todas": 59.3,
+     "ladder": 59.8,
+     "eval": 58.2
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 52.2,
+    "partidas": 159
+   },
+   {
+    "beta": 0.08,
+    "rescate": {
+     "perdida": 0.06,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 61.5,
+     "todas": 59.5,
+     "ladder": 60.0,
+     "eval": 58.5
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 52.2,
+    "partidas": 159
+   },
+   {
+    "beta": 0.08,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.3
+    },
+    "acuerdo": {
+     "hoja": 61.5,
+     "todas": 59.6,
+     "ladder": 60.2,
+     "eval": 58.7
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 52.2,
+    "partidas": 159
+   },
+   {
+    "beta": 0.08,
+    "rescate": {
+     "perdida": 0.1,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 61.5,
+     "todas": 59.4,
+     "ladder": 60.0,
+     "eval": 58.4
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 52.2,
+    "partidas": 159
+   },
+   {
+    "beta": 0.08,
+    "rescate": {
+     "perdida": 0.15,
+     "p": 0.45
+    },
+    "acuerdo": {
+     "hoja": 61.5,
+     "todas": 59.4,
+     "ladder": 60.0,
+     "eval": 58.5
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 52.2,
+    "partidas": 159
+   },
+   {
+    "beta": 0.08,
+    "rescate": {
+     "perdida": 0.2,
+     "p": 0.6
+    },
+    "acuerdo": {
+     "hoja": 61.5,
+     "todas": 59.4,
+     "ladder": 59.8,
+     "eval": 58.4
+    },
+    "n": {
+     "hoja": 455,
+     "todas": 2239,
+     "ladder": 525,
+     "eval": 1259
+    },
+    "resultado": 52.2,
+    "partidas": 159
+   }
+  ],
+  "elegido": {
+   "beta": 0.0,
+   "rescate": {
+    "perdida": 0.1,
+    "p": 0.3
+   },
+   "acuerdo": {
+    "hoja": 64.8,
+    "todas": 64.7,
+    "ladder": 66.3,
+    "eval": 63.9
+   },
+   "n": {
+    "hoja": 455,
+    "todas": 2239,
+    "ladder": 525,
+    "eval": 1259
+   },
+   "resultado": 50.3,
+   "partidas": 159
+  }
+ }
+}

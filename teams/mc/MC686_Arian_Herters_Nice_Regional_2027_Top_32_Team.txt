@@ -1,0 +1,54 @@
+Basculegion @ Choice Scarf  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Wave Crash  
+- Last Respects  
+- Soak  
+- Flip Turn  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Protect  
+- Sludge Bomb  
+- Shadow Ball  
+- Perish Song  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Sassy Nature  
+- Protect  
+- Fake Out  
+- Parting Shot  
+- Flare Blitz  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Timid Nature  
+- Protect  
+- Earth Power  
+- Draco Meteor  
+- Power Gem  
+
+Volcarona @ Grassy Seed  
+Ability: Flame Body  
+Level: 50  
+Modest Nature  
+- Protect  
+- Quiver Dance  
+- Heat Wave  
+- Giga Drain  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Fake Out  
+- Grassy Glide  
+- Wood Hammer  
+

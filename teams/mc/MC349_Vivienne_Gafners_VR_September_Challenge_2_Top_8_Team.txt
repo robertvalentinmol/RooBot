@@ -1,0 +1,54 @@
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Timid Nature  
+- Sludge Bomb  
+- Shadow Ball  
+- Icy Wind  
+- Protect  
+
+Annihilape @ Choice Scarf  
+Ability: Defiant  
+Level: 50  
+Jolly Nature  
+- Close Combat  
+- Shadow Claw  
+- Rock Tomb  
+- U-turn  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Flare Blitz  
+- Throat Chop  
+- Parting Shot  
+- Fake Out  
+
+Swampert @ Swampertite  
+Ability: Torrent  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- High Horsepower  
+- Yawn  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Flash Cannon  
+- Draco Meteor  
+- Electro Shot  
+- Protect  
+
+Pelipper @ Focus Sash  
+Ability: Drizzle  
+Level: 50  
+Timid Nature  
+- Weather Ball  
+- Hurricane  
+- Tailwind  
+- Wide Guard  
+

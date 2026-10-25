@@ -1,0 +1,54 @@
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Protect  
+- Calm Mind  
+- Dazzling Gleam  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Sucker Punch  
+- Protect  
+- Kowtow Cleave  
+- Iron Head  
+
+Basculegion @ Colbur Berry  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+- Wave Crash  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Grassy Glide  
+- Fake Out  
+- Wood Hammer  
+- High Horsepower  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Modest Nature  
+- Flamethrower  
+- Protect  
+- Tailwind  
+- Hyper Voice  
+
+Sneasler @ Focus Sash  
+Ability: Poison Touch  
+Level: 50  
+Jolly Nature  
+- Protect  
+- Dire Claw  
+- Fake Out  
+- Close Combat  
+

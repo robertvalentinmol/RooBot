@@ -1,0 +1,60 @@
+Mawile (F) @ Mawilite  
+Ability: Hyper Cutter  
+Level: 50  
+EVs: 32 HP / 32 Atk / 2 SpD  
+Brave Nature  
+- Protect  
+- Iron Head  
+- Play Rough  
+- Sucker Punch  
+
+Farigiraf (F) @ Life Orb  
+Ability: Armor Tail  
+Level: 50  
+EVs: 29 HP / 16 Def / 10 SpA / 11 SpD  
+Quiet Nature  
+- Protect  
+- Hyper Voice  
+- Psychic  
+- Trick Room  
+
+Incineroar (M) @ White Herb  
+Ability: Intimidate  
+Level: 50  
+EVs: 32 HP / 32 Atk / 2 Spe  
+Brave Nature  
+- Fake Out  
+- Flare Blitz  
+- Assurance  
+- Parting Shot  
+
+Rillaboom (M) @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+EVs: 32 HP / 15 Atk / 19 SpD  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Wood Hammer  
+- U-turn  
+
+Primarina (F) @ Leftovers  
+Ability: Liquid Voice  
+Level: 50  
+EVs: 27 HP / 28 Def / 4 SpA / 7 Spe  
+Modest Nature  
+- Protect  
+- Calm Mind  
+- Hyper Voice  
+- Moonblast  
+
+Kommo-o (F) @ Sitrus Berry  
+Ability: Bulletproof  
+Level: 50  
+EVs: 2 HP / 32 SpA / 32 Spe  
+Modest Nature  
+- Protect  
+- Clangorous Soul  
+- Clanging Scales  
+- Aura Sphere  
+

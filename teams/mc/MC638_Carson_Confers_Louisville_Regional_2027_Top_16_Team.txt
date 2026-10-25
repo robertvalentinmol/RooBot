@@ -1,0 +1,54 @@
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Modest Nature  
+- Muddy Water  
+- Shadow Ball  
+- Ice Beam  
+- Protect  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Zap Cannon  
+- Focus Blast  
+- Fake Out  
+- Protect  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Leech Life  
+- Iron Head  
+- Sucker Punch  
+- Protect  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Weather Ball  
+- Hurricane  
+- Helping Hand  
+- Wide Guard  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Electro Shot  
+- Dragon Pulse  
+- Flash Cannon  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Close Combat  
+- Rock Slide  
+- Protect  
+

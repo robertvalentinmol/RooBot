@@ -1,0 +1,54 @@
+Indeedee-F @ Sitrus Berry  
+Ability: Psychic Surge  
+Level: 50  
+Relaxed Nature  
+- Trick Room  
+- Follow Me  
+- Helping Hand  
+- Psychic  
+
+Gardevoir @ Gardevoirite  
+Ability: Synchronize  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Expanding Force  
+- Protect  
+- Calm Mind  
+
+Basculegion @ Choice Scarf  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Wave Crash  
+- Aqua Jet  
+- Flip Turn  
+- Last Respects  
+
+Pelipper @ Focus Sash  
+Ability: Drizzle  
+Level: 50  
+Modest Nature  
+- Weather Ball  
+- Tailwind  
+- Hurricane  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Dragon Pulse  
+- Snarl  
+- Electro Shot  
+- Protect  
+
+Sneasler @ Psychic Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Throat Chop  
+- Protect  
+

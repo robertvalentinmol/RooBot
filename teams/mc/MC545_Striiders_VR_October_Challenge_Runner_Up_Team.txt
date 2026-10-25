@@ -1,0 +1,54 @@
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Close Combat  
+- Rock Slide  
+- Protect  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Leech Life  
+- Iron Head  
+- Sucker Punch  
+- Protect  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Weather Ball  
+- Hurricane  
+- Helping Hand  
+- Wide Guard  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Electro Shot  
+- Dragon Pulse  
+- Aura Sphere  
+- Protect  
+
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Modest Nature  
+- Muddy Water  
+- Shadow Ball  
+- Ice Beam  
+- Protect  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Dazzling Gleam  
+- Light of Ruin  
+- Protect  
+

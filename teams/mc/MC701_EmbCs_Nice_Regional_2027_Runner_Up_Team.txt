@@ -1,0 +1,54 @@
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Sassy Nature  
+- Grassy Glide  
+- U-turn  
+- Fake Out  
+- Protect  
+
+Vivillon @ Focus Sash  
+Ability: Compound Eyes  
+Level: 50  
+Timid Nature  
+- Hurricane  
+- Sleep Powder  
+- Rage Powder  
+- Protect  
+
+Incineroar @ Leftovers  
+Ability: Intimidate  
+Level: 50  
+Sassy Nature  
+- Flare Blitz  
+- Parting Shot  
+- Fake Out  
+- Protect  
+
+Primarina @ Sitrus Berry  
+Ability: Liquid Voice  
+Level: 50  
+Quiet Nature  
+- Hyper Voice  
+- Moonblast  
+- Perish Song  
+- Protect  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Perish Song  
+- Sludge Bomb  
+- Protect  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Draco Meteor  
+- Earth Power  
+- Power Gem  
+- Protect  
+

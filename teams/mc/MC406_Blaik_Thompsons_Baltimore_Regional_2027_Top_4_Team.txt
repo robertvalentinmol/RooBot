@@ -1,0 +1,54 @@
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Draco Meteor  
+- Hyper Voice  
+- Protect  
+
+Arcanine-Hisui @ Focus Sash  
+Ability: Rock Head  
+Level: 50  
+Jolly Nature  
+- Flare Blitz  
+- Head Smash  
+- Extreme Speed  
+- Protect  
+
+Indeedee @ Choice Scarf  
+Ability: Psychic Surge  
+Level: 50  
+Modest Nature  
+- Expanding Force  
+- Trick  
+- Trick Room  
+- Imprison  
+
+Milotic @ Leftovers  
+Ability: Competitive  
+Level: 50  
+Calm Nature  
+- Scald  
+- Ice Beam  
+- Icy Wind  
+- Protect  
+
+Metagross @ Metagrossite  
+Ability: Clear Body  
+Level: 50  
+Adamant Nature  
+- Steel Roller  
+- Psychic Fangs  
+- Body Press  
+- Protect  
+
+Sneasler @ Psychic Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Throat Chop  
+- Close Combat  
+- Rock Slide  
+- Protect  
+

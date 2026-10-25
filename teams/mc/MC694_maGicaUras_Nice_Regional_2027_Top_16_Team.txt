@@ -1,0 +1,54 @@
+Garchomp @ Garchompite  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Stomping Tantrum  
+- Scale Shot  
+- Protect  
+- Rock Slide  
+
+Sneasler @ Focus Sash  
+Ability: Poison Touch  
+Level: 50  
+Jolly Nature  
+- Dire Claw  
+- Fake Out  
+- Coaching  
+- Close Combat  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Dazzling Gleam  
+- Draining Kiss  
+- Calm Mind  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Sassy Nature  
+- Flare Blitz  
+- Fake Out  
+- Parting Shot  
+- Helping Hand  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Wood Hammer  
+- High Horsepower  
+- Fake Out  
+- Grassy Glide  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Swords Dance  
+- Sucker Punch  
+- Protect  
+

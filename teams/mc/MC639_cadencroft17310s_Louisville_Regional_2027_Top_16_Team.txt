@@ -1,0 +1,54 @@
+Froslass @ Froslassite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Blizzard  
+- Shadow Ball  
+- Aurora Veil  
+- Protect  
+
+Whimsicott @ Fairy Feather  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Encore  
+- Tailwind  
+- Charm  
+
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Close Combat  
+- Brave Bird  
+- Roost  
+- Protect  
+
+Glimmora @ Focus Sash  
+Ability: Toxic Debris  
+Level: 50  
+Modest Nature  
+- Power Gem  
+- Earth Power  
+- Sludge Bomb  
+- Spiky Shield  
+
+Armarouge @ Sitrus Berry  
+Ability: Flash Fire  
+Level: 50  
+Modest Nature  
+- Armor Cannon  
+- Psyshock  
+- Wide Guard  
+- Trick Room  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Iron Head  
+- Protect  
+

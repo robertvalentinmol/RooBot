@@ -1,0 +1,54 @@
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Impish Nature  
+- Parting Shot  
+- Fake Out  
+- Flare Blitz  
+- Protect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Dragon Claw  
+- Stomping Tantrum  
+- Earthquake  
+- Rock Slide  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Quiet Nature  
+- Hyper Voice  
+- Quick Attack  
+- Yawn  
+- Detect  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Protect  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+
+Toxapex @ Leftovers  
+Ability: Regenerator  
+Level: 50  
+Relaxed Nature  
+- Toxic  
+- Wide Guard  
+- Infestation  
+- Baneful Bunker  
+
+Venusaur @ Focus Sash  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Protect  
+- Sleep Powder  
+- Sludge Bomb  
+- Earth Power  
+

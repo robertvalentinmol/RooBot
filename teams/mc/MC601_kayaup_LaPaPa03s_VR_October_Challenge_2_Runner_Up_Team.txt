@@ -1,0 +1,54 @@
+Pelipper @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Calm Nature  
+- Weather Ball  
+- Hurricane  
+- Wide Guard  
+- Helping Hand  
+
+Swampert @ Swampertite  
+Ability: Damp  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- High Horsepower  
+- Ice Punch  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Modest Nature  
+- Aura Sphere  
+- Dragon Pulse  
+- Electro Shot  
+- Protect  
+
+Incineroar @ Passho Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Flare Blitz  
+- Darkest Lariat  
+- Fake Out  
+- Parting Shot  
+
+Sinistcha @ Colbur Berry  
+Ability: Hospitality  
+Level: 50  
+Calm Nature  
+- Matcha Gotcha  
+- Trick Room  
+- Rage Powder  
+- Protect  
+
+Mawile @ Mawilite  
+Ability: Intimidate  
+Level: 50  
+Brave Nature  
+- Play Rough  
+- Sucker Punch  
+- Fire Fang  
+- Protect  
+

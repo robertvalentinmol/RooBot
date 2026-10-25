@@ -1,0 +1,54 @@
+Indeedee @ Choice Scarf  
+Ability: Psychic Surge  
+Level: 50  
+Modest Nature  
+- Expanding Force  
+- Trick  
+- Mystical Fire  
+- Terrain Pulse  
+
+Tyranitar @ Tyranitarite  
+Ability: Sand Stream  
+Level: 50  
+Jolly Nature  
+- Rock Slide  
+- Knock Off  
+- Low Kick  
+- Protect  
+
+Excadrill @ Focus Sash  
+Ability: Sand Rush  
+Level: 50  
+Jolly Nature  
+- Iron Head  
+- High Horsepower  
+- Rock Slide  
+- Protect  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Timid Nature  
+- Hyper Voice  
+- Flamethrower  
+- Draco Meteor  
+- Protect  
+
+Corviknight @ Psychic Seed  
+Ability: Mirror Armor  
+Level: 50  
+Careful Nature  
+- Brave Bird  
+- Power Trip  
+- Bulk Up  
+- Roost  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Coaching  
+- Protect  
+

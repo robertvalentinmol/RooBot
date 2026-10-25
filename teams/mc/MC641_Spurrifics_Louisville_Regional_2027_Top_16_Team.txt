@@ -1,0 +1,54 @@
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Rock Slide  
+- Protect  
+
+Basculegion @ Colbur Berry  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Aqua Jet  
+- Last Respects  
+- Protect  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Draco Meteor  
+- Flamethrower  
+- Protect  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Kowtow Cleave  
+- Sucker Punch  
+- Iron Head  
+
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Tailwind  
+- Encore  
+- Protect  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Dazzling Gleam  
+- Calm Mind  
+- Protect  
+

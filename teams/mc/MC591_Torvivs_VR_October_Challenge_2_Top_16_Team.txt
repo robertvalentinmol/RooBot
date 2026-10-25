@@ -1,0 +1,54 @@
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Relaxed Nature  
+- Fake Out  
+- Parting Shot  
+- Flare Blitz  
+- Protect  
+
+Rillaboom @ Occa Berry  
+Ability: Grassy Surge  
+Level: 50  
+Sassy Nature  
+- Fake Out  
+- Wood Hammer  
+- U-turn  
+- Protect  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Sludge Bomb  
+- Perish Song  
+- Protect  
+
+Kommo-o @ Leftovers  
+Ability: Soundproof  
+Level: 50  
+Modest Nature  
+- Clanging Scales  
+- Aura Sphere  
+- Clangorous Soul  
+- Protect  
+
+Ninetales-Alola @ Choice Scarf  
+Ability: Snow Warning  
+Level: 50  
+Modest Nature  
+- Blizzard  
+- Encore  
+- Freeze-Dry  
+- Hypnosis  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Swords Dance  
+- Protect  
+
