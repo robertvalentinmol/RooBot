@@ -173,13 +173,15 @@ goto fin
 
 :subir
 echo.
-echo Cambios que se van a guardar y subir:
-git status --short
+echo Cambios del mantenimiento que se van a guardar y subir:
+git status --short -- teams teams_apartados engine/juez.json engine/experiencia.json regulacion.json
 set "HOY="
 for /f "delims=" %%d in ('python -c "import datetime; print(datetime.date.today().isoformat())"') do set "HOY=%%d"
-git add -A
+REM Solo lo que cambia el mantenimiento: equipos, juez, experiencia y regulacion (nada de lo que dejes suelto en la carpeta)
+for %%p in (teams teams_apartados engine\juez.json engine\experiencia.json regulacion.json) do if exist "%%p" git add -A -- "%%p"
 git commit -q -m "Mantenimiento %HOY% (%REGACTUAL%)" || echo   No habia cambios nuevos que guardar.
-git push || (echo [ERROR] No pude subir a GitHub. Revisa la conexion o tu sesion de git. & goto fin)
+REM -u origin HEAD: sube la rama actual y la enlaza con GitHub aunque sea la primera vez
+git push -u origin HEAD || (echo [ERROR] No pude subir a GitHub. Copia el mensaje de arriba para ver que paso. & goto fin)
 echo.
 echo Subido. En la Thor toca el acceso "RooBot - actualizar".
 goto fin

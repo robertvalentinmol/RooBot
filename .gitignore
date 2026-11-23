@@ -26,3 +26,6 @@ Mantenimiento.pdf
 # Notas y utilidades locales para trabajar con Claude
 Claude outputs/
 empaquetar_roobot.bat
+
+# PDFs sueltos en la raiz (guias exportadas, etc.)
+/*.pdf
