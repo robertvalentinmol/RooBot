@@ -165,3 +165,24 @@ def test_pantallas_js_y_css(servidor):
     for ruta, tipo in (("/pantallas.js", "text/javascript"), ("/pantallas.css", "text/css")):
         with urllib.request.urlopen(base + ruta, timeout=5) as r:
             assert r.headers["Content-Type"].startswith(tipo)
+
+
+def test_arriba_sabe_en_pocos_segundos_que_abajo_se_cerro(servidor):
+    """El navegador de abajo se cierra sin avisar: arriba debe pasar a la espera en ≤ 5 s."""
+    import time
+    base, app = servidor
+    r = urllib.request.urlopen(base + "/api/pantallas/eventos?rol=abajo", timeout=5)
+    r.readline()                                              # conectada
+    eventos = []
+    hilo = threading.Thread(target=lambda: eventos.extend(
+        json.loads(l[5:]) for l in urllib.request.urlopen(base + "/api/pantallas/eventos?rol=arriba", timeout=10)
+        if l.startswith(b"data:") and json.loads(l[5:]).get("tipo") == "abajo" and not json.loads(l[5:])["conectada"]
+        and not eventos), daemon=True)
+    hilo.start()
+    time.sleep(0.5)
+    r.close()
+    t0 = time.time()
+    while not eventos and time.time() - t0 < 6:
+        time.sleep(0.1)
+    assert eventos, "arriba no se enteró de que abajo se cerró"
+    assert time.time() - t0 <= 5

@@ -2095,7 +2095,8 @@ def make_handler(app: App):
                 def escribir(datos: bytes):
                     self.wfile.write(datos)
                     self.wfile.flush()
-                servir_eventos(app.buzon, rol, escribir, lambda: True)
+                # latido cada 2 s: una ventana cerrada se detecta al fallar la escritura (≤ 5 s)
+                servir_eventos(app.buzon, rol, escribir, lambda: True, latido=2.0)
             elif u.path == "/manifest.webmanifest":      # RooBot instalable como app (Chrome en Android)
                 self._send(200, (WEB / "manifest.webmanifest").read_bytes(), "application/manifest+json")
             elif u.path == "/sw.js":

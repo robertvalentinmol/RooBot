@@ -160,6 +160,84 @@ function iniciarAbajo() {
   };
 }
 
+const ESPERA = 'Abre RooBot en la pantalla de abajo (Chrome → 127.0.0.1:8765/abajo)';
+
+/* Ventana de arriba: sólo el campo, copiado de la ventana de abajo; los toques vuelven abajo. */
+function iniciarArriba() {
+  const campo = document.querySelector('#fieldCard');
+  const capa = document.createElement('div');
+  capa.id = 'pantEspera';
+  capa.innerHTML = `<div class="pe-caja"><img src="/img/roobot-192.png" alt="" width="72" height="72">
+    <p>${ESPERA}</p><button type="button" class="btn">Usar solo esta pantalla</button></div>`;
+  document.body.appendChild(capa);
+  capa.querySelector('button').onclick = () => {
+    try { localStorage.removeItem('roobot.pantallas'); } catch (e) { /* nada */ }
+    location.href = '/';
+  };
+
+  let abajoConectada = false, campoVisible = false, hayCampo = false;
+  const espera = () => {
+    const mostrar = !abajoConectada || !campoVisible;
+    capa.classList.toggle('on', mostrar);
+    document.documentElement.classList.toggle('pantalla-atenuada', mostrar && hayCampo);
+  };
+  espera();
+
+  const crear = html => {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = html;
+    return tpl.content.firstElementChild;
+  };
+  const ajustar = () => { if (typeof window.fitStage === 'function') window.fitStage(); };
+  window.addEventListener('resize', ajustar);
+
+  const es = new EventSource('/api/pantallas/eventos?rol=arriba');
+  es.onmessage = e => {
+    let ev;
+    try { ev = JSON.parse(e.data); } catch (err) { return; }
+    if (ev.tipo === 'abajo') { abajoConectada = !!ev.conectada; espera(); return; }
+    if (ev.tipo !== 'campo') return;
+    campoVisible = !!ev.visible;
+    if (campoVisible) {                       // si abajo no hay campo, se queda el último (atenuado)
+      morph(campo, ev.html, crear);
+      campo.style.display = '';
+      hayCampo = true;
+      ajustar();
+      console.debug('pantallas: retraso', Date.now() - ev.t, 'ms');
+    }
+    espera();
+  };
+  es.onerror = () => { abajoConectada = false; espera(); };   // servidor reiniciándose: EventSource reconecta solo
+
+  // los toques en el campo no se ejecutan aquí: se mandan abajo
+  campo.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const r = rutaDe(e.target, campo);
+    if (r) enviar('/api/pantallas/toque', r);
+  }, true);
+}
+
+/* Ventana normal: la opción «Doble pantalla» al final del menú «Más». */
+function anadirBotonDoble() {
+  const mas = document.querySelector('#navMore');
+  if (!mas || document.querySelector('#navDual')) return;
+  const b = document.createElement('button');
+  b.id = 'navDual';
+  b.className = 'nav';
+  b.type = 'button';
+  b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="9" rx="1.5"/>' +
+    '<rect x="6" y="13" width="12" height="9" rx="1.5"/></svg>Doble pantalla';
+  b.title = 'Campo en esta pantalla y controles en la otra (AYN Thor)';
+  // en captura y cortando el resto: la app asigna onclick = goNav(...) a todos los .nav del menú al arrancar
+  b.addEventListener('click', e => {
+    e.stopImmediatePropagation();
+    try { localStorage.setItem('roobot.pantallas', 'doble'); } catch (err) { /* nada */ }
+    location.href = '/arriba';
+  }, true);
+  mas.appendChild(b);
+}
+
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   (function () {
     let recordado = null;
@@ -167,5 +245,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const rol = rolDe(location.pathname, recordado);
     if (rol === 'ir-arriba') { location.replace('/arriba'); return; }
     if (rol === 'abajo') iniciarAbajo();
+    else if (rol === 'arriba') iniciarArriba();
+    else anadirBotonDoble();
   })();
 }

@@ -103,3 +103,23 @@ html.pantalla-abajo #summary{margin-top:4px}
 html.pantalla-abajo #controlsCard,html.pantalla-abajo #controls{overflow:visible}
 /* los equipos sólo en «Hojas» */
 html.pantalla-abajo[data-pest="registro"] #teambar{display:none}
+
+/* ============================================================ ventana de arriba: el campo a pantalla completa */
+html.pantalla-arriba,html.pantalla-arriba body{height:100%;overflow:hidden;background:#05080e}
+html.pantalla-arriba .app{display:block;min-height:0}
+html.pantalla-arriba #rail,html.pantalla-arriba #topbar,html.pantalla-arriba aside,
+html.pantalla-arriba main > section > *:not(#fieldCard),html.pantalla-arriba #oldbanner{display:none !important}
+html.pantalla-arriba main{display:block;padding:0;max-width:none}
+/* el campo cabe en la altura (le quitamos la barra de estado, ~30 px) y se centra */
+html.pantalla-arriba #fieldCard{position:fixed;inset:0;margin:auto;height:max-content;
+  width:min(100vw, calc((100vh - 30px) * 640 / 381));border-radius:0;border:0;box-shadow:none}
+html.pantalla-arriba #fieldCard #field{border-radius:0}
+html.pantalla-arriba #teambar{display:none}
+html.pantalla-arriba.pantalla-atenuada #fieldCard{opacity:.35;filter:grayscale(.6)}
+
+#pantEspera{display:none}
+html.pantalla-arriba #pantEspera.on{display:grid;place-items:center;position:fixed;inset:0;z-index:100;
+  background:#05080ecc;color:var(--ink,#eaf0f8);text-align:center;padding:24px}
+#pantEspera .pe-caja{max-width:520px}
+#pantEspera img{image-rendering:pixelated;border-radius:16px}
+#pantEspera p{font-size:16px;line-height:1.45;margin:14px 0 18px}
