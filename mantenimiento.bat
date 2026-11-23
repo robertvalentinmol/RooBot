@@ -32,11 +32,15 @@ echo.
 echo     R   Nueva regulacion (M-D, M-E...)        (10-15 min, internet)
 echo         actualiza Showdown, cambia de formato y pide los equipos nuevos
 echo.
+echo     G   Subir los cambios a GitHub (para la Thor) (1 min, internet)
+echo         guarda en git equipos, juez, experiencia y regulacion, y los sube
+echo.
 echo     0   Salir
 echo.
 echo   Cierra la app antes: estos procesos usan todo el procesador.
 echo.
-choice /c 1234567890R /n /m "  Elige una opcion: "
+choice /c 1234567890RG /n /m "  Elige una opcion: "
+if errorlevel 12 goto subir
 if errorlevel 11 goto nueva
 if errorlevel 10 goto :eof
 if errorlevel 9 goto limpio
@@ -165,6 +169,19 @@ echo [4/4] Listo. La app ya usa la nueva regulacion.
 echo   Al principio de una regulacion casi no hay repeticiones de 1500+. Dentro de 2-3 semanas:
 echo     opcion 1 (rutina mensual) para el juez y opcion 9 para crear su banco limpio.
 echo   Despues copia el proyecto a la AYN Thor para que use lo mismo.
+goto fin
+
+:subir
+echo.
+echo Cambios que se van a guardar y subir:
+git status --short
+set "HOY="
+for /f "delims=" %%d in ('python -c "import datetime; print(datetime.date.today().isoformat())"') do set "HOY=%%d"
+git add -A
+git commit -q -m "Mantenimiento %HOY% (%REGACTUAL%)" || echo   No habia cambios nuevos que guardar.
+git push || (echo [ERROR] No pude subir a GitHub. Revisa la conexion o tu sesion de git. & goto fin)
+echo.
+echo Subido. En la Thor toca el acceso "RooBot - actualizar".
 goto fin
 
 :hacer_importar

@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Los scripts de la Thor (Termux) siempre con finales de línea LF
+*.sh text eol=lf
