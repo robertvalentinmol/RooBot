@@ -19,10 +19,14 @@ de siempre (engine/juez.json). Se aprende del RESULTADO de las partidas, no de l
 Banco de prueba fijo: la medición del acuerdo usa siempre las mismas repeticiones (logs/calibracion/banco.json),
 que nunca se usan para aprender. Así dos calibraciones se pueden comparar de verdad.
 
+Banco limpio (--banco-limpio): 100 partidas con hojas abiertas de 1500+ que tampoco se usan para aprender ni para
+diseñar reglas. De ahí salen los casos de «Revisar la app»; la mitad («examen») sólo se cuenta (ver revision.py).
+
 Uso (con internet):
     python -m vgclab.calibrar                                      # medir el acuerdo con el banco fijo
     python -m vgclab.calibrar --juez manual                        # lo mismo con el juez de siempre (referencia)
     python -m vgclab.calibrar --nuevas --replays 30                # medir con repeticiones recientes (no el banco)
+    python -m vgclab.calibrar --banco-limpio                       # crear (la primera vez) y medir el banco limpio
     python -m vgclab.calibrar --aprender --replays 500 --rating 1500   # enseñar al juez (descarga más)
     python -m vgclab.calibrar --aprender --solo-guardadas          # enseñar al juez sólo con las ya descargadas
     python -m vgclab.calibrar --carpeta mis_repeticiones           # .html/.log/.json descargados
@@ -35,13 +39,16 @@ import argparse
 import csv
 import json
 import os
+import random
+import re
 import time
 import zlib
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
+from . import revision as rev
 from .app import App, CATEGORIAS
 from .rutas import ROOT
 
@@ -454,7 +461,7 @@ def all_bank_ids() -> List[str]:
         ev = list(json.loads(BANCO_EVAL.read_text(encoding="utf-8")).get("ids", []))
     except Exception:
         ev = []
-    return list(dict.fromkeys(load_bank(False) + load_bank(True) + ev))
+    return list(dict.fromkeys(load_bank(False) + load_bank(True) + ev + rev.load_limpio()["ids"]))
 
 
 def has_sheets(rid: str) -> bool:
@@ -469,7 +476,7 @@ def has_sheets(rid: str) -> bool:
 def make_bank(n: int, min_rating: int, max_pages: int, hoja: bool = False, download: bool = True) -> List[str]:
     """Elige el banco de prueba: las n repeticiones guardadas de más rating (≥ min_rating); con hoja=True, sólo
     las que tienen hojas abiertas (si faltan, descarga partidas Bo3 conocidas por el buscador)."""
-    other = set(load_bank(not hoja))
+    other = set(load_bank(not hoja)) | set(rev.load_limpio()["ids"])      # ni el otro banco ni el limpio
 
     def cached():
         idx = _index()
@@ -522,7 +529,74 @@ def ensure_bank(n: int, min_rating: int, max_pages: int, remake: bool = False, h
     return ids or make_bank(n, min_rating, max_pages, hoja, download)
 
 
+def _jugadores(rid: str) -> Tuple[str, str]:
+    """Los nombres de los dos jugadores de una repetición guardada ("" si no se puede leer)."""
+    try:
+        log = (REPLAY_DIR / f"{rid}.log").read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return "", ""
+    nombres = []
+    for lado in ("p1", "p2"):
+        m = re.search(rf"^\|player\|{lado}\|([^|\n]+)", log, re.M)
+        nombres.append(m.group(1).strip() if m else "")
+    return nombres[0], nombres[1]
+
+
+LIMPIO_MINIMO = 20                # con menos partidas la cifra del examen no diría nada
+
+
+def make_limpio(n: int = 100, min_rating: int = 1500, seed: int = 20261116) -> Dict[str, List[str]]:
+    """El banco limpio: n repeticiones guardadas con hojas abiertas y rating ≥ min_rating, al azar (semilla fija)
+    entre las que no están en ningún banco. Se crea una vez y no se rehace: si ya existe, se devuelve tal cual.
+    Guarda también qué partidas son de la mitad «examen» (por pareja de jugadores: una serie entera cae junta)."""
+    banco = rev.load_limpio()
+    if banco["ids"]:
+        return banco
+    idx = _index()
+    fuera = set(all_bank_ids())
+    cand = sorted(f.stem for f in REPLAY_DIR.glob("*.log")) if REPLAY_DIR.exists() else []
+    cand = [i for i in cand if (idx.get(i) or 0) >= min_rating and i not in fuera and has_sheets(i)]
+    if len(cand) < LIMPIO_MINIMO:
+        raise SystemExit(f"Solo hay {len(cand)} partidas con hojas abiertas de {min_rating}+ fuera de los bancos; hacen falta "
+                         f"al menos {LIMPIO_MINIMO}. Actualiza el juez (opción 3) para descargar más y vuelve a probar.")
+    ids = sorted(random.Random(seed).sample(cand, min(n, len(cand))))
+    examen = [i for i in ids if rev.mitad(*_jugadores(i)) == "examen"]
+    rev.LIMPIO.parent.mkdir(parents=True, exist_ok=True)
+    rev.LIMPIO.write_text(json.dumps({"creado": time.strftime("%Y-%m-%d %H:%M"), "rating_min": min_rating, "hojas": True,
+                                      "semilla": seed, "ids": ids, "examen": examen}, ensure_ascii=False, indent=1),
+                          encoding="utf-8")
+    rs = [idx[i] for i in ids]
+    print(f"Banco limpio creado: {len(ids)} partidas con hojas abiertas (rating {min(rs)}–{max(rs)}) · "
+          f"{len(examen)} de examen y {len(ids) - len(examen)} de ajuste. Ya no se usarán para aprender.")
+    if len(ids) < n:
+        print(f"  (Pedías {n}: no hay más que sirvan ahora mismo. El banco se queda con {len(ids)}.)")
+    return {"ids": ids, "examen": examen}
+
+
 PRUEBA_REVISION = ROOT / "logs" / "calibracion" / "prueba_revision.json"
+
+
+def _resultado_prueba(res: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """El resultado de la prueba con tu revisión a partir de los casos ya analizados (cada uno con su grupo)."""
+    banco = rev.load_limpio()
+    casos = [dict(x, grupo=rev.grupo(x["replay"], banco)) for x in res]
+    return {"fecha": time.strftime("%Y-%m-%d %H:%M"), **rev.resumen_prueba(res, banco), "casos": casos}
+
+
+def _guardar_ultima(out_dir: Path, summary: Dict[str, Any], use_bank) -> List[Dict[str, Any]]:
+    """Guarda el resumen como «última calibración» con su historial y devuelve ese historial. La medida del banco
+    limpio va en su propio archivo: no se mezcla con el historial del banco con hojas que enseña «Mi progreso»."""
+    prev = out_dir / ("ultima_limpio.json" if use_bank == "limpio" else "ultima.json")
+    hist: List[Dict[str, Any]] = []
+    if prev.exists():
+        try:
+            old = json.loads(prev.read_text(encoding="utf-8"))
+            hist = old.get("historial", []) + [{k: old.get(k) for k in ("fecha", "acuerdo", "aceptables", "perdida_media", "decisiones", "juez", "banco", "categorias")}]
+        except Exception:
+            hist = []
+    summary["historial"] = hist[-20:]
+    prev.write_text(json.dumps(summary, ensure_ascii=False), encoding="utf-8")
+    return hist
 
 
 def prueba_revision(app, name: Optional[str] = None) -> Optional[Dict[str, Any]]:
@@ -530,7 +604,8 @@ def prueba_revision(app, name: Optional[str] = None) -> Optional[Dict[str, Any]]
     con el criterio actual y cuenta
       · errores falsos: decisiones en las que tú diste la razón al jugador (o a los dos) y la app aún dice «Error»;
       · aciertos de la app: decisiones en las que tú diste la razón a la app y la app sigue diciendo «Error».
-    Un cambio del criterio es bueno si baja los errores falsos sin perder aciertos de la app."""
+    Un cambio del criterio es bueno si baja los errores falsos sin perder aciertos de la app.
+    Las cuentas van por grupo (examen / ajuste / octubre, ver revision.py); los totales no incluyen el examen."""
     f = ROOT / "logs" / "revision.csv"
     if not f.exists():
         print("Prueba con tu revisión: aún no has revisado desacuerdos («Revisar la app»).")
@@ -559,14 +634,12 @@ def prueba_revision(app, name: Optional[str] = None) -> Optional[Dict[str, Any]]
         res.append({"replay": r["replay"], "lado": r["lado"], "turno": r["turno"], "veredicto": r["veredicto"], "tone": tone})
         if i % 10 == 0:
             print(f"  {i}/{len(casos)} · {(time.time() - t0) / 60:.0f} min", flush=True)
-    ok = [x for x in res if x["tone"] != "skip"]
-    jug = [x for x in ok if x["veredicto"] in ("jugador", "ambas")]
-    appr = [x for x in ok if x["veredicto"] == "app"]
-    out = {"fecha": time.strftime("%Y-%m-%d %H:%M"), "n": len(ok),
-           "falsos": sum(x["tone"] == "bad" for x in jug), "n_jugador": len(jug),
-           "aciertos": sum(x["tone"] == "bad" for x in appr), "n_app": len(appr), "casos": res}
-    print(f"  errores falsos: {out['falsos']} de {out['n_jugador']} · aciertos de la app que se mantienen: "
-          f"{out['aciertos']} de {out['n_app']}")
+    out = _resultado_prueba(res)
+    for g, nombre in (("examen", "Examen (partidas nuevas)"), ("ajuste", "Ajuste (partidas nuevas)"),
+                      ("octubre", "Revisión de octubre")):
+        c = out["grupos"][g]
+        print(f"  {nombre + ':':27s}" + (f"errores falsos {c['falsos']} de {c['n_jugador']} · aciertos de la app "
+                                         f"{c['aciertos']} de {c['n_app']}" if c["n"] else "sin revisar todavía"))
     if name:
         d = ROOT / "logs" / "calibracion" / "experimentos"
         d.mkdir(parents=True, exist_ok=True)
@@ -577,7 +650,7 @@ def prueba_revision(app, name: Optional[str] = None) -> Optional[Dict[str, Any]]
             hist = json.loads(PRUEBA_REVISION.read_text(encoding="utf-8")).get("historial", [])
         except Exception:
             pass
-        hist.append({k: out[k] for k in ("fecha", "n", "falsos", "n_jugador", "aciertos", "n_app")})
+        hist.append({k: out[k] for k in ("fecha", "n", "falsos", "n_jugador", "aciertos", "n_app", "grupos")})
         PRUEBA_REVISION.parent.mkdir(parents=True, exist_ok=True)
         PRUEBA_REVISION.write_text(json.dumps(dict(out, historial=hist[-30:]), ensure_ascii=False, indent=1), encoding="utf-8")
     return out
@@ -599,10 +672,14 @@ def main() -> None:
     ap.add_argument("--max-descargas", type=int, default=1500,
                     help="con --aprender: máximo de repeticiones conocidas pero no descargadas que bajar (de rating ≥ --rating-min-peso)")
     ap.add_argument("--nuevas", action="store_true", help="medir con repeticiones recientes en vez del banco de prueba fijo")
-    ap.add_argument("--banco", type=int, default=30, help="tamaño del banco de prueba fijo (al crearlo)")
+    ap.add_argument("--banco", type=int, default=None,
+                    help="tamaño del banco de prueba al crearlo (30; el banco limpio, 100)")
     ap.add_argument("--rehacer-banco", action="store_true", help="volver a elegir el banco de prueba")
     ap.add_argument("--banco-ladder", action="store_true",
                     help="medir con el banco de ladder (sin hojas) en vez del de hojas abiertas (como en torneo)")
+    ap.add_argument("--banco-limpio", action="store_true",
+                    help="medir con el banco limpio (lo crea la primera vez): partidas con hojas abiertas que no se usan "
+                         "para aprender ni para diseñar reglas; de ahí salen los casos de «Revisar la app»")
     ap.add_argument("--experimento", default=None,
                     help="(para los experimentos) guarda el resultado aparte, sin tocar el historial ni «Mi progreso»")
     ap.add_argument("--juez", choices=["actual", "manual"], default="actual",
@@ -610,6 +687,12 @@ def main() -> None:
     ap.add_argument("--prueba-revision", action="store_true",
                     help="sólo la prueba con tu revisión de la app: errores falsos y aciertos con el criterio actual")
     a = ap.parse_args()
+    if a.banco_limpio:
+        otra = next((o for o, v in (("--aprender", a.aprender), ("--nuevas", a.nuevas), ("--carpeta", a.carpeta),
+                                    ("--banco-ladder", a.banco_ladder), ("--experimento", a.experimento)) if v), None)
+        if otra:
+            ap.error(f"--banco-limpio no se puede combinar con {otra}")
+    n_banco = a.banco or 30
     os.environ["ROOBOT_SEMILLA_FIJA"] = "1"        # mismos mundos posibles en cada calibración: comparaciones justas
     if a.juez == "manual":
         os.environ["ROOBOT_JUEZ"] = "manual"
@@ -628,7 +711,7 @@ def main() -> None:
         # las repeticiones de los dos bancos de prueba nunca se usan para aprender
         for hoja in (False, True):
             try:
-                ensure_bank(a.banco, a.rating, a.paginas, a.rehacer_banco and (hoja != a.banco_ladder), hoja,
+                ensure_bank(n_banco, a.rating, a.paginas, a.rehacer_banco and (hoja != a.banco_ladder), hoja,
                             download=not a.solo_guardadas)
             except SystemExit as e:
                 print(f"  (banco {'con hojas' if hoja else 'de ladder'}: {e})")
@@ -643,9 +726,16 @@ def main() -> None:
         print(f"Buscando repeticiones de Champions con rating ≥ {a.rating}…")
         items = search_replays(a.replays, a.rating, a.paginas)
         print(f"{len(items)} encontradas con rating ≥ {a.rating}")
+    elif a.banco_limpio:
+        bank = make_limpio(a.banco or 100, a.rating)["ids"]
+        idx = _index()
+        items = [{"id": i, "rating": idx.get(i)} for i in bank]
+        use_bank = "limpio"
+        print(f"Banco limpio (examen de la app): {len(items)} repeticiones con hojas abiertas · juez "
+              f"{'de siempre (manual)' if a.juez == 'manual' else 'actual'}")
     else:
         hoja = not a.banco_ladder
-        bank = ensure_bank(a.banco, a.rating, a.paginas, a.rehacer_banco, hoja)
+        bank = ensure_bank(n_banco, a.rating, a.paginas, a.rehacer_banco, hoja)
         idx = _index()
         items = [{"id": i, "rating": idx.get(i)} for i in bank]
         use_bank = "hoja" if hoja else "ladder"
@@ -794,17 +884,9 @@ def main() -> None:
         summary["juez"] = "de siempre"
     summary["banco"] = use_bank
     (out_dir / f"calibracion_{stamp}.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
-    prev = out_dir / "ultima.json"
-    hist = []
-    if prev.exists():
-        try:
-            old = json.loads(prev.read_text(encoding="utf-8"))
-            hist = old.get("historial", []) + [{k: old.get(k) for k in ("fecha", "acuerdo", "aceptables", "perdida_media", "decisiones", "juez", "banco", "categorias")}]
-        except Exception:
-            hist = []
-    summary["historial"] = hist[-20:]
-    (out_dir / "ultima.json").write_text(json.dumps(summary, ensure_ascii=False), encoding="utf-8")
+    hist = _guardar_ultima(out_dir, summary, use_bank)
     btype = lambda h: "ladder" if h.get("banco") is True else h.get("banco")
+    nombre_banco = {"hoja": "con hojas abiertas", "ladder": "de ladder", "limpio": "limpio (examen de la app)"}.get(use_bank, "")
     same = [h for h in hist + [summary] if btype(h) == use_bank] if use_bank else []
     cmp_html = ""
     if len(same) > 1:
@@ -820,7 +902,7 @@ def main() -> None:
 <style>body{{font:14px/1.5 system-ui;margin:24px;max-width:1100px;background:#10162a;color:#eef1fa}}td,th{{padding:5px 8px;border-bottom:1px solid #2a3558;text-align:left}}
 table{{border-collapse:collapse;width:100%;margin:10px 0 24px}}a{{color:#f5c542}}b{{color:#fff}}.k{{font-size:28px;font-weight:700;color:#f5c542}}</style>
 <h1>Calibración del análisis · {summary['fecha']}</h1>
-<p>{summary['replays']} repeticiones{(' del <b>banco de prueba fijo ' + ('con hojas abiertas' if use_bank == 'hoja' else 'de ladder') + '</b>') if use_bank else ' recientes'} · juez <b>{summary['juez']}</b> · {summary['decisiones']} decisiones de ambos jugadores · {summary['con_hoja']} % con hoja abierta.</p>{cmp_html}
+<p>{summary['replays']} repeticiones{(' del <b>banco ' + nombre_banco + '</b>') if use_bank else ' recientes'} · juez <b>{summary['juez']}</b> · {summary['decisiones']} decisiones de ambos jugadores · {summary['con_hoja']} % con hoja abierta.</p>{cmp_html}
 <p><span class="k">{summary['acuerdo']} %</span> de sus decisiones la app las da por buenas · {summary['aceptables']} % aceptables · pérdida media {summary['perdida_media']}</p>
 <h2>Acuerdo por tipo de decisión (de menos a más)</h2><p>Donde el acuerdo es bajo, revisa las discrepancias: o la app se equivoca en esa categoría o es un error suyo.</p>
 <table><tr><th>Decisión</th><th>N</th><th>Acuerdo</th></tr>{rows}</table>
@@ -828,7 +910,7 @@ table{{border-collapse:collapse;width:100%;margin:10px 0 24px}}a{{color:#f5c542}
     rep = out_dir / f"calibracion_{stamp}.html"
     rep.write_text(html, encoding="utf-8")
     print(f"\nAcuerdo: {summary['acuerdo']} % · pérdida media {summary['perdida_media']} · juez {summary['juez']}"
-          f"{(' · banco fijo ' + ('con hojas' if use_bank == 'hoja' else 'de ladder')) if use_bank else ''}")
+          f"{(' · banco ' + nombre_banco) if use_bank else ''}")
     for h in (same[:-1] if use_bank else []):
         print(f"  antes, mismo banco ({h.get('fecha')}, juez {h.get('juez')}): {h.get('acuerdo')} %")
     print(f"Informe: {rep}")

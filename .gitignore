@@ -16,6 +16,7 @@ node_modules/
 
 # Restos locales
 _a_borrar/
+*.zip
 limpiar_v*.bat
 checkpoints/
 Mantenimiento.pdf

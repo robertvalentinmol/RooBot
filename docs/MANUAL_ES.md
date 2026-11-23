@@ -56,6 +56,7 @@ Todo el mantenimiento está en **`mantenimiento.bat`** (doble clic y eliges una 
 | 6 · Experimentos | Prueba ajustes del criterio (sección 6c) | Cada 2-3 meses, de noche |
 | 7 · Experiencia | Vuelve a aprender «lo que suelen jugar los fuertes» (sección 6d) | Cada 2-3 meses |
 | 8 · Acceso directo | Icono de RooBot en el escritorio | Una vez |
+| 9 · Banco limpio | La primera vez aparta 100 partidas con hojas abiertas de 1500+ que nunca se usan para aprender; después mide siempre esas mismas. De ahí salen los casos de «Revisar la app» (sección 6b) | Una vez, y después de cada cambio del juez (~40 min) |
 
 Las opciones avanzadas siguen disponibles desde una consola: `python -m vgclab.calibrar --help` (y lo mismo con `importar`, `experimentos`, `experiencia` y `sprites`).
 
@@ -200,11 +201,19 @@ Muestra el daño estimado cruzado (tus 6 contra sus 6, con Megas activadas) y la
 
 ## 6b. Revisar la app (tú juzgas)
 
-«Revisar la app» (menú Mejorar) te enseña, de una en una, las jugadas de jugadores de 1500+ que la app marcó como **error** en la última calibración (la del banco con hojas abiertas), empezando por las de mayor pérdida. Ves la posición, lo que jugó, lo que prefiere la app y su explicación, y decides: **el jugador**, **la app**, **las dos valen** o **no lo sé** (con una nota opcional). Se guarda en `logs\revision.csv`. «Mi progreso» muestra cuántas veces tenía razón la app cuando dijo «error», por tipo de decisión, y una estimación de su precisión real. Además de medir la app, es un entrenamiento de primer nivel: posiciones difíciles de jugadores fuertes, analizadas.
+«Revisar la app» (menú Mejorar) te enseña, de una en una, las jugadas de jugadores de 1500+ que la app marcó como **error** en la última medida del **banco limpio** (`mantenimiento.bat`, opción 9), en orden al azar; si aún no lo has creado o ya no quedan casos, salen los del banco con hojas abiertas, empezando por los de mayor pérdida. Ves la posición, lo que jugó, lo que prefiere la app y su explicación, y decides: **el jugador**, **la app**, **las dos valen** o **no lo sé** (con una nota opcional). Se guarda en `logs\revision.csv`. «Mi progreso» muestra cuántas veces tenía razón la app cuando dijo «error», por tipo de decisión, y una estimación de su precisión real. Además de medir la app, es un entrenamiento de primer nivel: posiciones difíciles de jugadores fuertes, analizadas.
 
 **Lo que cambió con tu revisión (v33).** En los primeros 55 desacuerdos, la app sólo tenía razón 3 veces; cuando el jugador hizo una jugada de plan (proteger, cambiar, estado, preparar, control de velocidad) en una ranura donde la app prefería atacar, acertó 1 de 28. Por eso ahora, en ese caso, el veredicto es **«Discutible: jugada de plan que el cálculo de un turno infravalora»** en vez de «Error»: no baja tu rating, no va a «Repasar mis errores» y cuenta como acierto en «Mi punto débil». Si la app prefería otra jugada de plan, o las dos son ataques, el veredicto sigue igual.
 
 **La prueba con tu revisión.** `python -m vgclab.calibrar --prueba-revision` (también al final de las opciones 1 y 4 de `mantenimiento.bat`, y dentro de los experimentos) vuelve a analizar todas las decisiones que juzgaste y cuenta los **errores falsos** (le diste la razón al jugador o a los dos y la app aún dice «Error») y los **aciertos** que mantiene (le diste la razón a la app). Un experimento que suba los errores falsos o pierda aciertos se descarta aunque mejore el acuerdo. El resultado sale en «Mi progreso → Estado de la app».
+
+**Examen, ajuste y octubre (v34).** La regla «Discutible» se diseñó mirando los 55 casos de octubre, así que su cifra de errores falsos es optimista. Para tener una cifra honrada, los casos nuevos salen del banco limpio y se reparten en dos mitades fijas, por pareja de jugadores (una serie al mejor de tres cae entera en la misma):
+
+- **Examen**: sólo se cuenta. Nunca se mira para diseñar o elegir reglas, y los experimentos no la usan para decidir. Es la cifra que vale.
+- **Ajuste**: los casos que sí se pueden estudiar para mejorar el criterio.
+- **Octubre**: las revisiones anteriores al banco limpio (orientativa).
+
+Lo que revisas cuenta al momento en «Mi progreso → Estado de la app»; la prueba completa (rutina mensual, opción 4 y experimentos) vuelve a analizar todos los casos con el criterio de ese día. El reparto y las cuentas están en `vgclab/revision.py`.
 
 ## 6c. Experimentos automáticos
 

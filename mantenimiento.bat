@@ -23,12 +23,16 @@ echo     6   Experimentos, de noche                  (3-4 h)
 echo     7   Experiencia                             (1-1,5 h)
 echo     8   Crear acceso directo en el escritorio
 echo.
+echo     9   Banco limpio: crear y medir             (~40 min)
+echo         partidas nuevas para "Revisar la app" y la cifra de examen
+echo.
 echo     0   Salir
 echo.
 echo   Cierra la app antes: estos procesos usan todo el procesador.
 echo.
-choice /c 123456780 /n /m "  Elige una opcion: "
-if errorlevel 9 goto :eof
+choice /c 1234567890 /n /m "  Elige una opcion: "
+if errorlevel 10 goto :eof
+if errorlevel 9 goto limpio
 if errorlevel 8 goto acceso
 if errorlevel 7 goto experiencia
 if errorlevel 6 goto experimentos
@@ -91,6 +95,14 @@ goto fin
 
 :experiencia
 python -m vgclab.experiencia
+goto fin
+
+:limpio
+echo.
+echo La primera vez elige las 100 partidas del banco limpio; despues siempre mide las mismas.
+python -m vgclab.calibrar --banco-limpio
+echo.
+echo Hecho. Abre la app: "Revisar la app" te ira ensenando los desacuerdos de ese banco.
 goto fin
 
 :acceso

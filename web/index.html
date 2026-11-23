@@ -1065,7 +1065,7 @@ function spriteIdFromName(name){ const i=name.indexOf('-'); if(i<0) return toID(
 const monFromName = name => ({name, spriteid:spriteIdFromName(name), baseSpriteid:toID(name.split('-')[0])});
 
 let POS = null, PICK = [null, null], PEND = [null, null], BUSY = false;
-const APP_VERSION = '33';
+const APP_VERSION = '34';
 const OPT = {deep:false, realistic:true, tournament:false, look:false};
 try { Object.assign(OPT, JSON.parse(localStorage.getItem('vgclab.opts') || '{}')); } catch(e){}
 // v24: se entrena como en torneo (hojas abiertas) por defecto; se activa una vez aunque estuviera guardado apagado
@@ -1349,7 +1349,7 @@ const MODES = {
   partida: {t: 'Partida vs bot', d: 'Una partida o un Bo3 completo contra el bot, con informe turno a turno al terminar.', b: 'Ir a la serie'},
   replay:  {t: 'Analizar partida', d: 'Pega una repetición tuya y revisa cada turno: qué jugaste y qué era mejor.', b: 'Abrir el analizador'},
   weak:    {t: 'Mi punto débil', d: 'Tu acierto por tipo de decisión, de peor a mejor. Pulsa «Entrenar» en la que quieras mejorar.', b: 'Entrenar el más débil'},
-  revision: {t: 'Revisar la app', d: 'Jugadas de jugadores de 1500+ que la app marca como error. Tú decides quién tiene razón: así sabemos su precisión real, y analizas posiciones difíciles de jugadores fuertes.', b: 'Siguiente desacuerdo'},
+  revision: {t: 'Revisar la app', d: 'Jugadas de jugadores de 1500+ que la app marca como error. Tú decides quién tiene razón: así sabemos su precisión real, y analizas posiciones difíciles de jugadores fuertes. Los casos salen de un banco de partidas nuevas, en orden al azar.', b: 'Siguiente desacuerdo'},
   plan:    {t: 'Fichas de plan', d: 'Tu plan contra un rival concreto: leads, amenazas, respuestas y velocidades.', b: 'Abrir fichas'},
 };
 const PHASES = ['mixto', 'lead', 'medio', 'final'];
@@ -2780,7 +2780,23 @@ function drawProgress(P){
       (RV.estimate != null ? ` Precisión real estimada de la app: <b>${RV.estimate} %</b> de las jugadas bien juzgadas.` : '') + '</p>' +
       ((RV.cats || []).length ? `<table class="ptab"><tr><th>Decisión</th><th>Revisadas</th><th>La app tenía razón</th></tr>${RV.cats.map(c => `<tr><td>${esc(c.label)}</td><td>${c.n}</td><td><b>${c.app} %</b></td></tr>`).join('')}</table>` : '') + '</div>';
     const PR = RV.prueba;
-    if (PR) h += `<div class="pchart"><h4>Prueba con tu revisión (${esc(PR.fecha || '')})</h4><p style="margin:0 0 8px">Con el criterio actual, de las <b>${PR.n_jugador}</b> decisiones en las que diste la razón al jugador (o a los dos), la app aún marca <b>${PR.falsos}</b> como error (errores falsos). De las <b>${PR.n_app}</b> en las que le diste la razón a ella, mantiene <b>${PR.aciertos}</b>.</p>` +
+    if (PR && PR.grupos) {
+      const fila = (nombre, g) => {
+        const c = PR.grupos[g] || {};
+        return `<tr><td>${nombre}</td>` + (!((c.n_jugador || 0) + (c.n_app || 0)) ? '<td colspan="2"><span class="muted">sin revisar todavía</span></td>'
+          : `<td>${c.n_jugador ? `<b>${c.falsos} de ${c.n_jugador}</b>` : '–'}</td><td>${c.n_app ? `${c.aciertos} de ${c.n_app}` : '–'}</td>`) + '</tr>';
+      };
+      const CL = P.calibracion_limpio, LP = RV.limpio || {};
+      h += `<div class="pchart"><h4>Errores falsos de la app</h4>
+        <table class="ptab"><tr><th>Casos que has revisado</th><th>Errores falsos</th><th>Aciertos de la app</th></tr>` +
+        fila('<b>Examen</b> (partidas nuevas)', 'examen') + fila('Ajuste (partidas nuevas)', 'ajuste') +
+        fila('Revisión de octubre <small class="muted">(orientativa)</small>', 'octubre') + '</table>' +
+        (CL ? `<p style="margin:8px 0 0">Banco limpio (${esc(CL.fecha || '')}): la app da por buenas el <b>${CL.acuerdo} %</b> de las jugadas de 1500+ · ${CL.decisiones} decisiones.</p>`
+            : '<p style="margin:8px 0 0">Aún no has medido el banco limpio: <code>mantenimiento.bat</code>, opción 9.</p>') +
+        (LP.pendientes ? `<p style="margin:4px 0 0">Te quedan <b>${LP.pendientes}</b> desacuerdos por revisar en «Revisar la app».</p>` : '') +
+        ((PR.historial || []).length > 1 ? `<table class="ptab"><tr><th>Prueba del</th><th>Examen</th><th>Ajuste y octubre</th><th>Aciertos de la app</th></tr>${PR.historial.slice().reverse().map(x => `<tr><td>${esc(x.fecha)}</td><td>${x.grupos && (x.grupos.examen.n_jugador + x.grupos.examen.n_app) ? x.grupos.examen.falsos + ' / ' + x.grupos.examen.n_jugador : '–'}</td><td>${x.falsos} / ${x.n_jugador}</td><td>${x.aciertos} / ${x.n_app}</td></tr>`).join('')}</table>` : '') +
+        '<p class="note">La cifra que vale es la del examen: son partidas que nunca se han usado para ajustar la app. Un «error falso» es una jugada en la que diste la razón al jugador (o a los dos) y la app dice «error»; un acierto, una en la que se la diste a ella. Lo que revisas cuenta al momento' + ((PR.historial || []).length > 1 ? '; la segunda tabla es cada prueba completa (rutina mensual y experimentos)' : '') + '.</p></div>';
+    } else if (PR) h += `<div class="pchart"><h4>Prueba con tu revisión (${esc(PR.fecha || '')})</h4><p style="margin:0 0 8px">Con el criterio actual, de las <b>${PR.n_jugador}</b> decisiones en las que diste la razón al jugador (o a los dos), la app aún marca <b>${PR.falsos}</b> como error (errores falsos). De las <b>${PR.n_app}</b> en las que le diste la razón a ella, mantiene <b>${PR.aciertos}</b>.</p>` +
       ((PR.historial || []).length > 1 ? `<table class="ptab"><tr><th>Fecha</th><th>Errores falsos</th><th>Aciertos de la app</th></tr>${PR.historial.slice().reverse().map(x => `<tr><td>${esc(x.fecha)}</td><td>${x.falsos} / ${x.n_jugador}</td><td>${x.aciertos} / ${x.n_app}</td></tr>`).join('')}</table>` : '') +
       '<p class="note">Un cambio del criterio es bueno si baja los errores falsos sin perder aciertos de la app. Se repite en la rutina mensual y en los experimentos.</p></div>';
   }

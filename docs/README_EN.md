@@ -76,6 +76,8 @@ app.bat               :: opens the app at http://127.0.0.1:8765 (local only)
 mantenimiento.bat     :: menu: import teams, download sprites, update/measure the evaluator, experiments
 ```
 
+Automated tests (no simulator needed): `pip install pytest` and `python -m pytest tests`.
+
 Sprites are not included in the repository. Run `mantenimiento.bat` → option 2 once (with internet) to download them, or let the app fetch them on demand.
 
 ## Project structure

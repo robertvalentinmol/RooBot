@@ -30,10 +30,11 @@ from urllib.parse import parse_qs, urlparse
 from .engine_client import EngineError, EnginePool
 from .explicar import explain_endgame, duel_matrix, explain_selection, selection_weaknesses, explain_lookahead, explain_position, explain_preview, explain_best, classify, CATEGORIAS, _k
 from .rutas import ROOT
+from . import revision as revisar
 from . import sprites
 
 WEB = ROOT / "web"
-APP_VERSION = "33"
+APP_VERSION = "34"
 # análisis a 2 turnos: respuestas por bando en el turno siguiente, semillas y mezcla con la valoración de 1 turno
 # umbrales de pérdida (escala −1…+1) para llamar «error» a una jugada: validados viendo si la posición empeora después
 LOSS_ERROR = 0.20
@@ -952,12 +953,12 @@ class App:
                 "total": entry["total"], "format": parsed["format"], "sheets": entry["sheet_cards"],
                 "turns": [{"turn": d["turn"], "label": d["label"], "known": d["known"], "reason": d["reason"]} for d in parsed["decisions"]]}
 
-    def _analyze_turn(self, parsed, d, deep: bool, look: bool = False) -> Dict[str, Any]:
+    def _analyze_turn(self, parsed, d, deep: bool, look: bool = False, fija: bool = False) -> Dict[str, Any]:
         state = d["state"]
         sheet = parsed["sheets"]["theirs"]
         K, seeds, nw = (10, 32, 6) if deep else (8, 16, 4)
         with self.lock:
-            wseed = (zlib.crc32(json.dumps(state, sort_keys=True).encode()) % 10 ** 6 + 1) if os.environ.get("ROOBOT_SEMILLA_FIJA") \
+            wseed = (zlib.crc32(json.dumps(state, sort_keys=True).encode()) % 10 ** 6 + 1) if fija or os.environ.get("ROOBOT_SEMILLA_FIJA") \
                 else random.randint(1, 10 ** 6)
             worlds = self.pool.main.call("realistic_worlds", state=state, sheet=sheet, n=nw, seed=wseed)["worlds"]
         spec = d.get("spec")
@@ -1230,18 +1231,47 @@ class App:
         top = sorted(valid, key=lambda i: -w[i])[:3]
         return [{"label": ours[i]["label"], "p": round(100 * w[i] / z)} for i in top]
 
-    def _latest_detail(self):
-        """El detalle de la última calibración (mejor la del banco con hojas abiertas)."""
+    def _latest_detail(self, banco: str = "hoja"):
+        """El detalle de la última calibración con ese banco. Para el banco con hojas abiertas, si no hay ninguna
+        vale la última de otro tipo (ladder o recientes), pero nunca la del banco limpio, que va aparte."""
         d = self.logs / "calibracion"
-        files = sorted(d.glob("calibracion_*_detalle.json"))
-        for f in reversed(files):
+        otras = []
+        for f in reversed(sorted(d.glob("calibracion_*_detalle.json"))):
             try:
                 summ = json.loads(f.with_name(f.name.replace("_detalle", "")).read_text(encoding="utf-8"))
             except Exception:
+                otras.append(f)
                 continue
-            if summ.get("banco") == "hoja":
+            if summ.get("banco") == banco:
                 return f, summ
-        return (files[-1], None) if files else (None, None)
+            if summ.get("banco") != "limpio":
+                otras.append(f)
+        return (otras[0], None) if banco == "hoja" and otras else (None, None)
+
+    def _revision_pendientes(self):
+        """Los desacuerdos que te quedan por juzgar: primero los del banco limpio (en orden al azar fijo) y, si no
+        hay o se han acabado, los del banco con hojas (por gravedad). Devuelve (casos, resumen, banco); banco es
+        None si aún no hay ninguna calibración."""
+        done = {f"{r['replay']}|{r['lado']}|{r['turno']}" for r in self._revision_rows()}
+        ultimo = ([], None, None)
+        for banco in ("limpio", "hoja"):
+            f, summ = self._latest_detail(banco)
+            if not f:
+                continue
+            dec = json.loads(f.read_text(encoding="utf-8"))
+            pend = revisar.pendientes(dec, done, LOSS_ERROR, azar=(banco == "limpio"))
+            if pend:
+                return pend, summ, banco
+            ultimo = ([], summ, banco)
+        return ultimo
+
+    def _calibracion_limpio(self) -> Optional[Dict[str, Any]]:
+        """La última medida con el banco limpio (para «Mi progreso»), o None si aún no se ha hecho."""
+        try:
+            c = json.loads((self.logs / "calibracion" / "ultima_limpio.json").read_text(encoding="utf-8"))
+            return {k: c.get(k) for k in ("fecha", "replays", "decisiones", "acuerdo", "aceptables", "juez")}
+        except Exception:
+            return None
 
     def _revision_rows(self) -> List[Dict[str, str]]:
         f = self.logs / "revision.csv"
@@ -1251,16 +1281,13 @@ class App:
             return list(csv.DictReader(fh))
 
     def revision_next(self) -> Dict[str, Any]:
-        f, summ = self._latest_detail()
-        if not f:
-            raise ValueError("Primero calibra la app (mantenimiento.bat, opción 5): aquí salen las jugadas en las que no está de acuerdo con jugadores fuertes")
-        dec = json.loads(f.read_text(encoding="utf-8"))
-        done = {f"{r['replay']}|{r['lado']}|{r['turno']}" for r in self._revision_rows()}
-        pend = [x for x in dec if x.get("tone") == "bad" and x.get("loss", 0) >= LOSS_ERROR
-                and f"{x['replay']}|{x['side']}|{x['turn']}" not in done]
+        pend, summ, banco = self._revision_pendientes()
+        if banco is None:
+            raise ValueError("Primero mide la app (mantenimiento.bat, opción 9): aquí salen las jugadas en las que no está de acuerdo con jugadores fuertes")
         if not pend:
-            raise ValueError("Ya has revisado todos los desacuerdos de la última calibración. Vuelve a calibrar para tener más.")
-        pend.sort(key=lambda x: -x.get("loss", 0))
+            if revisar.load_limpio()["ids"]:
+                raise ValueError("Ya has revisado todos los desacuerdos. Saldrán más cuando cambie el juez y vuelvas a medir (mantenimiento.bat, opción 9).")
+            raise ValueError("Ya has revisado todos los desacuerdos. Para tener más: mantenimiento.bat, opción 9 (banco limpio).")
         from .calibrar import fetch_log
         last_err = None
         for x in pend[:6]:          # si una no se puede reconstruir (o ya no es desacuerdo), la siguiente
@@ -1269,11 +1296,11 @@ class App:
                 with self.lock:
                     parsed = self.pool.main.call("replay_parse", log=log, ourTeam=[], side=x["side"])
                 d = next(dd for dd in parsed["decisions"] if dd["turn"] == x["turn"])
-                t = self._analyze_turn(parsed, d, False)
+                t = self._analyze_turn(parsed, d, False, fija=True)      # los mismos mundos posibles que al medir
                 if t.get("skipped"):
                     raise ValueError(t.get("reason") or "turno no reproducible")
-                if t["tone"] == "good":
-                    raise ValueError("al volver a analizarla, la app ya la da por buena")
+                if t["tone"] != "bad":
+                    raise ValueError("al volver a analizarla, la app ya no la marca como error")
                 with self.lock:
                     sheet_ours = self.pool.main.call("sheet", team=parsed["sheets"]["ours"], mine=True)
                     sheet_theirs = self.pool.main.call("sheet", team=parsed["sheets"]["theirs"])
@@ -1287,7 +1314,7 @@ class App:
                         "sheets": {"ours": sheet_ours, "theirs": sheet_theirs},
                         "rev": {"id": rid, "replay": x["replay"], "player": x.get("player"), "rating": x.get("rating"),
                                 "turn": x["turn"], "jugador": x["mine"], "app": x["best"], "loss": x["loss"],
-                                "cats": x.get("cats") or [], "pending": len(pend),
+                                "cats": x.get("cats") or [], "pending": len(pend), "banco": banco,
                                 "url": f"https://replay.pokemonshowdown.com/{x['replay']}",
                                 "fecha_cal": (summ or {}).get("fecha")}}
             except Exception as e:
@@ -1358,13 +1385,28 @@ class App:
             est = None
         prueba = None
         try:
-            pj = json.loads((self.logs / "calibracion" / "prueba_revision.json").read_text(encoding="utf-8"))
-            prueba = {k: pj.get(k) for k in ("fecha", "n", "falsos", "n_jugador", "aciertos", "n_app")}
+            pf = self.logs / "calibracion" / "prueba_revision.json"
+            pj = json.loads(pf.read_text(encoding="utf-8")) if pf.exists() else {"casos": []}
+            prueba = {k: pj.get(k) for k in ("fecha", "n", "falsos", "n_jugador", "aciertos", "n_app", "grupos")}
             prueba["historial"] = (pj.get("historial") or [])[-6:]
+            if pj.get("casos") is not None:        # al día: con lo que has juzgado desde la última prueba
+                prueba["grupos"] = revisar.resumen_prueba(revisar.casos_al_dia(pj["casos"], self._revision_rows()),
+                                                          revisar.load_limpio())["grupos"]
         except Exception:
             pass
+        banco = revisar.load_limpio()
+        revisadas = {g: sum(revisar.grupo(r["replay"], banco) == g for r in rows) for g in ("examen", "ajuste")}
+        pendientes = None
+        try:
+            f, _ = self._latest_detail("limpio")
+            if f:
+                done = {f"{r['replay']}|{r['lado']}|{r['turno']}" for r in self._revision_rows()}
+                pendientes = len(revisar.pendientes(json.loads(f.read_text(encoding="utf-8")), done, LOSS_ERROR, azar=True))
+        except Exception:
+            pendientes = None
         return {"total": len(rows), "counts": cnt, "app_ok": None if app_ok is None else round(100 * app_ok, 1),
-                "cats": cats, "estimate": est, "prueba": prueba}
+                "cats": cats, "estimate": est, "prueba": prueba,
+                "limpio": {"revisadas": revisadas, "pendientes": pendientes}}
 
     # ------------------------------------------------------------------ partida completa contra el bot
     BOT_LEVELS = {
@@ -1993,7 +2035,7 @@ class App:
         return {"juez": juez, "weeks": per_week, "ratings": ratings, "summary": self.rating.summary(), "cats": cat_out, "quiz": quiz_w,
                 "bot": bot, "partidas": [{"fecha": r["fecha"], "rival": r["rival"], "precision": r["precision"],
                                           "resultado": r["resultado"]} for r in partidas],
-                "total": len(ej), "calibracion": calib, "revision": self.revision_stats(), "experimentos": self._last_experiment(), "experiencia": self._last_experience(), "sesiones": [{"fecha": r["fecha"], "minutos": r["minutos"], "bloques": r["bloques"],
+                "total": len(ej), "calibracion": calib, "calibracion_limpio": self._calibracion_limpio(), "revision": self.revision_stats(), "experimentos": self._last_experiment(), "experiencia": self._last_experience(), "sesiones": [{"fecha": r["fecha"], "minutos": r["minutos"], "bloques": r["bloques"],
                                                  "fallos": r["fallos"], "dTactico": r["d_tactico"], "incompleta": r["incompleta"]} for r in sesiones]}
 
     def history(self) -> Dict[str, Any]:
