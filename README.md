@@ -28,6 +28,7 @@
 | **Team preview** | Eliges tus 4 y tu lead contra un equipo real de torneo. Se simula cada selección (turno 1 y partidas enteras), con la matriz «quién gana a quién» y las amenazas que tu selección deja sin respuesta. |
 | **Analizar partida** | Pegas una repetición de Showdown y se reconstruye y evalúa cada turno (✓ / ?! / ✗), usando solo lo que podías ver en esa partida (hoja abierta, sin stats ocultos). |
 | **Partidas contra el bot** | Bo1 o Bo3 contra un bot basado en búsqueda, con informe turno a turno al terminar. |
+| **Doble pantalla** | En consolas de dos pantallas (AYN Thor): el campo arriba (`/arriba`) y los controles abajo (`/abajo`), sincronizados. |
 | **Ciclo de aprendizaje** | Repaso espaciado de tus errores, rating táctico tipo Elo, acierto por tipo de decisión (proteger, Fake Out, objetivo, Mega, cambios…) y una sesión guiada diaria. |
 
 <p align="center">

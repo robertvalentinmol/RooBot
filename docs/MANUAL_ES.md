@@ -143,6 +143,19 @@ Tras cada decisión, el apartado **¿Por qué?** explica la jugada: cuál era la
 
 ---
 
+### Doble pantalla (AYN Thor y similares)
+
+En una consola de dos pantallas, RooBot se abre dos veces y las dos ventanas se mantienen sincronizadas a través del servidor local:
+
+| Pantalla | Dirección | Qué muestra |
+|---|---|---|
+| Arriba | `127.0.0.1:8765/arriba` | Sólo el campo de combate, a pantalla completa. Lo que toques en él (por ejemplo, tus 4 en el team preview) se aplica abajo. |
+| Abajo | `127.0.0.1:8765/abajo` | La app con los controles en pestañas: **Jugada** (movimientos, objetivos y confirmar, sin desplazar), **Por qué** (veredicto y explicación; se abre sola al confirmar), **Registro**, **Hojas** (con los equipos) y **Menú** (navegación, fase, equipo, rival y modo). |
+
+Para empezar: arriba, la app RooBot → **Más → Doble pantalla**; abajo, Chrome en `127.0.0.1:8765/abajo`. La elección se recuerda: la app vuelve a abrirse en modo «arriba» hasta que pulses **Usar solo esta pantalla**. Si la ventana de abajo no está abierta (o se cierra), arriba lo dice y espera. Si reinicias el servidor, las dos ventanas se reconectan solas. Mjolnir puede abrir las dos a la vez con el botón Home.
+
+`/` sigue siendo el modo de siempre, de una sola ventana (también en el PC).
+
 ## 5. Calculadora estilo Marcus Koh
 
 ```bat
