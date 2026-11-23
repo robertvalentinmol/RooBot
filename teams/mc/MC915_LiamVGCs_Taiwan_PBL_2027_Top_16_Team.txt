@@ -1,0 +1,54 @@
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Timid Nature  
+- Protect  
+- Hyper Voice  
+- Draco Meteor  
+- Tailwind  
+
+Volcarona @ Charti Berry  
+Ability: Flame Body  
+Level: 50  
+Timid Nature  
+- Protect  
+- Struggle Bug  
+- Overheat  
+- Rage Powder  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Wood Hammer  
+- Superpower  
+- Grassy Glide  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Kowtow Cleave  
+- Swords Dance  
+- Sucker Punch  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Rock Slide  
+- Stomping Tantrum  
+- Dragon Claw  
+- Earthquake  
+
+Glimmora @ Glimmoranite  
+Ability: Toxic Debris  
+Level: 50  
+Modest Nature  
+- Spiky Shield  
+- Sludge Bomb  
+- Earth Power  
+- Power Gem  
+

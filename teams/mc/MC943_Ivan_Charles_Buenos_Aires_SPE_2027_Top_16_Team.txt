@@ -1,0 +1,54 @@
+Venusaur @ Focus Sash  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Leaf Storm  
+- Sludge Bomb  
+- Sleep Powder  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Dragon Pulse  
+- Flash Cannon  
+- Electro Shot  
+- Protect  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Draco Meteor  
+- Earth Power  
+- Power Gem  
+- Protect  
+
+Grimmsnarl @ Light Clay  
+Ability: Prankster  
+Level: 50  
+Sassy Nature  
+- Spirit Break  
+- Parting Shot  
+- Light Screen  
+- Reflect  
+
+Pelipper @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Hurricane  
+- Weather Ball  
+- Tailwind  
+- Wide Guard  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Weather Ball  
+- Hurricane  
+- Protect  
+

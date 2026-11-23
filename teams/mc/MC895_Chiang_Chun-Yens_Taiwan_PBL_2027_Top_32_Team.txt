@@ -1,0 +1,54 @@
+Metagross @ Metagrossite  
+Ability: Clear Body  
+Level: 50  
+Adamant Nature  
+- Psychic Fangs  
+- Iron Head  
+- Stomping Tantrum  
+- Protect  
+
+Volcarona @ Charti Berry  
+Ability: Flame Body  
+Level: 50  
+Bold Nature  
+- Flamethrower  
+- Struggle Bug  
+- Rage Powder  
+- Tailwind  
+
+Rillaboom @ Life Orb  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Wood Hammer  
+- Grassy Glide  
+- U-turn  
+- Fake Out  
+
+Basculegion @ Mystic Water  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Aqua Jet  
+- Last Respects  
+- Protect  
+
+Sneasler @ Focus Sash  
+Ability: Unburden  
+Level: 50  
+Jolly Nature  
+- Close Combat  
+- Dire Claw  
+- Fake Out  
+- Coaching  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Draco Meteor  
+- Earth Power  
+- Flamethrower  
+- Protect  
+

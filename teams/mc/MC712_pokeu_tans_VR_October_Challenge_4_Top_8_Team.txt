@@ -1,0 +1,54 @@
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Brave Bird  
+- Close Combat  
+- Tailwind  
+- Protect  
+
+Farigiraf @ Psychic Seed  
+Ability: Armor Tail  
+Level: 50  
+Modest Nature  
+- Expanding Force  
+- Hyper Voice  
+- Nasty Plot  
+- Protect  
+
+Indeedee-F @ Sitrus Berry  
+Ability: Psychic Surge  
+Level: 50  
+Bold Nature  
+- Psychic  
+- Follow Me  
+- Trick Room  
+- Helping Hand  
+
+Basculegion @ Life Orb  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Iron Head  
+- Sucker Punch  
+- Low Kick  
+
+Raichu @ Focus Sash  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Thunderbolt  
+- Charm  
+- Encore  
+- Fake Out  
+

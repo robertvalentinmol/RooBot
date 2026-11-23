@@ -1,0 +1,54 @@
+Froslass @ Froslassite  
+Ability: Cursed Body  
+Level: 50  
+Timid Nature  
+- Blizzard  
+- Shadow Ball  
+- Aurora Veil  
+- Protect  
+
+Toxapex @ Leftovers  
+Ability: Regenerator  
+Level: 50  
+Bold Nature  
+- Infestation  
+- Toxic  
+- Wide Guard  
+- Baneful Bunker  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Earthquake  
+- Dragon Claw  
+- Stomping Tantrum  
+- Rock Slide  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Fake Out  
+- Protect  
+
+Kingambit @ Black Glasses  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Swords Dance  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Helping Hand  
+

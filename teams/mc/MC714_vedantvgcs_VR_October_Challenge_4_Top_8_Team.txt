@@ -1,0 +1,54 @@
+Gholdengo @ Life Orb  
+Ability: Good as Gold  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Make It Rain  
+- Nasty Plot  
+- Protect  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Wood Hammer  
+- U-turn  
+
+Milotic @ Leftovers  
+Ability: Competitive  
+Level: 50  
+Calm Nature  
+- Coil  
+- Muddy Water  
+- Hypnosis  
+- Protect  
+
+Arcanine-Hisui @ Focus Sash  
+Ability: Rock Head  
+Level: 50  
+Jolly Nature  
+- Extreme Speed  
+- Head Smash  
+- Flare Blitz  
+- Protect  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Draco Meteor  
+- Tailwind  
+- Protect  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Fake Out  
+- Zap Cannon  
+- Focus Blast  
+- Protect  
+

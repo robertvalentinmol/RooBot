@@ -1,0 +1,54 @@
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Draining Kiss  
+- Calm Mind  
+- Protect  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Draco Meteor  
+- Tailwind  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Close Combat  
+- Fake Out  
+- Protect  
+
+Basculegion @ Focus Sash  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Liquidation  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Flare Blitz  
+- Helping Hand  
+- Parting Shot  
+- Fake Out  
+
+Rillaboom @ Life Orb  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Wood Hammer  
+- High Horsepower  
+- Grassy Glide  
+- Fake Out  
+

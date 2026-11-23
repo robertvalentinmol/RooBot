@@ -1,0 +1,54 @@
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Zap Cannon  
+- Focus Blast  
+- Fake Out  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Rock Slide  
+- Dire Claw  
+- Close Combat  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Protect  
+- Aura Sphere  
+- Dragon Pulse  
+- Electro Shot  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+Modest Nature  
+- Hurricane  
+- Weather Ball  
+- Helping Hand  
+- Wide Guard  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Sucker Punch  
+- Leech Life  
+- Iron Head  
+- Swords Dance  
+
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Muddy Water  
+- Ice Beam  
+- Protect  
+

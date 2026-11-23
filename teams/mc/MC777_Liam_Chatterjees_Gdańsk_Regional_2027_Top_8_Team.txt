@@ -1,0 +1,54 @@
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Dazzling Gleam  
+- Light of Ruin  
+- Protect  
+
+Indeedee @ Focus Sash  
+Ability: Psychic Surge  
+Level: 50  
+Timid Nature  
+- Expanding Force  
+- Hyper Voice  
+- Trick Room  
+- Imprison  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+- Protect  
+
+Glimmora @ Life Orb  
+Ability: Toxic Debris  
+Level: 50  
+Modest Nature  
+- Sludge Bomb  
+- Power Gem  
+- Earth Power  
+- Spiky Shield  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Earthquake  
+- Dragon Claw  
+- Rock Slide  
+- Stomping Tantrum  
+
+Whimsicott @ Occa Berry  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Tailwind  
+- Encore  
+- Protect  
+

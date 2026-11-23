@@ -1,0 +1,54 @@
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Sludge Bomb  
+- Shadow Ball  
+- Perish Song  
+- Protect  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Swords Dance  
+- Sucker Punch  
+- Kowtow Cleave  
+- Protect  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Grassy Glide  
+- Wood Hammer  
+- Fake Out  
+- Protect  
+
+Kommo-o @ Leftovers  
+Ability: Soundproof  
+Level: 50  
+Modest Nature  
+- Protect  
+- Clanging Scales  
+- Aura Sphere  
+- Clangorous Soul  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Sassy Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Protect  
+
+Vivillon @ Focus Sash  
+Ability: Compound Eyes  
+Level: 50  
+Timid Nature  
+- Sleep Powder  
+- Rage Powder  
+- Hurricane  
+- Protect  
+

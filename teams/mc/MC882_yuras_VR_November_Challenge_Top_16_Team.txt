@@ -1,0 +1,54 @@
+Dragonite @ Dragoninite  
+Ability: Multiscale  
+Level: 50  
+Modest Nature  
+- Dragon Pulse  
+- Heat Wave  
+- Tailwind  
+- Protect  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Iron Head  
+- Protect  
+
+Sneasler @ Focus Sash  
+Ability: Poison Touch  
+Level: 50  
+Jolly Nature  
+- Fake Out  
+- Poison Jab  
+- Close Combat  
+- Protect  
+
+Basculegion @ Life Orb  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+- Protect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Earthquake  
+- Stomping Tantrum  
+- Dragon Claw  
+- Rock Slide  
+

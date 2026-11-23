@@ -1,0 +1,54 @@
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Impish Nature  
+- Fake Out  
+- Protect  
+- Darkest Lariat  
+- Parting Shot  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Perish Song  
+- Sludge Bomb  
+- Protect  
+
+Politoed @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Sassy Nature  
+- Weather Ball  
+- Encore  
+- Perish Song  
+- Protect  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Drum Beating  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Protect  
+- Flash Cannon  
+- Dragon Pulse  
+- Electro Shot  
+
+Vivillon-Fancy @ Focus Sash  
+Ability: Compound Eyes  
+Level: 50  
+Timid Nature  
+- Sleep Powder  
+- Protect  
+- Hurricane  
+- Rage Powder  
+

@@ -1,0 +1,54 @@
+Camerupt @ Cameruptite  
+Ability: Solid Rock  
+Level: 50  
+Quiet Nature  
+- Heat Wave  
+- Earth Power  
+- Ancient Power  
+- Protect  
+
+Rillaboom @ Life Orb  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Grassy Glide  
+- U-turn  
+- Wood Hammer  
+- Fake Out  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+Modest Nature  
+- Psychic  
+- Thunderbolt  
+- Trick Room  
+- Protect  
+
+Primarina @ Mystic Water  
+Ability: Liquid Voice  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Moonblast  
+- Calm Mind  
+- Protect  
+
+Incineroar @ Passho Berry  
+Ability: Intimidate  
+Level: 50  
+Adamant Nature  
+- Flare Blitz  
+- Darkest Lariat  
+- Parting Shot  
+- Fake Out  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Zap Cannon  
+- Focus Blast  
+- Encore  
+- Protect  
+

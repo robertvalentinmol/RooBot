@@ -1,0 +1,54 @@
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Throat Chop  
+
+Primarina @ Leftovers  
+Ability: Liquid Voice  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Moonblast  
+- Calm Mind  
+- Protect  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Wood Hammer  
+- Grassy Glide  
+- U-turn  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Fake Out  
+- Zap Cannon  
+- Focus Blast  
+- Protect  
+
+Volcarona @ Grassy Seed  
+Ability: Flame Body  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Giga Drain  
+- Quiver Dance  
+- Protect  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Draco Meteor  
+- Earth Power  
+- Power Gem  
+- Protect  
+

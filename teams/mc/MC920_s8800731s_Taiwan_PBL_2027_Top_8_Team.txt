@@ -1,0 +1,54 @@
+Gardevoir @ Gardevoirite  
+Ability: Trace  
+Level: 50  
+Timid Nature  
+- Hyper Voice  
+- Expanding Force  
+- Protect  
+- Mystical Fire  
+
+Sinistcha @ Colbur Berry  
+Ability: Hospitality  
+Level: 50  
+Bold Nature  
+- Matcha Gotcha  
+- Life Dew  
+- Rage Powder  
+- Protect  
+
+Indeedee-F @ Rocky Helmet  
+Ability: Psychic Surge  
+Level: 50  
+Bold Nature  
+- Follow Me  
+- Imprison  
+- Helping Hand  
+- Trick Room  
+
+Farigiraf @ Red Card  
+Ability: Armor Tail  
+Level: 50  
+Calm Nature  
+- Expanding Force  
+- Helping Hand  
+- Mirror Coat  
+- Ally Switch  
+
+Sneasler @ Psychic Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Close Combat  
+- Brick Break  
+- Rain Dance  
+
+Blastoise @ Blastoisinite  
+Ability: Rain Dish  
+Level: 50  
+Modest Nature  
+- Water Spout  
+- Dark Pulse  
+- Shell Smash  
+- Protect  
+

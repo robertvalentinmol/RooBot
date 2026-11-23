@@ -1,0 +1,54 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Protect  
+- Weather Ball  
+- Heat Wave  
+- Ancient Power  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Protect  
+- Flash Cannon  
+- Dragon Pulse  
+- Electro Shot  
+
+Blastoise @ Blastoisinite  
+Ability: Torrent  
+Level: 50  
+Modest Nature  
+- Protect  
+- Shell Smash  
+- Water Spout  
+- Dark Pulse  
+
+Pelipper @ Focus Sash  
+Ability: Drizzle  
+Level: 50  
+Modest Nature  
+- Hurricane  
+- Weather Ball  
+- Tailwind  
+- Wide Guard  
+
+Venusaur @ Life Orb  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Protect  
+- Leaf Storm  
+- Sludge Bomb  
+- Sleep Powder  
+
+Indeedee-F @ Psychic Seed  
+Ability: Psychic Surge  
+Level: 50  
+Relaxed Nature  
+- Psychic  
+- Follow Me  
+- Trick Room  
+- Helping Hand  
+

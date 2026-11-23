@@ -1,0 +1,54 @@
+Incineroar @ Leftovers  
+Ability: Intimidate  
+Level: 50  
+Relaxed Nature  
+- Fake Out  
+- Snarl  
+- Flare Blitz  
+- Parting Shot  
+
+Venusaur @ Focus Sash  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Earth Power  
+- Sludge Bomb  
+- Sleep Powder  
+- Protect  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Ancient Power  
+- Weather Ball  
+- Protect  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Modest Nature  
+- Power Gem  
+- Draco Meteor  
+- Earth Power  
+- Protect  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Detect  
+- Hyper Voice  
+- Yawn  
+- Quick Attack  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+Modest Nature  
+- Psychic  
+- Protect  
+- Trick Room  
+- Thunderbolt  
+

@@ -1,0 +1,60 @@
+Aerodactyl @ Aerodactylite  
+Ability: Unnerve  
+Level: 50  
+EVs: 6 HP / 28 Atk / 32 Spe  
+Jolly Nature  
+- Rock Slide  
+- Dual Wingbeat  
+- Tailwind  
+- Wide Guard  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+EVs: 31 HP / 21 Def / 14 SpD  
+Bold Nature  
+- Psychic  
+- Thunderbolt  
+- Protect  
+- Trick Room  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+EVs: 20 HP / 16 Def / 20 SpA / 10 Spe  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Quick Attack  
+- Protect  
+
+Garchomp @ Life Orb  
+Ability: Rough Skin  
+Level: 50  
+EVs: 2 HP / 32 Atk / 32 Spe  
+Jolly Nature  
+- Dragon Claw  
+- Earthquake  
+- Rock Tomb  
+- Protect  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+EVs: 32 HP / 9 Def / 1 SpA / 24 SpD  
+Modest Nature  
+- Weather Ball  
+- Heat Wave  
+- Solar Beam  
+- Protect  
+
+Kingambit @ Focus Sash  
+Ability: Defiant  
+Level: 50  
+EVs: 2 HP / 32 Atk / 32 Spe  
+Adamant Nature  
+- Iron Head  
+- Kowtow Cleave  
+- Sucker Punch  
+- Low Kick  
+

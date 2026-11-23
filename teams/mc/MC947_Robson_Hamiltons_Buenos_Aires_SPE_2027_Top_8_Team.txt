@@ -1,0 +1,54 @@
+Hippowdon @ Leftovers  
+Ability: Sand Stream  
+Level: 50  
+Adamant Nature  
+- High Horsepower  
+- Stone Edge  
+- Yawn  
+- Protect  
+
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Brave Bird  
+- Close Combat  
+- Roost  
+- Protect  
+
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Tailwind  
+- Charm  
+- Encore  
+
+Glimmora @ Glimmoranite  
+Ability: Toxic Debris  
+Level: 50  
+Modest Nature  
+- Earth Power  
+- Sludge Bomb  
+- Power Gem  
+- Spiky Shield  
+
+Kingambit @ Occa Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Sucker Punch  
+- Kowtow Cleave  
+- Low Kick  
+- Protect  
+
+Houndstone @ Life Orb  
+Ability: Sand Rush  
+Level: 50  
+Adamant Nature  
+- Last Respects  
+- Play Rough  
+- Substitute  
+- Protect  
+

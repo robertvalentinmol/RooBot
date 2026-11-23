@@ -1,0 +1,60 @@
+Baxcalibur @ Baxcalibrite  
+Ability: Ice Body  
+Level: 50  
+EVs: 18 HP / 25 Atk / 1 Def / 17 SpD / 5 Spe  
+Adamant Nature  
+- Glaive Rush  
+- Ice Shard  
+- Swords Dance  
+- Protect  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+EVs: 25 HP / 11 Def / 2 SpA / 5 SpD / 23 Spe  
+Timid Nature  
+- Zap Cannon  
+- Focus Blast  
+- Fake Out  
+- Protect  
+
+Volcarona @ Grassy Seed  
+Ability: Flame Body  
+Level: 50  
+EVs: 32 HP / 4 Def / 5 SpA / 1 SpD / 24 Spe  
+Modest Nature  
+- Bug Buzz  
+- Heat Wave  
+- Quiver Dance  
+- Protect  
+
+Milotic @ Leftovers  
+Ability: Competitive  
+Level: 50  
+EVs: 30 HP / 11 Def / 25 SpD  
+Calm Nature  
+- Muddy Water  
+- Hypnosis  
+- Coil  
+- Recover  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+EVs: 30 HP / 16 Def / 20 SpD  
+Careful Nature  
+- Flare Blitz  
+- Darkest Lariat  
+- Fake Out  
+- Parting Shot  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+EVs: 32 HP / 25 Atk / 9 Spe  
+Adamant Nature  
+- Wood Hammer  
+- Grassy Glide  
+- High Horsepower  
+- Fake Out  
+

@@ -1,0 +1,54 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Protect  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+Bold Nature  
+- Psychic  
+- Trick Room  
+- Thunderbolt  
+- Helping Hand  
+
+Aerodactyl @ Aerodactylite  
+Ability: Unnerve  
+Level: 50  
+Jolly Nature  
+- Tailwind  
+- Rock Slide  
+- Protect  
+- Dual Wingbeat  
+
+Kingambit @ Focus Sash  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Low Kick  
+- Kowtow Cleave  
+- Iron Head  
+- Sucker Punch  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Earthquake  
+- Dragon Claw  
+- Stomping Tantrum  
+- Rock Slide  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Detect  
+- Hyper Voice  
+- Hyper Beam  
+- Quick Attack  
+

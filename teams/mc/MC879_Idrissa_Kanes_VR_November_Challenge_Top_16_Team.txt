@@ -1,0 +1,54 @@
+Tyranitar @ Tyranitarite  
+Ability: Sand Stream  
+Level: 50  
+Jolly Nature  
+- Rock Slide  
+- Protect  
+- Knock Off  
+- Low Kick  
+
+Excadrill @ Focus Sash  
+Ability: Sand Rush  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Iron Head  
+- High Horsepower  
+- Rock Slide  
+
+Sinistcha @ Occa Berry  
+Ability: Hospitality  
+Level: 50  
+Bold Nature  
+- Matcha Gotcha  
+- Rage Powder  
+- Protect  
+- Shadow Ball  
+
+Gholdengo @ Life Orb  
+Ability: Good as Gold  
+Level: 50  
+Timid Nature  
+- Make It Rain  
+- Protect  
+- Nasty Plot  
+- Shadow Ball  
+
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Brave Bird  
+- Protect  
+- Close Combat  
+- Tailwind  
+
+Milotic @ Leftovers  
+Ability: Competitive  
+Level: 50  
+Bold Nature  
+- Scald  
+- Protect  
+- Icy Wind  
+- Ice Beam  
+

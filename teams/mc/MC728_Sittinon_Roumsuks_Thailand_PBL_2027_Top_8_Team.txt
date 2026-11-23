@@ -1,0 +1,54 @@
+Tyranitar @ Tyranitarite  
+Ability: Sand Stream  
+Level: 50  
+Jolly Nature  
+- Rock Slide  
+- Knock Off  
+- Low Kick  
+- Protect  
+
+Excadrill @ Focus Sash  
+Ability: Sand Rush  
+Level: 50  
+Adamant Nature  
+- Iron Head  
+- Earthquake  
+- High Horsepower  
+- Protect  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Draco Meteor  
+- Flamethrower  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Coaching  
+- Close Combat  
+- Protect  
+
+Indeedee @ Choice Scarf  
+Ability: Psychic Surge  
+Level: 50  
+Modest Nature  
+- Expanding Force  
+- Trick  
+- Mystical Fire  
+- Protect  
+
+Corviknight @ Psychic Seed  
+Ability: Mirror Armor  
+Level: 50  
+Careful Nature  
+- Bulk Up  
+- Brave Bird  
+- Power Trip  
+- Roost  
+

@@ -1,0 +1,54 @@
+Delphox @ Delphoxite  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Psyshock  
+- Calm Mind  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Throat Chop  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Zap Cannon  
+- Focus Blast  
+- Protect  
+- Fake Out  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Sucker Punch  
+- Kowtow Cleave  
+- Swords Dance  
+- Protect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Earthquake  
+- Dragon Claw  
+- Stomping Tantrum  
+- Rock Slide  
+
+Sinistcha @ Colbur Berry  
+Ability: Hospitality  
+Level: 50  
+Bold Nature  
+- Matcha Gotcha  
+- Protect  
+- Trick Room  
+- Rage Powder  
+
