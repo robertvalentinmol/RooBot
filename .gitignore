@@ -21,3 +21,8 @@ limpiar_v*.bat
 checkpoints/
 Mantenimiento.pdf
 *.lnk
+.pytest_cache/
+
+# Notas y utilidades locales para trabajar con Claude
+Claude outputs/
+empaquetar_roobot.bat

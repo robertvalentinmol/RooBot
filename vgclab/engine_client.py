@@ -16,7 +16,9 @@ from typing import Any, Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parent.parent
 ENGINE_JS = ROOT / "engine" / "engine.js"
-DEFAULT_FORMAT = os.environ.get("VGCLAB_FORMAT", "gen9championsvgc2026regmc")
+from .regulacion import REG
+
+DEFAULT_FORMAT = REG.formato   # regulación activa (regulacion.json); VGCLAB_FORMAT sigue mandando
 
 
 class EngineError(RuntimeError):

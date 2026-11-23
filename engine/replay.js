@@ -9,7 +9,7 @@
  * parse(req): { log, side?: 'p1'|'p2', ourTeam?: [sets], format? }
  *   → { players, format, side, winner, sheets: {ours, theirs}, decisions: [{ turn, state, spec, label, known, reason }] }
  */
-const { PS, dexFor, normSet, toID, completeOpponentSet, guessSpread } = require('./sim');
+const { PS, dexFor, normSet, toID, completeOpponentSet, guessSpread, DEFAULT_FORMAT } = require('./sim');
 
 const PROTECT = new Set(['protect', 'detect', 'spikyshield', 'kingsshield', 'banefulbunker', 'silktrap', 'burningbulwark', 'obstruct', 'maxguard']);
 const WEATHER = { raindance: 'raindance', sunnyday: 'sunnyday', sandstorm: 'sandstorm', snowscape: 'snowscape', snow: 'snowscape', hail: 'snowscape',
@@ -249,8 +249,8 @@ function parse(req) {
 		}
 	}
 
-	format = format || 'gen9championsvgc2026regmc';
-	if (!PS.Dex.formats.get(format).exists) format = 'gen9championsvgc2026regmc';
+	format = format || DEFAULT_FORMAT;
+	if (!PS.Dex.formats.get(format).exists) format = DEFAULT_FORMAT;
 	const dex = dexFor(format);
 	const baseId = name => toID(dex.species.get(name).baseSpecies);
 

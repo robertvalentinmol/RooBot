@@ -1,0 +1,17 @@
+{
+  "activa": "mc",
+  "regulaciones": {
+    "mc": {
+      "nombre": "Reg M-C",
+      "formato": "gen9championsvgc2026regmc",
+      "formato_bo3": "gen9championsvgc2026regmcbo3",
+      "equipos": "teams/mc",
+      "showdown": "d601443",
+      "sufijo_datos": "",
+      "hoja_equipos": {
+        "url": "https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw/edit",
+        "pestana": "Champions M-C Featured Teams"
+      }
+    }
+  }
+}

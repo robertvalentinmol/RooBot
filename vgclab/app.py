@@ -30,6 +30,7 @@ from urllib.parse import parse_qs, urlparse
 from .engine_client import EngineError, EnginePool
 from .explicar import explain_endgame, duel_matrix, explain_selection, selection_weaknesses, explain_lookahead, explain_position, explain_preview, explain_best, classify, CATEGORIAS, _k
 from .rutas import ROOT
+from .regulacion import REG, carpetas_de_otras
 from . import revision as revisar
 from . import sprites
 
@@ -289,11 +290,14 @@ class App:
     # ------------------------------------------------------------------ equipos
     def team_files(self) -> List[Dict[str, str]]:
         out = []
+        otras = carpetas_de_otras()    # equipos de otras regulaciones: no se mezclan con los de la activa
         for base in [ROOT / "teams"] + [Path(r) for r in self.rival_dirs]:
             base = base if base.is_absolute() else ROOT / base
             if not base.exists():
                 continue
             for f in sorted(base.rglob("*.txt")):
+                if any(o in f.parents for o in otras if o not in base.parents and o != base):
+                    continue
                 try:
                     rel = str(f.relative_to(ROOT))
                 except ValueError:
@@ -319,7 +323,7 @@ class App:
         with self.lock:
             v = self.pool.main.call("validate", team=ours)
         if not v["ok"]:
-            raise ValueError("Tu equipo no es válido para Reg M-C: " + "; ".join(v["problems"][:3]))
+            raise ValueError(f"Tu equipo no es válido para {REG.nombre}: " + "; ".join(v["problems"][:3]))
         rival_file = self._pick_rival(my_team, rival)
         theirs = self._read_team(rival_file)
         focus = None
@@ -1268,7 +1272,7 @@ class App:
     def _calibracion_limpio(self) -> Optional[Dict[str, Any]]:
         """La última medida con el banco limpio (para «Mi progreso»), o None si aún no se ha hecho."""
         try:
-            c = json.loads((self.logs / "calibracion" / "ultima_limpio.json").read_text(encoding="utf-8"))
+            c = json.loads(REG.archivo(self.logs / "calibracion" / "ultima_limpio.json").read_text(encoding="utf-8"))
             return {k: c.get(k) for k in ("fecha", "replays", "decisiones", "acuerdo", "aceptables", "juez")}
         except Exception:
             return None
@@ -1421,7 +1425,7 @@ class App:
         with self.lock:
             v = self.pool.main.call("validate", team=ours)
         if not v["ok"]:
-            raise ValueError("Tu equipo no es válido para Reg M-C: " + "; ".join(v["problems"][:3]))
+            raise ValueError(f"Tu equipo no es válido para {REG.nombre}: " + "; ".join(v["problems"][:3]))
         rival_file = self._pick_rival(my_team, rival)
         theirs = self._read_team(rival_file)
         if len(ours) < 4 or len(theirs) < 4:
@@ -1556,7 +1560,7 @@ class App:
                 pass
         report = None
         if g["decisions"]:
-            parsed = {"format": "gen9championsvgc2026regmc", "players": ["Tú", "Bot"], "side": "p1", "opp": "p2",
+            parsed = {"format": REG.formato, "players": ["Tú", "Bot"], "side": "p1", "opp": "p2",
                       "winner": None if info["winner"] not in ("p1", "p2") else ("Tú" if won else f"Bot · {series['rival']}"),
                       "ourName": "Tú", "oppName": f"Bot · {series['rival']}", "icon": "⚔", "usedOurFile": True,
                       "openSheets": True, "sheets": {"ours": series["ours"], "theirs": series["theirs"]},
@@ -2007,7 +2011,7 @@ class App:
         partidas = rows("partidas.csv")[-20:]
         sesiones = rows("sesiones.csv")[-12:]
         calib = None
-        cf = self.logs / "calibracion" / "ultima.json"
+        cf = REG.archivo(self.logs / "calibracion" / "ultima.json")
         if cf.exists():
             try:
                 c = json.loads(cf.read_text(encoding="utf-8"))
@@ -2071,7 +2075,8 @@ def make_handler(app: App):
         def do_GET(self):
             u = urlparse(self.path)
             if u.path in ("/", "/index.html"):
-                self._send(200, (WEB / "index.html").read_bytes(), "text/html; charset=utf-8")
+                self._send(200, (WEB / "index.html").read_bytes().replace(b"__REGULACION__", REG.nombre.encode("utf-8")),
+                           "text/html; charset=utf-8")
             elif u.path == "/favicon.ico":
                 self._send(200, (WEB / "img" / "roobot.ico").read_bytes(), "image/x-icon", cache=True)
             elif u.path.startswith("/img/"):
@@ -2215,7 +2220,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Ejercicios de posición con interfaz gráfica")
     ap.add_argument("--puerto", type=int, default=8765)
     ap.add_argument("--workers", type=int, default=2)
-    ap.add_argument("--rivales", nargs="+", default=["teams/mc"])
+    ap.add_argument("--rivales", nargs="+", default=[REG.equipos])
     ap.add_argument("--no-abrir", action="store_true")
     a = ap.parse_args(argv)
     app = App(a.workers, a.rivales, ROOT / "logs")

@@ -51,8 +51,9 @@ from typing import Any, Dict, List, Optional, Tuple
 from . import revision as rev
 from .app import App, CATEGORIAS
 from .rutas import ROOT
+from .regulacion import REG
 
-FORMATS = ["gen9championsvgc2026regmc", "gen9championsvgc2026regmcbo3"]
+FORMATS = REG.formatos      # Bo1 y Bo3 de la regulación activa
 UA = {"User-Agent": "Mozilla/5.0 (RooBot; calibracion personal)"}
 
 
@@ -136,6 +137,13 @@ def load_folder(folder: Path) -> List[Dict[str, Any]]:
 
 
 REPLAY_DIR = ROOT / "logs" / "calibracion" / "replays"
+
+
+def guardadas() -> List[str]:
+    """Ids de las repeticiones descargadas que son de la regulación activa (la carpeta es común a todas)."""
+    if not REPLAY_DIR.exists():
+        return []
+    return [f.stem for f in sorted(REPLAY_DIR.glob("*.log")) if REG.es_suya(f.stem)]
 
 
 def fetch_log(rid: str) -> str:
@@ -436,8 +444,8 @@ def learn(items, app, out_dir: Path, exclude=None) -> Dict[str, Any]:
     return info
 
 
-BANCO = ROOT / "logs" / "calibracion" / "banco.json"              # ladder (sin hojas)
-BANCO_HOJA = ROOT / "logs" / "calibracion" / "banco_hoja.json"    # con hojas abiertas (como en torneo)
+BANCO = REG.archivo(ROOT / "logs" / "calibracion" / "banco.json")              # ladder (sin hojas)
+BANCO_HOJA = REG.archivo(ROOT / "logs" / "calibracion" / "banco_hoja.json")    # con hojas abiertas (como en torneo)
 
 
 def _bank_file(hoja: bool) -> Path:
@@ -451,7 +459,7 @@ def load_bank(hoja: bool = False) -> List[str]:
         return []
 
 
-BANCO_EVAL = ROOT / "logs" / "calibracion" / "banco_eval.json"   # partidas apartadas para evaluar la experiencia
+BANCO_EVAL = REG.archivo(ROOT / "logs" / "calibracion" / "banco_eval.json")   # partidas apartadas para evaluar la experiencia
 
 
 def all_bank_ids() -> List[str]:
@@ -480,7 +488,7 @@ def make_bank(n: int, min_rating: int, max_pages: int, hoja: bool = False, downl
 
     def cached():
         idx = _index()
-        got = [(idx.get(f.stem), f.stem) for f in REPLAY_DIR.glob("*.log")] if REPLAY_DIR.exists() else []
+        got = [(idx.get(i), i) for i in guardadas()]
         ok = [(r, i) for r, i in got if r is not None and r >= min_rating and i not in other]
         if hoja:
             ok = [(r, i) for r, i in ok if has_sheets(i)]
@@ -490,7 +498,8 @@ def make_bank(n: int, min_rating: int, max_pages: int, hoja: bool = False, downl
         print(f"Sólo hay {len(have)} repeticiones guardadas que sirvan: descargo más para el banco…")
         if hoja:
             idx = _index()
-            cand = sorted(((r, i) for i, r in idx.items() if r and r >= min_rating and not (REPLAY_DIR / f"{i}.log").exists()),
+            cand = sorted(((r, i) for i, r in idx.items() if r and r >= min_rating and REG.es_suya(i)
+                           and not (REPLAY_DIR / f"{i}.log").exists()),
                           key=lambda x: (("bo3" not in x[1]), -x[0]))
             tries = 0
             for r, rid in cand:
@@ -554,7 +563,7 @@ def make_limpio(n: int = 100, min_rating: int = 1500, seed: int = 20261116) -> D
         return banco
     idx = _index()
     fuera = set(all_bank_ids())
-    cand = sorted(f.stem for f in REPLAY_DIR.glob("*.log")) if REPLAY_DIR.exists() else []
+    cand = guardadas()
     cand = [i for i in cand if (idx.get(i) or 0) >= min_rating and i not in fuera and has_sheets(i)]
     if len(cand) < LIMPIO_MINIMO:
         raise SystemExit(f"Solo hay {len(cand)} partidas con hojas abiertas de {min_rating}+ fuera de los bancos; hacen falta "
@@ -586,7 +595,7 @@ def _resultado_prueba(res: List[Dict[str, Any]]) -> Dict[str, Any]:
 def _guardar_ultima(out_dir: Path, summary: Dict[str, Any], use_bank) -> List[Dict[str, Any]]:
     """Guarda el resumen como «última calibración» con su historial y devuelve ese historial. La medida del banco
     limpio va en su propio archivo: no se mezcla con el historial del banco con hojas que enseña «Mi progreso»."""
-    prev = out_dir / ("ultima_limpio.json" if use_bank == "limpio" else "ultima.json")
+    prev = REG.archivo(out_dir / ("ultima_limpio.json" if use_bank == "limpio" else "ultima.json"))
     hist: List[Dict[str, Any]] = []
     if prev.exists():
         try:
@@ -697,7 +706,7 @@ def main() -> None:
     if a.juez == "manual":
         os.environ["ROOBOT_JUEZ"] = "manual"
     if a.prueba_revision:
-        prueba_revision(App(a.workers or 0, ["teams/mc"], ROOT / "logs" / "calibracion" / "_tmp"), a.experimento)
+        prueba_revision(App(a.workers or 0, [REG.equipos], ROOT / "logs" / "calibracion" / "_tmp"), a.experimento)
         return
 
     out_dir = ROOT / "logs" / "calibracion"
@@ -744,7 +753,7 @@ def main() -> None:
     if not items and not (a.aprender and a.solo_guardadas):
         raise SystemExit("No hay repeticiones que analizar (prueba con --rating más bajo o --carpeta)")
 
-    app = App(a.workers or 0, ["teams/mc"], ROOT / "logs" / "calibracion" / "_tmp")
+    app = App(a.workers or 0, [REG.equipos], ROOT / "logs" / "calibracion" / "_tmp")
     if a.aprender:
         # también las que ya estaban guardadas de otras veces
         have = {it.get("id") for it in items} | set(bank)
@@ -752,7 +761,7 @@ def main() -> None:
         rmin = min(a.rating, a.rating_min_peso)
         if not a.carpeta:
             idx = _index()
-            cached = {f.stem for f in REPLAY_DIR.glob("*.log")} if REPLAY_DIR.exists() else set()
+            cached = set(guardadas())
             for rid in sorted(cached):
                 r = idx.get(rid)
                 if rid not in have and r is not None and r >= rmin:           # guardadas de otras veces
@@ -764,7 +773,7 @@ def main() -> None:
                 for rid, r in sorted(idx.items(), key=lambda x: -(x[1] or 0)):
                     if down >= a.max_descargas:
                         break
-                    if rid not in have and rid not in cached and r is not None and r >= rmin:
+                    if rid not in have and rid not in cached and r is not None and r >= rmin and REG.es_suya(rid):
                         items.append({"id": rid, "rating": r})
                         have.add(rid)
                         down += 1

@@ -80,6 +80,10 @@ Automated tests (no simulator needed): `pip install pytest` and `python -m pytes
 
 Sprites are not included in the repository. Run `mantenimiento.bat` → option 2 once (with internet) to download them, or let the app fetch them on demand.
 
+### Switching regulations
+
+The active regulation (Showdown format, rival-team folder and tested Showdown commit) lives in `regulacion.json`, and the whole program reads it from there. When a new one comes out, `mantenimiento.bat` → **R** updates Showdown, registers it, creates its team folder and asks for its teams. Test banks are kept per regulation and saved replays are filtered by format.
+
 ## Project structure
 
 ```

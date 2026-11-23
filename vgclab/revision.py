@@ -15,8 +15,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 from .rutas import ROOT
+from .regulacion import REG
 
-LIMPIO = ROOT / "logs" / "calibracion" / "banco_limpio.json"
+LIMPIO = REG.archivo(ROOT / "logs" / "calibracion" / "banco_limpio.json")   # uno por regulación
 GRUPOS = ("examen", "ajuste", "octubre")
 _CUENTAS = ("n", "falsos", "n_jugador", "aciertos", "n_app")
 

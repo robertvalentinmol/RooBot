@@ -29,6 +29,7 @@ from typing import Any, Dict, List
 
 from .engine_client import EnginePool
 from .rutas import ROOT, load_teams
+from .regulacion import REG
 
 WEATHER = {"sunnyday": "Sol", "desolateland": "Sol extremo", "raindance": "Lluvia", "primordialsea": "Lluvia extrema",
            "sandstorm": "Tormenta de arena", "snowscape": "Nieve"}
@@ -262,7 +263,7 @@ def run(args):
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Ejercicios de posición con análisis del motor")
     ap.add_argument("--equipo", required=True, help="tu equipo (.txt de exportación de Showdown)")
-    ap.add_argument("--rivales", nargs="+", default=[str(ROOT / "teams" / "mc")])
+    ap.add_argument("--rivales", nargs="+", default=[str(REG.carpeta_equipos)])
     ap.add_argument("--tipo", choices=["mixto", "lead", "medio", "final"], default="mixto")
     ap.add_argument("--n", type=int, default=10)
     ap.add_argument("--opciones", type=int, default=8, help="nº de opciones a mostrar/analizar")

@@ -28,7 +28,8 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 
 from .rutas import ROOT
-from .calibrar import (REPLAY_DIR, BANCO_EVAL, _index, all_bank_ids, fetch_log, load_bank, rating_weight)
+from .regulacion import REG
+from .calibrar import (REPLAY_DIR, BANCO_EVAL, _index, all_bank_ids, fetch_log, guardadas, load_bank, rating_weight)
 
 EXP = ROOT / "engine" / "experiencia.json"
 OUT = ROOT / "logs" / "calibracion" / "experiencia"
@@ -49,8 +50,8 @@ def ensure_eval_bank(n: int = 100, min_rating: int = 1500) -> List[str]:
         pass
     idx = _index()
     banks = set(load_bank(False) + load_bank(True))
-    cand = [f.stem for f in REPLAY_DIR.glob("*.log")
-            if (idx.get(f.stem) or 0) >= min_rating and f.stem not in banks]
+    cand = [i for i in guardadas()
+            if (idx.get(i) or 0) >= min_rating and i not in banks]
     cand.sort(key=lambda i: zlib.crc32(i.encode()))          # al azar pero siempre las mismas
     ids = cand[:n]
     BANCO_EVAL.write_text(json.dumps({"creado": time.strftime("%Y-%m-%d %H:%M"), "rating_min": min_rating, "ids": ids},
@@ -62,8 +63,8 @@ def ensure_eval_bank(n: int = 100, min_rating: int = 1500) -> List[str]:
 def training_ids(min_rating: int = 1300) -> List[str]:
     idx = _index()
     excl = set(all_bank_ids())
-    return [f.stem for f in sorted(REPLAY_DIR.glob("*.log"))
-            if (idx.get(f.stem) or 0) >= min_rating and f.stem not in excl]
+    return [i for i in guardadas()
+            if (idx.get(i) or 0) >= min_rating and i not in excl]
 
 
 # ------------------------------------------------------------------ 1) extraer
@@ -353,7 +354,7 @@ def main() -> None:
     ev_ids = ensure_eval_bank()
     ids = training_ids(a.rating_min)
     print(f"Partidas para aprender: {len(ids)} (rating ≥ {a.rating_min}, sin los bancos de prueba ni de evaluación)")
-    app = App(a.workers or 0, ["teams/mc"], ROOT / "logs" / "calibracion" / "_tmp")
+    app = App(a.workers or 0, [REG.equipos], ROOT / "logs" / "calibracion" / "_tmp")
     try:
         data = extract(app, ids)
         model = learn(data)

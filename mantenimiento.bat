@@ -6,15 +6,18 @@ title RooBot - mantenimiento
 
 :menu
 cls
+set "REGACTUAL=?"
+for /f "delims=" %%r in ('python -m vgclab.regulacion --valor nombre 2^>nul') do set "REGACTUAL=%%r"
 echo.
 echo   ====================================================
-echo     RooBot  -  mantenimiento
+echo     RooBot  -  mantenimiento        [%REGACTUAL%]
 echo   ====================================================
 echo.
 echo     1   Rutina mensual completa                (~1-1,5 h, internet)
 echo         equipos nuevos + sprites + juez actualizado + comprobacion
 echo.
 echo     2   Importar equipos nuevos y sus sprites   (5-10 min, internet)
+echo         de la hoja de VGCPastes de la regulacion (y de equipos_nuevos.txt)
 echo     3   Actualizar el juez con repeticiones nuevas (15-25 min, internet)
 echo     4   Comprobar el juez frente al de siempre  (25-35 min)
 echo     5   Medir la app (calibracion rapida)       (~12 min)
@@ -26,11 +29,15 @@ echo.
 echo     9   Banco limpio: crear y medir             (~40 min)
 echo         partidas nuevas para "Revisar la app" y la cifra de examen
 echo.
+echo     R   Nueva regulacion (M-D, M-E...)        (10-15 min, internet)
+echo         actualiza Showdown, cambia de formato y pide los equipos nuevos
+echo.
 echo     0   Salir
 echo.
 echo   Cierra la app antes: estos procesos usan todo el procesador.
 echo.
-choice /c 1234567890 /n /m "  Elige una opcion: "
+choice /c 1234567890R /n /m "  Elige una opcion: "
+if errorlevel 11 goto nueva
 if errorlevel 10 goto :eof
 if errorlevel 9 goto limpio
 if errorlevel 8 goto acceso
@@ -109,7 +116,65 @@ goto fin
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$d=[Environment]::GetFolderPath('Desktop'); $s=(New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $d 'RooBot.lnk')); $s.TargetPath=(Join-Path (Get-Location) 'app.bat'); $s.WorkingDirectory=(Get-Location).Path; $s.IconLocation=(Join-Path (Get-Location) 'web\img\roobot.ico'); $s.Description='RooBot - entrenamiento VGC'; $s.WindowStyle=7; $s.Save(); Write-Host ('Acceso directo creado en ' + $d)"
 goto fin
 
+:nueva
+echo.
+echo   Nueva regulacion de Pokemon Champions
+echo   -------------------------------------
+echo   Actualiza Showdown, registra la regulacion y prepara su carpeta de equipos.
+echo   La actual (%REGACTUAL%) no se borra: su juez y su experiencia se guardan en logs\regulaciones
+echo   y puedes volver a ella con:  python -m vgclab.regulacion --usar ^<id^>
+echo.
+echo [1/4] Actualizando Pokemon Showdown...
+pushd server\pokemon-showdown
+git fetch -q origin master || (popd & echo [ERROR] No pude descargar Showdown. Revisa la conexion. & goto fin)
+git checkout -q FETCH_HEAD || (popd & echo [ERROR] No pude cambiar de version de Showdown. & goto fin)
+call npm install --omit=optional || (popd & echo [ERROR] Fallo npm install. & goto fin)
+node build || (popd & echo [ERROR] Fallo la compilacion de Showdown. & goto fin)
+popd
+echo.
+echo [2/4] Formatos de Champions que conoce el Showdown actualizado:
+python -m vgclab.regulacion --listar-formatos
+echo.
+echo   Si la nueva regulacion aun no aparece, Showdown todavia no la tiene: vuelve en unos dias.
+echo   (Pulsa Intro sin escribir nada para salir sin cambiar de regulacion.)
+echo.
+set "REGID="
+set "REGNOMBRE="
+set "REGFMT="
+set /p REGID=  Id corto de la nueva regulacion (p. ej. md): 
+if "%REGID%"=="" goto fin
+set /p REGNOMBRE=  Nombre para mostrar (p. ej. Reg M-D): 
+set /p REGFMT=  Formato Bo1 de la lista de arriba (el que no acaba en bo3): 
+if "%REGFMT%"=="" goto fin
+echo   Pestana de sus equipos en la hoja de VGCPastes. Intro = solo los que tienen resultados
+echo   ("Champions M-D Featured Teams" para Reg M-D). Para todos, escribe p. ej.: Champions M-D
+set "REGPEST="
+set /p REGPEST=  Pestana (Intro = Featured Teams): 
+if "%REGPEST%"=="" (
+  python -m vgclab.regulacion --nueva %REGID% --nombre "%REGNOMBRE%" --formato %REGFMT%
+) else (
+  python -m vgclab.regulacion --nueva %REGID% --nombre "%REGNOMBRE%" --formato %REGFMT% --pestana "%REGPEST%"
+)
+if errorlevel 1 goto fin
+echo.
+echo [3/4] Equipos de la nueva regulacion...
+if exist equipos_nuevos.txt move /y equipos_nuevos.txt equipos_nuevos_anterior.txt >nul
+call :hacer_importar
+echo.
+echo [4/4] Listo. La app ya usa la nueva regulacion.
+echo   Al principio de una regulacion casi no hay repeticiones de 1500+. Dentro de 2-3 semanas:
+echo     opcion 1 (rutina mensual) para el juez y opcion 9 para crear su banco limpio.
+echo   Despues copia el proyecto a la AYN Thor para que use lo mismo.
+goto fin
+
 :hacer_importar
+REM Con hoja de equipos (regulacion.json): se importan de ahi los nuevos, y tambien lo que haya en equipos_nuevos.txt
+python -m vgclab.regulacion --tiene-hoja >nul 2>nul
+if errorlevel 1 goto sin_hoja
+echo Equipos nuevos de la hoja de la regulacion...
+if exist equipos_nuevos.txt (python -m vgclab.importar --hoja equipos_nuevos.txt) else (python -m vgclab.importar --hoja)
+goto sprites_equipos
+:sin_hoja
 if exist equipos_nuevos.txt goto hay_archivo
 echo # Pega aqui tus equipos y guarda el archivo. Las lineas que empiezan por # se ignoran.> equipos_nuevos.txt
 echo # Vale: enlaces de pokepast.es, uno por linea, o equipos exportados de Showdown.>> equipos_nuevos.txt
@@ -118,6 +183,7 @@ echo He creado equipos_nuevos.txt y lo abro. Pega tus equipos, guardalo y cierra
 start "" /wait notepad equipos_nuevos.txt
 :hay_archivo
 python -m vgclab.importar equipos_nuevos.txt
+:sprites_equipos
 echo.
 echo Sprites de los equipos (solo baja los que faltan)...
 python -m vgclab.sprites

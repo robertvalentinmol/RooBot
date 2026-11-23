@@ -7,6 +7,7 @@ REM ==========================================================================
 setlocal
 cd /d %~dp0
 set COMMIT=d601443
+for /f "delims=" %%c in ('python -m vgclab.regulacion --valor showdown 2^>nul') do set COMMIT=%%c
 if not "%VGCLAB_SHOWDOWN_COMMIT%"=="" set COMMIT=%VGCLAB_SHOWDOWN_COMMIT%
 
 where node >nul 2>nul || (echo [ERROR] Falta Node.js 20+  -  https://nodejs.org & exit /b 1)
