@@ -2077,6 +2077,10 @@ def make_handler(app: App):
             if u.path in ("/", "/index.html"):
                 self._send(200, (WEB / "index.html").read_bytes().replace(b"__REGULACION__", REG.nombre.encode("utf-8")),
                            "text/html; charset=utf-8")
+            elif u.path == "/manifest.webmanifest":      # RooBot instalable como app (Chrome en Android)
+                self._send(200, (WEB / "manifest.webmanifest").read_bytes(), "application/manifest+json")
+            elif u.path == "/sw.js":
+                self._send(200, (WEB / "sw.js").read_bytes(), "text/javascript; charset=utf-8")
             elif u.path == "/favicon.ico":
                 self._send(200, (WEB / "img" / "roobot.ico").read_bytes(), "image/x-icon", cache=True)
             elif u.path.startswith("/img/"):

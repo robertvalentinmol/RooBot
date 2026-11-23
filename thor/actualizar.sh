@@ -16,6 +16,7 @@ python -m vgclab.sprites || echo "  No pude bajarlos ahora; la app los descargar
 
 echo
 python -m vgclab.regulacion
+bash thor/arranque.sh          # vuelve a dejar RooBot en marcha, ya actualizado
 echo
-echo "Listo. Abre RooBot con su icono."
+echo "Listo. RooBot está en marcha otra vez: ábrelo con su icono."
 [ -t 0 ] && read -r -p "Pulsa Intro para cerrar." _ || true
