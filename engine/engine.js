@@ -12,7 +12,7 @@ const readline = require('readline');
 // stdout es el canal del protocolo: cualquier log interno va a stderr
 console.log = (...a) => console.error(...a);
 console.info = (...a) => console.error(...a);
-const { PS, DEFAULT_FORMAT, dexFor, importTeam, normSet, completeOpponentSet } = require('./sim');
+const { PS, DEFAULT_FORMAT, dexFor, importTeam, normSet, completeOpponentSet, toID } = require('./sim');
 const damage = require('./damage');
 const { teamPreview } = require('./teampreview');
 const { search, staticValue } = require('./search');
@@ -58,6 +58,25 @@ const handlers = {
 		return { ok: !problems, problems: problems || [] };
 	},
 	complete_set: (r) => completeOpponentSet(r.set, dexFor(r.format)),
+	// Hojas de equipo abiertas (OTS): traen especie, objeto, habilidad y movimientos, pero no los SP.
+	// A cada Pokémon sin SP se le pone el reparto del set real más parecido de los equipos guardados
+	// (o uno típico por sus stats y movimientos), como hace la app con los sets ocultos del rival.
+	// Objeto, habilidad, movimientos y naturaleza (si la hay) no se tocan.
+	fill_spreads: (r) => {
+		const dex = dexFor(r.format);
+		const sets = PS.Teams.import(r.text) || [];
+		const filled = [];
+		for (const s of sets) {
+			const total = Object.values(s.evs || {}).reduce((a, b) => a + (b || 0), 0);
+			if (total > 0) continue;
+			const partial = { species: s.species, item: s.item || '', ability: s.ability || '', moves: (s.moves || []).map(toID) };
+			const full = completeOpponentSet(partial, dex, s.nature ? { nature: s.nature } : null);
+			s.evs = Object.assign({ hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }, full.evs);
+			if (!s.nature) s.nature = full.nature;
+			filled.push(dex.species.get(s.species).name);
+		}
+		return { text: PS.Teams.export(sets), filled };
+	},
 	normalize: (r) => {
 		// sin apodos ni Tera, nivel 50: texto limpio de exportación de Showdown
 		const sets = PS.Teams.import(r.text) || [];

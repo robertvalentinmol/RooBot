@@ -40,6 +40,8 @@ from .regulacion import REG
 ROOT = Path(__file__).resolve().parent.parent
 UA = {"User-Agent": "Mozilla/5.0 (VGC-Lab importer)"}
 PASTE_RE = re.compile(r"https?://pokepast\.es/([0-9a-fA-F]{8,})")
+TEAM_ID_RE = re.compile(r"([A-Z]{1,3}\d{1,5})_")      # MC894_Nombre.txt → MC894 (id de la hoja)
+SIN_SP = "exactly 0 Stat Points"                        # aviso de Showdown: Pokémon sin SP (hoja abierta sin stats)
 STAT_NAMES = {"hp": "HP", "atk": "Atk", "def": "Def", "spa": "SpA", "spd": "SpD", "spe": "Spe"}
 STAT_KEYS = {"hp": "hp", "atk": "atk", "def": "def", "spa": "spa", "spd": "spd", "spe": "spe"}
 
@@ -166,18 +168,24 @@ def read_rows(source: str) -> List[List[str]]:
 
 
 def find_teams(rows: List[List[str]]) -> List[Dict[str, str]]:
-    """Una entrada por enlace de Pokepaste, con un id y un nombre si la fila los tiene."""
-    out, seen = [], set()
+    """Una entrada por enlace de Pokepaste, con un id y un nombre si la fila los tiene. Si el mismo paste sale
+    en una fila sin id y en otra con id, se queda con la de id (es la fila del equipo)."""
+    out: List[Dict[str, str]] = []
+    por_pid: Dict[str, Dict[str, str]] = {}
     for row in rows:
         for cell in row:
             for m in PASTE_RE.finditer(cell):
                 pid = m.group(1).lower()
-                if pid in seen:
-                    continue
-                seen.add(pid)
                 tid = next((c.strip() for c in row if re.fullmatch(r"[A-Z]{1,3}\d{1,5}", c.strip())), "")
                 name = next((c.strip() for c in row if " Team" in c or "'s " in c), "")
-                out.append({"id": tid or pid[:8], "name": name, "paste": pid})
+                if pid in por_pid:
+                    t = por_pid[pid]
+                    if tid and not t["con_id"]:
+                        t.update({"id": tid, "name": name or t["name"], "con_id": True})
+                    continue
+                t = {"id": tid or pid[:8], "name": name, "paste": pid, "con_id": bool(tid)}
+                por_pid[pid] = t
+                out.append(t)
     return out
 
 
@@ -266,12 +274,18 @@ def collect(sources: List[str]) -> List[Dict[str, str]]:
     return out
 
 
+def saltos(text: str) -> str:
+    """Saltos de línea a «\n». pokepast.es sirve «\r\n», y en Windows la caché antigua los guardaba como
+    «\r\r\n»: leído tal cual, cada línea parecía un Pokémon («your team has 41»)."""
+    return text.replace("\r\r\n", "\n").replace("\r\n", "\n").replace("\r", "\n")
+
+
 def fetch_paste(pid: str, cache: Path) -> str:
     f = cache / f"{pid}.txt"
     if f.exists():
-        return f.read_text(encoding="utf-8")
-    text = http_get(f"https://pokepast.es/{pid}/raw")
-    f.write_text(text, encoding="utf-8")
+        return saltos(f.read_bytes().decode("utf-8", errors="replace"))
+    text = saltos(http_get(f"https://pokepast.es/{pid}/raw"))
+    f.write_bytes(text.encode("utf-8"))
     time.sleep(0.25)  # no saturar pokepast.es
     return text
 
@@ -359,7 +373,13 @@ def main(argv=None):
             raise SystemExit(f"{REG.nombre} no tiene hoja de equipos. Añádela con:\n"
                              '  python -m vgclab.regulacion --hoja "<enlace>" --pestana "<nombre de la pestaña>"')
         print(f"  Hoja de {REG.nombre}: pestaña «{REG.pestana}»")
-        teams += find_teams(read_tab(REG.hoja, REG.pestana))
+        de_hoja = find_teams(read_tab(REG.hoja, REG.pestana))
+        con_id = [t for t in de_hoja if t.get("con_id")]
+        if len(con_id) * 2 >= len(de_hoja):     # hoja con ids (VGCPastes): fuera los enlaces de filas sin id
+            if len(con_id) < len(de_hoja):
+                print(f"  ({len(de_hoja) - len(con_id)} enlaces de filas sin id de equipo: no son equipos de la pestaña, se ignoran)")
+            de_hoja = con_id
+        teams += de_hoja
     if a.origen:
         vistos = {t["paste"] for t in teams if t.get("paste")}
         teams += [t for t in collect(a.origen) if not t.get("paste") or t["paste"] not in vistos]
@@ -380,6 +400,7 @@ def main(argv=None):
                 pass
             return t
         existing = set()
+        ids_ya = {m.group(1) for f in out.glob("*.txt") if (m := TEAM_ID_RE.match(f.name))}
         for f in out.glob("*.txt"):   # para no duplicar equipos que ya tienes
             try:
                 existing.add(hashlib.sha1(canon(f.read_text(encoding="utf-8")).encode()).hexdigest())
@@ -387,6 +408,10 @@ def main(argv=None):
                 pass
         for k, t in enumerate(teams, 1):
             src = t.get("paste") or "texto"
+            if t.get("con_id") and t["id"] in ids_ya:     # mismo id de la hoja: ya importado (con o sin SP estimados)
+                report.append([t["id"], t["name"], src, "ya estaba", ""])
+                same += 1
+                continue
             if "text" in t:
                 raw = t["text"]
             else:
@@ -413,6 +438,16 @@ def main(argv=None):
                 v = eng.call("validate", team=text)
             except Exception as e:
                 v = {"ok": False, "problems": [str(e).splitlines()[0]]}
+            if not v["ok"] and any(SIN_SP in p for p in v["problems"]):
+                # hoja de equipo abierta sin SP: se estiman y se vuelve a validar
+                try:
+                    f = eng.call("fill_spreads", text=text)
+                    v2 = eng.call("validate", team=f["text"])
+                    if v2["ok"] or not any(SIN_SP in p for p in v2["problems"]):
+                        text, v = f["text"], v2
+                        notes = notes + [f"SP estimados: {', '.join(f['filled'])}"]
+                except Exception:
+                    pass
             if v["ok"]:
                 base = safe_name(f"{t['id']}_{t['name']}" if t["id"] else t["name"])
                 fname = out / f"{base}.txt"
@@ -421,10 +456,13 @@ def main(argv=None):
                     fname = out / f"{base}_{n}.txt"
                     n += 1
                 fname.write_text(text, encoding="utf-8")
+                if t.get("con_id"):
+                    ids_ya.add(t["id"])
                 ok += 1
                 print(f"  + {fname.name}" + (f"  ({'; '.join(notes)})" if notes else ""))
                 if notes:
-                    report.append([t["id"], t["name"], src, "ok (ajustado)", "; ".join(notes)])
+                    estado = "ok (SP estimados)" if any(n.startswith("SP estimados") for n in notes) else "ok (ajustado)"
+                    report.append([t["id"], t["name"], src, estado, "; ".join(notes)])
             else:
                 bad += 1
                 print(f"  x {t['name'] or src}: {' | '.join(v['problems'][:2])}")

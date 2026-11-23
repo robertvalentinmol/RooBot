@@ -140,3 +140,46 @@ def test_regulacion_hoja(tmp_path, monkeypatch):
     assert R.activa().pestana == "Champions M-D"
     with pytest.raises(SystemExit):
         R.main(["--hoja", "https://example.com/no-es-una-hoja"])
+
+
+def test_saltos_de_la_cache_antigua(tmp_path):
+    (tmp_path / "abc.txt").write_bytes(b"Gengar @ Gengarite  \r\r\nAbility: Cursed Body  \r\r\n- Protect\r\r\n\r\r\nPelipper\r\n- Hurricane\r\n")
+    t = I.fetch_paste("abc", tmp_path)
+    assert t == "Gengar @ Gengarite  \nAbility: Cursed Body  \n- Protect\n\nPelipper\n- Hurricane\n"
+    assert len(I.adapt_to_champions(t)[0].strip().split("\n\n")) == 2       # dos Pokémon, no cinco
+
+
+def test_paste_repetido_se_queda_con_la_fila_con_id():
+    filas = [["", "notas", "https://pokepast.es/aaaaaaaaaaaaaaaa"],
+             ["MC7", "Eva's Team", "https://pokepast.es/aaaaaaaaaaaaaaaa"]]
+    eq = I.find_teams(filas)
+    assert len(eq) == 1 and eq[0]["id"] == "MC7" and eq[0]["con_id"] and eq[0]["name"] == "Eva's Team"
+
+
+class MotorSinSP(MotorFalso):
+    def call(self, cmd, **k):
+        if cmd == "validate":
+            ok = "EVs:" in k["team"]
+            return {"ok": ok, "problems": [] if ok else ["Basculegion has exactly 0 Stat Points - did you forget to invest it?"]}
+        if cmd == "fill_spreads":
+            return {"text": k["text"] + "EVs: 32 HP / 32 Atk / 2 Spe\n", "filled": ["Basculegion"]}
+        return super().call(cmd, **k)
+
+
+def test_hoja_abierta_sin_sp_y_sin_duplicar_por_id(tmp_path, monkeypatch):
+    xlsx = hacer_xlsx({"Champions M-C": [CABECERA,
+        ["MC9", "Lin's PBL Team", "", "Lin", "https://pokepast.es/9999999999999999"],
+        ["MC8", "Old's Team", "", "Old", "https://pokepast.es/8888888888888888"],
+        ["", "", "", "", "https://pokepast.es/7777777777777777"]]})          # fila sin id: se ignora
+    (tmp_path / "MC8_Olds_Team.txt").write_text("otro texto: mismo id", encoding="utf-8")
+    monkeypatch.setattr(I, "ROOT", tmp_path)
+    monkeypatch.setattr(I, "REG", replace(R.REG, hoja="https://docs.google.com/spreadsheets/d/XYZ/edit", pestana="Champions M-C"))
+    monkeypatch.setattr(I, "http_get_bytes", lambda *a, **k: xlsx)
+    pedidos = []
+    monkeypatch.setattr(I, "fetch_paste", lambda pid, cache: pedidos.append(pid) or "Basculegion @ Choice Scarf\nAbility: Adaptability\n- Wave Crash\n")
+    monkeypatch.setattr(I, "Engine", MotorSinSP)
+    I.main(["--hoja", "--salida", str(tmp_path)])
+    assert pedidos == ["9" * 16]                       # MC8 ya estaba (por id): ni se descarga
+    assert (tmp_path / "MC9_Lins_PBL_Team.txt").read_text(encoding="utf-8").endswith("EVs: 32 HP / 32 Atk / 2 Spe\n")
+    informe = (tmp_path / "_informe_importacion.csv").read_text(encoding="utf-8")
+    assert "ok (SP estimados)" in informe and "SP estimados: Basculegion" in informe and "7777" not in informe
