@@ -1,0 +1,60 @@
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+EVs: 32 HP / 1 Def / 1 SpA / 29 SpD / 3 Spe  
+Bold Nature  
+- Dragon Pulse  
+- Snarl  
+- Electro Shot  
+- Protect  
+
+Raichu-Mega-X @ Raichunite X  
+Ability: Lightning Rod  
+Level: 50  
+EVs: 30 HP / 4 Def / 32 Spe  
+Jolly Nature  
+- Fake Out  
+- Feint  
+- Volt Switch  
+- Volt Tackle  
+
+Sneasler @ Electric Seed  
+Ability: Unburden  
+Level: 50  
+EVs: 30 HP / 14 Atk / 4 SpD / 18 Spe  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Swords Dance  
+- Protect  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+EVs: 32 HP / 10 Def / 17 SpA / 7 SpD  
+Bold Nature  
+- Weather Ball  
+- Hurricane  
+- Helping Hand  
+- Wide Guard  
+
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+EVs: 2 HP / 32 SpA / 32 Spe  
+Modest Nature  
+- Muddy Water  
+- Shadow Ball  
+- Ice Beam  
+- Protect  
+
+Golisopod-Mega @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+EVs: 31 HP / 30 Atk / 4 SpD / 1 Spe  
+Adamant Nature  
+- Iron Head  
+- Leech Life  
+- Sucker Punch  
+- Protect  
+

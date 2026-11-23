@@ -1,0 +1,54 @@
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Throat Chop  
+
+Basculegion @ Choice Scarf  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Flip Turn  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Wood Hammer  
+- U-turn  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Protect  
+- Focus Blast  
+- Fake Out  
+- Zap Cannon  
+
+Volcarona @ Leftovers  
+Ability: Flame Body  
+Level: 50  
+Modest Nature  
+- Protect  
+- Heat Wave  
+- Quiver Dance  
+- Struggle Bug  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Protect  
+- Dazzling Gleam  
+- Calm Mind  
+- Moonblast  
+

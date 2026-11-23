@@ -1,0 +1,54 @@
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Timid Nature  
+- Hyper Voice  
+- Flamethrower  
+- Tailwind  
+- Protect  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Dazzling Gleam  
+- Calm Mind  
+- Protect  
+
+Sneasler @ Focus Sash  
+Ability: Poison Touch  
+Level: 50  
+Jolly Nature  
+- Fake Out  
+- Dire Claw  
+- Close Combat  
+- Protect  
+
+Rillaboom @ Life Orb  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Wood Hammer  
+- High Horsepower  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Sucker Punch  
+- Iron Head  
+- Kowtow Cleave  
+- Protect  
+
+Basculegion @ Mystic Water  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Wave Crash  
+- Aqua Jet  
+- Last Respects  
+- Protect  
+

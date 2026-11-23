@@ -1,0 +1,54 @@
+Raichu @ Raichunite X  
+Ability: Lightning Rod  
+Level: 50  
+Jolly Nature  
+- Volt Tackle  
+- Volt Switch  
+- Feint  
+- Fake Out  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Protect  
+- Snarl  
+- Dragon Pulse  
+- Electro Shot  
+
+Sneasler @ Electric Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Poison Jab  
+- Swords Dance  
+- Protect  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Leech Life  
+- Swords Dance  
+- Aqua Jet  
+- Protect  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Weather Ball  
+- Hurricane  
+- Helping Hand  
+- Wide Guard  
+
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Timid Nature  
+- Muddy Water  
+- Soak  
+- Ice Beam  
+- Protect  
+

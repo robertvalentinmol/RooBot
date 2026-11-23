@@ -1,0 +1,54 @@
+Sneasler @ Electric Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Close Combat  
+- Rock Slide  
+- Protect  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Weather Ball  
+- Hurricane  
+- Wide Guard  
+- Helping Hand  
+
+Raichu @ Raichunite X  
+Ability: Lightning Rod  
+Level: 50  
+Jolly Nature  
+- Volt Tackle  
+- Volt Switch  
+- Fake Out  
+- Feint  
+
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Ice Beam  
+- Muddy Water  
+- Protect  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Leech Life  
+- Iron Head  
+- Sucker Punch  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Electro Shot  
+- Dragon Pulse  
+- Snarl  
+- Protect  
+

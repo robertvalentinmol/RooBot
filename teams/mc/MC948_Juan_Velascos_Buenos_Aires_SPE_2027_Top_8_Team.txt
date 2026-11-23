@@ -1,0 +1,54 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Protect  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+
+Garchomp @ Life Orb  
+Ability: Rough Skin  
+Level: 50  
+Jolly Nature  
+- Protect  
+- Dragon Claw  
+- Earthquake  
+- Rock Slide  
+
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Protect  
+- Moonblast  
+- Encore  
+- Tailwind  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Protect  
+- Moonblast  
+- Dazzling Gleam  
+- Light of Ruin  
+
+Basculegion @ Mystic Water  
+Ability: Adaptability  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Iron Head  
+- Kowtow Cleave  
+- Sucker Punch  
+- Low Kick  
+

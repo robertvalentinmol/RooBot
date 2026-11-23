@@ -16,7 +16,17 @@ try {
 	throw e;
 }
 
-const DEFAULT_FORMAT = process.env.VGCLAB_FORMAT || 'gen9championsvgc2026regmc';
+// Formato activo: VGCLAB_FORMAT (lo pone siempre la app de Python) o, si no, la regulación activa de regulacion.json
+function formatoActivo() {
+	if (process.env.VGCLAB_FORMAT) return process.env.VGCLAB_FORMAT;
+	try {
+		const cfg = JSON.parse(require('fs').readFileSync(path.join(__dirname, '..', 'regulacion.json'), 'utf8'));
+		const reg = (cfg.regulaciones || {})[process.env.VGCLAB_REG || cfg.activa];
+		if (reg && reg.formato) return reg.formato;
+	} catch (e) { /* sin regulacion.json: la de siempre */ }
+	return 'gen9championsvgc2026regmc';
+}
+const DEFAULT_FORMAT = formatoActivo();
 
 const dexCache = new Map();
 function dexFor(formatid = DEFAULT_FORMAT) {

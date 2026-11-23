@@ -1,0 +1,54 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Weather Ball  
+- Solar Beam  
+- Protect  
+
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Close Combat  
+- Brave Bird  
+- Tailwind  
+- Protect  
+
+Espathra @ Psychic Seed  
+Ability: Speed Boost  
+Level: 50  
+Bold Nature  
+- Lumina Crash  
+- Hypnosis  
+- Feather Dance  
+- Protect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Rock Slide  
+- Stomping Tantrum  
+- Dragon Claw  
+- Earthquake  
+
+Indeedee @ Focus Sash  
+Ability: Psychic Surge  
+Level: 50  
+Timid Nature  
+- Expanding Force  
+- Protect  
+- Shadow Ball  
+- Gravity  
+
+Sylveon @ Life Orb  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Mystical Fire  
+- Detect  
+

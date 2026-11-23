@@ -1,0 +1,54 @@
+Garchomp @ Garchompite  
+Ability: Rough Skin  
+Level: 50  
+Jolly Nature  
+- Stomping Tantrum  
+- Scale Shot  
+- Rock Slide  
+- Protect  
+
+Hippowdon @ Leftovers  
+Ability: Sand Stream  
+Level: 50  
+Sassy Nature  
+- High Horsepower  
+- Yawn  
+- Protect  
+- Stone Edge  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Adamant Nature  
+- Flare Blitz  
+- Throat Chop  
+- Fake Out  
+- Parting Shot  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Grassy Glide  
+- Wood Hammer  
+- U-turn  
+- Fake Out  
+
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Timid Nature  
+- Shadow Ball  
+- Sludge Bomb  
+- Substitute  
+- Protect  
+
+Annihilape @ Choice Scarf  
+Ability: Defiant  
+Level: 50  
+Jolly Nature  
+- Close Combat  
+- Shadow Claw  
+- U-turn  
+- Coaching  
+

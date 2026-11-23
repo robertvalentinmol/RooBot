@@ -1,0 +1,60 @@
+Garchomp (M) @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+EVs: 2 HP / 32 Atk / 32 Spe  
+Adamant Nature  
+- Rock Slide  
+- Dragon Claw  
+- Earthquake  
+- Stomping Tantrum  
+
+Charizard-Mega-Y (M) @ Charizardite Y  
+Ability: Drought  
+Level: 50  
+EVs: 8 HP / 24 Def / 11 SpA / 23 Spe  
+Timid Nature  
+- Weather Ball  
+- Heat Wave  
+- Ancient Power  
+- Protect  
+
+Aerodactyl-Mega (M) @ Aerodactylite  
+Ability: Unnerve  
+Level: 50  
+EVs: 10 HP / 20 Atk / 1 Def / 3 SpD / 32 Spe  
+Jolly Nature  
+- Rock Slide  
+- Dual Wingbeat  
+- Tailwind  
+- Ice Fang  
+
+Farigiraf (F) @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+EVs: 23 HP / 27 Def / 10 SpA / 6 SpD  
+Bold Nature  
+- Psychic  
+- Helping Hand  
+- Roar  
+- Trick Room  
+
+Sylveon (M) @ Life Orb  
+Ability: Pixilate  
+Level: 50  
+EVs: 2 HP / 32 SpA / 32 Spe  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Quick Attack  
+- Protect  
+
+Kingambit (M) @ Focus Sash  
+Ability: Defiant  
+Level: 50  
+EVs: 2 HP / 32 Atk / 32 Spe  
+Adamant Nature  
+- Kowtow Cleave  
+- Iron Head  
+- Sucker Punch  
+- Low Kick  
+

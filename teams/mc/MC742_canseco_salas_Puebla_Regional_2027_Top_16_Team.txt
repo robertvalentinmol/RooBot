@@ -1,0 +1,54 @@
+Sneasler @ Focus Sash  
+Ability: Poison Touch  
+Level: 50  
+Jolly Nature  
+- Close Combat  
+- Rock Slide  
+- Poison Jab  
+- Fake Out  
+
+Farigiraf @ Sitrus Berry  
+Ability: Armor Tail  
+Level: 50  
+Bold Nature  
+- Helping Hand  
+- Psychic  
+- Protect  
+- Trick Room  
+
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Brave Bird  
+- Close Combat  
+- Tailwind  
+- Protect  
+
+Delphox @ Delphoxite  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Psychic  
+- Nasty Plot  
+- Protect  
+
+Torkoal @ Charcoal  
+Ability: Drought  
+Level: 50  
+Quiet Nature  
+- Eruption  
+- Earth Power  
+- Weather Ball  
+- Protect  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Sucker Punch  
+- Iron Head  
+- Protect  
+

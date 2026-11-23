@@ -5,7 +5,8 @@ y se queda sólo con las que mejoran el acuerdo con jugadores de 1500+ en LOS DO
   1) cada variante se mide con el banco con hojas abiertas, jugada a jugada frente a la versión actual;
   2) las que mejoran se confirman con el banco de ladder (partidas distintas);
   3) si hay varias, se prueba también su combinación;
-  3b) y además no puede empeorar la prueba con tu revisión de la app (más errores falsos o menos aciertos);
+  3b) y además no puede empeorar la prueba con tu revisión de la app (más errores falsos o menos aciertos),
+      sin contar la mitad de examen del banco limpio, que no decide nada (ver revision.py);
   4) lo que pasa las pruebas se guarda en engine/parametros.json (la app lo usa al arrancar), el juez
      aprendido vuelve a aprender con la nueva valoración y se hace una calibración final para «Mi progreso».
 Tarda varias horas: déjalo de noche. No hace falta internet si ya tienes las repeticiones de los bancos.

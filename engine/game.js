@@ -13,7 +13,7 @@
  *         forceSwitch:[bool,bool], switchOptions:[[...],[...]], state (visto por p1), botState (visto por p2),
  *         events:[...], log:[...] }
  */
-const { PS, dexFor } = require('./sim');
+const { PS, dexFor, DEFAULT_FORMAT } = require('./sim');
 const { teamPreview } = require('./teampreview');
 const { stateFromBattle } = require('./positions');
 
@@ -132,7 +132,7 @@ function info(id, g, withEvents) {
 }
 
 function newGame(req) {
-	const format = req.format || 'gen9championsvgc2026regmc';
+	const format = req.format || DEFAULT_FORMAT;
 	const dex = dexFor(format);
 	const b = new PS.Battle({ formatid: format, seed: req.seed || undefined });
 	b.send = () => {};

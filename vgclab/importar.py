@@ -2,6 +2,7 @@
 de enlaces de pokepast.es sueltos o de texto exportado de Showdown.
 
     mantenimiento.bat, opción 2                    (lee equipos_nuevos.txt: pega ahí enlaces o equipos)
+    python -m vgclab.importar --hoja                 (la hoja y la pestaña de la regulación activa, en regulacion.json)
     python -m vgclab.importar "https://docs.google.com/spreadsheets/d/<ID>/edit?gid=<GID>"
     python -m vgclab.importar https://pokepast.es/abc123... https://pokepast.es/def456...
     python -m vgclab.importar mis_equipos.txt          (export de Showdown; varios con === [formato] Nombre ===)
@@ -9,7 +10,8 @@ de enlaces de pokepast.es sueltos o de texto exportado de Showdown.
     python -m vgclab.importar ... --mios              (guarda en teams\\ como equipos tuyos, con ★ en la app)
 
 Qué hace:
-  1. Descarga la pestaña como CSV y busca todos los enlaces https://pokepast.es/...
+  1. Descarga la pestaña (con --hoja, el libro entero en .xlsx y elige la pestaña por su nombre, así que no hace
+     falta el gid; con un enlace, esa pestaña como CSV) y busca todos los enlaces https://pokepast.es/...
   2. Descarga cada paste en texto (pokepast.es/<id>/raw), con caché en .cache_pastes/
   3. Lo adapta a Champions: EVs clásicos (>32) se convierten a Stat Points (1.º SP = 4 EVs,
      cada SP extra = 8 EVs; máx. 32 por stat y 66 en total), quita IVs, Tera y niveles.
@@ -27,29 +29,38 @@ import re
 import sys
 import time
 import urllib.request
+import xml.etree.ElementTree as ET
+import zipfile
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from .engine_client import DEFAULT_FORMAT, Engine
+from .regulacion import REG
 
 ROOT = Path(__file__).resolve().parent.parent
 UA = {"User-Agent": "Mozilla/5.0 (VGC-Lab importer)"}
 PASTE_RE = re.compile(r"https?://pokepast\.es/([0-9a-fA-F]{8,})")
+TEAM_ID_RE = re.compile(r"([A-Z]{1,3}\d{1,5})_")      # MC894_Nombre.txt → MC894 (id de la hoja)
+SIN_SP = "exactly 0 Stat Points"                        # aviso de Showdown: Pokémon sin SP (hoja abierta sin stats)
 STAT_NAMES = {"hp": "HP", "atk": "Atk", "def": "Def", "spa": "SpA", "spd": "SpD", "spe": "Spe"}
 STAT_KEYS = {"hp": "hp", "atk": "atk", "def": "def", "spa": "spa", "spd": "spd", "spe": "spe"}
 
 
-def http_get(url: str, timeout: int = 30, tries: int = 3) -> str:
+def http_get_bytes(url: str, timeout: int = 30, tries: int = 3) -> bytes:
     last = None
     for k in range(tries):
         try:
             req = urllib.request.Request(url, headers=UA)
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read().decode("utf-8", errors="replace")
+                return r.read()
         except Exception as e:  # pragma: no cover - red
             last = e
             time.sleep(1.5 * (k + 1))
     raise RuntimeError(f"No pude descargar {url}: {last}")
+
+
+def http_get(url: str, timeout: int = 30, tries: int = 3) -> str:
+    return http_get_bytes(url, timeout, tries).decode("utf-8", errors="replace")
 
 
 def sheet_csv_url(url: str) -> str:
@@ -58,6 +69,94 @@ def sheet_csv_url(url: str) -> str:
         raise SystemExit("No reconozco el enlace de Google Sheets")
     gid = re.search(r"gid=(\d+)", url)
     return f"https://docs.google.com/spreadsheets/d/{m.group(1)}/export?format=csv" + (f"&gid={gid.group(1)}" if gid else "")
+
+
+def sheet_id(url: str) -> str:
+    m = re.search(r"/spreadsheets/d/([A-Za-z0-9_-]+)", url)
+    if not m:
+        raise SystemExit("No reconozco el enlace de Google Sheets")
+    return m.group(1)
+
+
+_X = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+_XR = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
+_XP = "{http://schemas.openxmlformats.org/package/2006/relationships}"
+
+
+def _col(ref: str) -> int:
+    n = 0
+    for ch in ref:
+        if not ch.isalpha():
+            break
+        n = n * 26 + (ord(ch.upper()) - 64)
+    return n - 1
+
+
+def _rels(z, path: str) -> Dict[str, str]:
+    d, name = path.rsplit("/", 1)
+    rp = f"{d}/_rels/{name}.rels"
+    if rp not in z.namelist():
+        return {}
+    return {r.get("Id"): r.get("Target") for r in ET.fromstring(z.read(rp)).iter(f"{_XP}Relationship")}
+
+
+def xlsx_tabs(data: bytes) -> Dict[str, str]:
+    """Pestañas de un .xlsx: nombre → ruta de su hoja dentro del zip."""
+    z = zipfile.ZipFile(io.BytesIO(data))
+    rels = _rels(z, "xl/workbook.xml")
+    out = {}
+    for s in ET.fromstring(z.read("xl/workbook.xml")).iter(f"{_X}sheet"):
+        t = rels.get(s.get(f"{_XR}id"), "")
+        out[s.get("name")] = t.lstrip("/") if t.startswith("/") else "xl/" + t
+    return out
+
+
+def read_xlsx_tab(data: bytes, tab: str) -> List[List[str]]:
+    """Filas (texto) de la pestaña `tab` de un .xlsx. Si una celda tiene un enlace, se añade su dirección al texto,
+    así los Pokepaste enlazados con otro texto («Pokepaste», «Link») también se encuentran."""
+    z = zipfile.ZipFile(io.BytesIO(data))
+    tabs = xlsx_tabs(data)
+    norm = {k.strip().lower(): k for k in tabs}
+    name = tab if tab in tabs else norm.get(tab.strip().lower())
+    if not name:
+        raise SystemExit(f"La hoja no tiene la pestaña «{tab}». Tiene: {', '.join(tabs)}")
+    shared: List[str] = []
+    if "xl/sharedStrings.xml" in z.namelist():
+        shared = ["".join(t.text or "" for t in si.iter(f"{_X}t"))
+                  for si in ET.fromstring(z.read("xl/sharedStrings.xml")).iter(f"{_X}si")]
+    path = tabs[name]
+    root = ET.fromstring(z.read(path))
+    links: Dict[str, str] = {}
+    srels = _rels(z, path)
+    for h in root.iter(f"{_X}hyperlink"):
+        url = srels.get(h.get(f"{_XR}id") or "", "")
+        if url.startswith("http"):
+            links[h.get("ref", "").split(":")[0]] = url
+    rows: List[List[str]] = []
+    for row in root.iter(f"{_X}row"):
+        cells: Dict[int, str] = {}
+        for c in row.iter(f"{_X}c"):
+            ref, t = c.get("r", ""), c.get("t")
+            if t == "s":
+                v = c.find(f"{_X}v")
+                val = shared[int(v.text)] if v is not None and v.text else ""
+            elif t == "inlineStr":
+                val = "".join(x.text or "" for x in c.iter(f"{_X}t"))
+            else:
+                v = c.find(f"{_X}v")
+                val = v.text if v is not None and v.text else ""
+            if ref in links and links[ref] not in val:
+                val = f"{val} {links[ref]}".strip()
+            cells[_col(ref) if ref else len(cells)] = val
+        if cells:
+            rows.append([cells.get(i, "") for i in range(max(cells) + 1)])
+    return rows
+
+
+def read_tab(url: str, tab: str) -> List[List[str]]:
+    """Una pestaña de una hoja pública de Google por su nombre (descarga el libro en .xlsx)."""
+    data = http_get_bytes(f"https://docs.google.com/spreadsheets/d/{sheet_id(url)}/export?format=xlsx", timeout=120)
+    return read_xlsx_tab(data, tab)
 
 
 def read_rows(source: str) -> List[List[str]]:
@@ -69,18 +168,24 @@ def read_rows(source: str) -> List[List[str]]:
 
 
 def find_teams(rows: List[List[str]]) -> List[Dict[str, str]]:
-    """Una entrada por enlace de Pokepaste, con un id y un nombre si la fila los tiene."""
-    out, seen = [], set()
+    """Una entrada por enlace de Pokepaste, con un id y un nombre si la fila los tiene. Si el mismo paste sale
+    en una fila sin id y en otra con id, se queda con la de id (es la fila del equipo)."""
+    out: List[Dict[str, str]] = []
+    por_pid: Dict[str, Dict[str, str]] = {}
     for row in rows:
         for cell in row:
             for m in PASTE_RE.finditer(cell):
                 pid = m.group(1).lower()
-                if pid in seen:
-                    continue
-                seen.add(pid)
                 tid = next((c.strip() for c in row if re.fullmatch(r"[A-Z]{1,3}\d{1,5}", c.strip())), "")
                 name = next((c.strip() for c in row if " Team" in c or "'s " in c), "")
-                out.append({"id": tid or pid[:8], "name": name, "paste": pid})
+                if pid in por_pid:
+                    t = por_pid[pid]
+                    if tid and not t["con_id"]:
+                        t.update({"id": tid, "name": name or t["name"], "con_id": True})
+                    continue
+                t = {"id": tid or pid[:8], "name": name, "paste": pid, "con_id": bool(tid)}
+                por_pid[pid] = t
+                out.append(t)
     return out
 
 
@@ -169,12 +274,18 @@ def collect(sources: List[str]) -> List[Dict[str, str]]:
     return out
 
 
+def saltos(text: str) -> str:
+    """Saltos de línea a «\n». pokepast.es sirve «\r\n», y en Windows la caché antigua los guardaba como
+    «\r\r\n»: leído tal cual, cada línea parecía un Pokémon («your team has 41»)."""
+    return text.replace("\r\r\n", "\n").replace("\r\n", "\n").replace("\r", "\n")
+
+
 def fetch_paste(pid: str, cache: Path) -> str:
     f = cache / f"{pid}.txt"
     if f.exists():
-        return f.read_text(encoding="utf-8")
-    text = http_get(f"https://pokepast.es/{pid}/raw")
-    f.write_text(text, encoding="utf-8")
+        return saltos(f.read_bytes().decode("utf-8", errors="replace"))
+    text = saltos(http_get(f"https://pokepast.es/{pid}/raw"))
+    f.write_bytes(text.encode("utf-8"))
     time.sleep(0.25)  # no saturar pokepast.es
     return text
 
@@ -239,23 +350,44 @@ def safe_name(s: str) -> str:
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Importa equipos (hoja de VGCPastes, enlaces de Pokepaste o texto de Showdown)")
-    ap.add_argument("origen", nargs="+", help="enlace de Google Sheets, enlaces de pokepast.es, .txt/.csv o carpetas")
+    ap.add_argument("origen", nargs="*", help="enlace de Google Sheets, enlaces de pokepast.es, .txt/.csv o carpetas")
+    ap.add_argument("--hoja", action="store_true",
+                    help="importar de la hoja de equipos de la regulación activa (hoja y pestaña en regulacion.json)")
     ap.add_argument("--salida", default=None, help="carpeta destino (por defecto teams\\mc, o teams\\ con --mios)")
     ap.add_argument("--mios", action="store_true", help="son equipos tuyos: se guardan en teams\\ (salen con ★ en la app)")
     ap.add_argument("--formato", default=DEFAULT_FORMAT)
     ap.add_argument("--max", type=int, default=0, help="importar como mucho N equipos (0 = todos)")
     a = ap.parse_args(argv)
 
-    out = Path(a.salida) if a.salida else (ROOT / "teams" if a.mios else ROOT / "teams" / "mc")
+    out = Path(a.salida) if a.salida else (ROOT / "teams" if a.mios else REG.carpeta_equipos)
     out.mkdir(parents=True, exist_ok=True)
     cache = ROOT / ".cache_pastes"
     cache.mkdir(exist_ok=True)
 
+    if not a.origen and not a.hoja:
+        ap.error("indica de dónde importar (enlaces, archivos o --hoja)")
     print("Buscando equipos...")
-    teams = collect(a.origen)
+    teams: List[Dict[str, str]] = []
+    if a.hoja:
+        if not REG.hoja:
+            raise SystemExit(f"{REG.nombre} no tiene hoja de equipos. Añádela con:\n"
+                             '  python -m vgclab.regulacion --hoja "<enlace>" --pestana "<nombre de la pestaña>"')
+        print(f"  Hoja de {REG.nombre}: pestaña «{REG.pestana}»")
+        de_hoja = find_teams(read_tab(REG.hoja, REG.pestana))
+        con_id = [t for t in de_hoja if t.get("con_id")]
+        if len(con_id) * 2 >= len(de_hoja):     # hoja con ids (VGCPastes): fuera los enlaces de filas sin id
+            if len(con_id) < len(de_hoja):
+                print(f"  ({len(de_hoja) - len(con_id)} enlaces de filas sin id de equipo: no son equipos de la pestaña, se ignoran)")
+            de_hoja = con_id
+        teams += de_hoja
+    if a.origen:
+        vistos = {t["paste"] for t in teams if t.get("paste")}
+        teams += [t for t in collect(a.origen) if not t.get("paste") or t["paste"] not in vistos]
     if a.max:
         teams = teams[: a.max]
     print(f"{len(teams)} equipos encontrados.")
+    if not teams:
+        return
     ok = bad = same = 0
     hashes = set()
     report = []
@@ -268,6 +400,7 @@ def main(argv=None):
                 pass
             return t
         existing = set()
+        ids_ya = {m.group(1) for f in out.glob("*.txt") if (m := TEAM_ID_RE.match(f.name))}
         for f in out.glob("*.txt"):   # para no duplicar equipos que ya tienes
             try:
                 existing.add(hashlib.sha1(canon(f.read_text(encoding="utf-8")).encode()).hexdigest())
@@ -275,6 +408,10 @@ def main(argv=None):
                 pass
         for k, t in enumerate(teams, 1):
             src = t.get("paste") or "texto"
+            if t.get("con_id") and t["id"] in ids_ya:     # mismo id de la hoja: ya importado (con o sin SP estimados)
+                report.append([t["id"], t["name"], src, "ya estaba", ""])
+                same += 1
+                continue
             if "text" in t:
                 raw = t["text"]
             else:
@@ -301,6 +438,16 @@ def main(argv=None):
                 v = eng.call("validate", team=text)
             except Exception as e:
                 v = {"ok": False, "problems": [str(e).splitlines()[0]]}
+            if not v["ok"] and any(SIN_SP in p for p in v["problems"]):
+                # hoja de equipo abierta sin SP: se estiman y se vuelve a validar
+                try:
+                    f = eng.call("fill_spreads", text=text)
+                    v2 = eng.call("validate", team=f["text"])
+                    if v2["ok"] or not any(SIN_SP in p for p in v2["problems"]):
+                        text, v = f["text"], v2
+                        notes = notes + [f"SP estimados: {', '.join(f['filled'])}"]
+                except Exception:
+                    pass
             if v["ok"]:
                 base = safe_name(f"{t['id']}_{t['name']}" if t["id"] else t["name"])
                 fname = out / f"{base}.txt"
@@ -309,10 +456,13 @@ def main(argv=None):
                     fname = out / f"{base}_{n}.txt"
                     n += 1
                 fname.write_text(text, encoding="utf-8")
+                if t.get("con_id"):
+                    ids_ya.add(t["id"])
                 ok += 1
                 print(f"  + {fname.name}" + (f"  ({'; '.join(notes)})" if notes else ""))
                 if notes:
-                    report.append([t["id"], t["name"], src, "ok (ajustado)", "; ".join(notes)])
+                    estado = "ok (SP estimados)" if any(n.startswith("SP estimados") for n in notes) else "ok (ajustado)"
+                    report.append([t["id"], t["name"], src, estado, "; ".join(notes)])
             else:
                 bad += 1
                 print(f"  x {t['name'] or src}: {' | '.join(v['problems'][:2])}")

@@ -1,0 +1,54 @@
+Grimmsnarl @ Light Clay  
+Ability: Prankster  
+Level: 50  
+Impish Nature  
+- Light Screen  
+- Reflect  
+- Parting Shot  
+- Spirit Break  
+
+Pelipper @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Calm Nature  
+- Weather Ball  
+- Hurricane  
+- Protect  
+- Tailwind  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Dragon Claw  
+- Earthquake  
+- Rock Slide  
+- Bulldoze  
+
+Venusaur @ Focus Sash  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Sludge Bomb  
+- Sleep Powder  
+- Earth Power  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Modest Nature  
+- Dragon Pulse  
+- Protect  
+- Electro Shot  
+- Snarl  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Protect  
+- Heat Wave  
+- Weather Ball  
+- Hurricane  
+

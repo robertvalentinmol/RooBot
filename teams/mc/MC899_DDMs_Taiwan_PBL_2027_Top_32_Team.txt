@@ -1,0 +1,54 @@
+Gengar @ Gengarite  
+Ability: Cursed Body  
+Level: 50  
+Modest Nature  
+- Shadow Ball  
+- Perish Song  
+- Substitute  
+- Protect  
+
+Rillaboom @ Occa Berry  
+Ability: Grassy Surge  
+Level: 50  
+Brave Nature  
+- Fake Out  
+- Grassy Glide  
+- U-turn  
+- Protect  
+
+Politoed @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Weather Ball  
+- Perish Song  
+- Icy Wind  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Bold Nature  
+- Electro Shot  
+- Snarl  
+- Dragon Pulse  
+- Protect  
+
+Grapploct @ Life Orb  
+Ability: Technician  
+Level: 50  
+Brave Nature  
+- Storm Throw  
+- Mach Punch  
+- Bulk Up  
+- Detect  
+
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Parting Shot  
+- Flare Blitz  
+- Protect  
+

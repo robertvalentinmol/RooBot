@@ -1,0 +1,54 @@
+Kingambit @ Focus Sash  
+Ability: Defiant  
+Level: 50  
+Brave Nature  
+- Kowtow Cleave  
+- Iron Head  
+- Low Kick  
+- Sucker Punch  
+
+Armarouge @ Psychic Seed  
+Ability: Flash Fire  
+Level: 50  
+Modest Nature  
+- Expanding Force  
+- Flamethrower  
+- Calm Mind  
+- Trick Room  
+
+Rillaboom @ Sitrus Berry  
+Ability: Grassy Surge  
+Level: 50  
+Sassy Nature  
+- Wood Hammer  
+- Grassy Glide  
+- Fake Out  
+- Worry Seed  
+
+Indeedee-F @ Rocky Helmet  
+Ability: Psychic Surge  
+Level: 50  
+Relaxed Nature  
+- Follow Me  
+- Heal Pulse  
+- Skill Swap  
+- Trick Room  
+
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Brave Bird  
+- Roost  
+- Protect  
+
+Torkoal @ Life Orb  
+Ability: Drought  
+Level: 50  
+Quiet Nature  
+- Eruption  
+- Flamethrower  
+- Solar Beam  
+- Earth Power  
+

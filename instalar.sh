@@ -3,8 +3,8 @@
 # Requisitos: Node.js 20+, git, Python 3.10+
 set -euo pipefail
 cd "$(dirname "$0")"
-COMMIT="${VGCLAB_SHOWDOWN_COMMIT:-d601443}"
 PY="${PYTHON:-python3}"
+COMMIT="${VGCLAB_SHOWDOWN_COMMIT:-$("$PY" -m vgclab.regulacion --valor showdown 2>/dev/null || echo d601443)}"
 
 command -v node >/dev/null || { echo "Falta Node.js 20+ (https://nodejs.org)"; exit 1; }
 command -v git  >/dev/null || { echo "Falta git"; exit 1; }

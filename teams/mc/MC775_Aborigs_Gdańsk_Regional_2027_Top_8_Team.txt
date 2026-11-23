@@ -1,0 +1,54 @@
+Basculegion @ Life Orb  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Wave Crash  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Kowtow Cleave  
+- Iron Head  
+- Sucker Punch  
+- Low Kick  
+
+Whimsicott @ Focus Sash  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Tailwind  
+- Encore  
+- Protect  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Solar Beam  
+- Protect  
+- Weather Ball  
+
+Salamence @ Salamencite  
+Ability: Intimidate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Draco Meteor  
+- Flamethrower  
+- Protect  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Gunk Shot  
+- Rock Slide  
+- Protect  
+

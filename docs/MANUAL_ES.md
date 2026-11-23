@@ -24,7 +24,7 @@ Todo usa el **simulador real de Showdown** (mod `champions`): daño, Stat Points
 
 **Pokémon Champions y sus regulaciones.** Desde mayo de 2026 Champions es la plataforma oficial de VGC. Reglas base: dobles, nivel 50 automático, cláusula de especie y de objeto, se llevan 6 y se eligen 4. Stat Points en vez de EVs/IVs: **66 SP en total, máximo 32 por estadística**, IVs fijos a 31 (1 SP ≈ 8 EVs). Una Mega por combate. Regulaciones: **M-A** (8 abr – 17 jun 2026), **M-B** (17 jun – 9 sep, la del Mundial 2026), **M-C** (9 sep – 2 dic 2026, añade Mega Absol Z, Mega Lucario Z y Mega Garchomp Z, Rillaboom y Baxcalibur, entre otros).
 
-**Formatos en Showdown:** `gen9championsvgc2026regmc` (Bo1, OTS opcional — el que usaba mikumiku37), `gen9championsvgc2026regmcbo3` (Bo3, OTS forzado), y los equivalentes de Reg M-B. Cuando salga la siguiente regulación, cambia el formato con la variable `VGCLAB_FORMAT` (y actualiza Showdown).
+**Formatos en Showdown:** `gen9championsvgc2026regmc` (Bo1, OTS opcional — el que usaba mikumiku37), `gen9championsvgc2026regmcbo3` (Bo3, OTS forzado), y los equivalentes de Reg M-B. Cuando salga la siguiente regulación, usa `mantenimiento.bat` → **R** (ver «Cambiar de regulación» en la sección 9).
 
 **Bots y Showdown.** La comunidad está debatiendo en serio el impacto de estos bots. Smogon exige registrar los bots que se conectan al servidor público, y en el código actual de Showdown un bot registrado sólo se empareja en ladder con jugadores que lo han permitido expresamente (opción desactivada por defecto). Este proyecto funciona sólo en tu PC: no se conecta a ningún servidor de Showdown y nunca entra en ladder. Úsalo para entrenar, no para jugar por ti en torneos.
 
@@ -48,14 +48,15 @@ Todo el mantenimiento está en **`mantenimiento.bat`** (doble clic y eliges una 
 
 | Opción | Qué hace | Cuándo |
 |---|---|---|
-| 1 · Rutina mensual | Importa lo que hayas pegado en `equipos_nuevos.txt` y sus sprites, descarga repeticiones nuevas, actualiza el juez y lo mide frente al de siempre | 1 vez al mes (~1 h, internet) |
-| 2 · Importar equipos | Equipos de `equipos_nuevos.txt` (enlaces de pokepast.es o export de Showdown) + sprites | Tras cada torneo |
+| 1 · Rutina mensual | Importa los equipos nuevos de la hoja de VGCPastes (y lo que hayas pegado en `equipos_nuevos.txt`) y sus sprites, descarga repeticiones nuevas, actualiza el juez y lo mide frente al de siempre | 1 vez al mes (~1 h, internet) |
+| 2 · Importar equipos | Equipos nuevos de la pestaña de la regulación en la hoja de VGCPastes, más los de `equipos_nuevos.txt` (enlaces de pokepast.es o export de Showdown) + sprites. Los que ya tienes no se repiten | Cada semana o tras cada torneo |
 | 3 · Actualizar el juez | Repeticiones nuevas de 1500+ y nuevo aprendizaje (sólo se activa si mejora) | Si no haces la rutina |
 | 4 · Comprobar el juez | Vuelve a aprender con lo guardado y mide los dos jueces con el banco fijo | Para comparar |
 | 5 · Medir la app | Calibración con el banco fijo con hojas abiertas | Cuando quieras |
 | 6 · Experimentos | Prueba ajustes del criterio (sección 6c) | Cada 2-3 meses, de noche |
 | 7 · Experiencia | Vuelve a aprender «lo que suelen jugar los fuertes» (sección 6d) | Cada 2-3 meses |
 | 8 · Acceso directo | Icono de RooBot en el escritorio | Una vez |
+| 9 · Banco limpio | La primera vez aparta 100 partidas con hojas abiertas de 1500+ que nunca se usan para aprender; después mide siempre esas mismas. De ahí salen los casos de «Revisar la app» (sección 6b) | Una vez, y después de cada cambio del juez (~40 min) |
 
 Las opciones avanzadas siguen disponibles desde una consola: `python -m vgclab.calibrar --help` (y lo mismo con `importar`, `experimentos`, `experiencia` y `sprites`).
 
@@ -200,11 +201,19 @@ Muestra el daño estimado cruzado (tus 6 contra sus 6, con Megas activadas) y la
 
 ## 6b. Revisar la app (tú juzgas)
 
-«Revisar la app» (menú Mejorar) te enseña, de una en una, las jugadas de jugadores de 1500+ que la app marcó como **error** en la última calibración (la del banco con hojas abiertas), empezando por las de mayor pérdida. Ves la posición, lo que jugó, lo que prefiere la app y su explicación, y decides: **el jugador**, **la app**, **las dos valen** o **no lo sé** (con una nota opcional). Se guarda en `logs\revision.csv`. «Mi progreso» muestra cuántas veces tenía razón la app cuando dijo «error», por tipo de decisión, y una estimación de su precisión real. Además de medir la app, es un entrenamiento de primer nivel: posiciones difíciles de jugadores fuertes, analizadas.
+«Revisar la app» (menú Mejorar) te enseña, de una en una, las jugadas de jugadores de 1500+ que la app marcó como **error** en la última medida del **banco limpio** (`mantenimiento.bat`, opción 9), en orden al azar; si aún no lo has creado o ya no quedan casos, salen los del banco con hojas abiertas, empezando por los de mayor pérdida. Ves la posición, lo que jugó, lo que prefiere la app y su explicación, y decides: **el jugador**, **la app**, **las dos valen** o **no lo sé** (con una nota opcional). Se guarda en `logs\revision.csv`. «Mi progreso» muestra cuántas veces tenía razón la app cuando dijo «error», por tipo de decisión, y una estimación de su precisión real. Además de medir la app, es un entrenamiento de primer nivel: posiciones difíciles de jugadores fuertes, analizadas.
 
 **Lo que cambió con tu revisión (v33).** En los primeros 55 desacuerdos, la app sólo tenía razón 3 veces; cuando el jugador hizo una jugada de plan (proteger, cambiar, estado, preparar, control de velocidad) en una ranura donde la app prefería atacar, acertó 1 de 28. Por eso ahora, en ese caso, el veredicto es **«Discutible: jugada de plan que el cálculo de un turno infravalora»** en vez de «Error»: no baja tu rating, no va a «Repasar mis errores» y cuenta como acierto en «Mi punto débil». Si la app prefería otra jugada de plan, o las dos son ataques, el veredicto sigue igual.
 
 **La prueba con tu revisión.** `python -m vgclab.calibrar --prueba-revision` (también al final de las opciones 1 y 4 de `mantenimiento.bat`, y dentro de los experimentos) vuelve a analizar todas las decisiones que juzgaste y cuenta los **errores falsos** (le diste la razón al jugador o a los dos y la app aún dice «Error») y los **aciertos** que mantiene (le diste la razón a la app). Un experimento que suba los errores falsos o pierda aciertos se descarta aunque mejore el acuerdo. El resultado sale en «Mi progreso → Estado de la app».
+
+**Examen, ajuste y octubre (v34).** La regla «Discutible» se diseñó mirando los 55 casos de octubre, así que su cifra de errores falsos es optimista. Para tener una cifra honrada, los casos nuevos salen del banco limpio y se reparten en dos mitades fijas, por pareja de jugadores (una serie al mejor de tres cae entera en la misma):
+
+- **Examen**: sólo se cuenta. Nunca se mira para diseñar o elegir reglas, y los experimentos no la usan para decidir. Es la cifra que vale.
+- **Ajuste**: los casos que sí se pueden estudiar para mejorar el criterio.
+- **Octubre**: las revisiones anteriores al banco limpio (orientativa).
+
+Lo que revisas cuenta al momento en «Mi progreso → Estado de la app»; la prueba completa (rutina mensual, opción 4 y experimentos) vuelve a analizar todos los casos con el criterio de ese día. El reparto y las cuentas están en `vgclab/revision.py`.
 
 ## 6c. Experimentos automáticos
 
@@ -251,7 +260,34 @@ ejemplos/          escenarios de la calculadora
 - **"No encuentro Showdown compilado"**: ejecuta `instalar.bat` (o define `VGCLAB_SHOWDOWN` con la ruta de tu Showdown).
 - **La app dice que es una versión antigua**: cierra todas las ventanas negras de `app.bat` y vuelve a abrirlo.
 - **Va lento**: `app.bat --workers 3` (o hasta tus núcleos - 1).
-- **Nueva regulación (M-D…)**: actualiza Showdown (`git pull` en `server\pokemon-showdown`, `node build`) y define `VGCLAB_FORMAT` con el nuevo id.
+- **Nueva regulación (M-D…)**: `mantenimiento.bat` → **R**. Ver «Cambiar de regulación» justo debajo.
+
+### Cambiar de regulación
+
+La regulación activa está en `regulacion.json` (formato Bo1 y Bo3 de Showdown, carpeta de equipos rivales y versión de Showdown probada). Todo el programa la lee de ahí: la app, el motor, el importador, la calibración y los instaladores.
+
+**Cuando salga una regulación nueva:** `mantenimiento.bat` → **R**. Actualiza Showdown, te enseña los formatos de Champions que conoce, registra la nueva (por ejemplo id `md`, formato `gen9championsvgc2026regmd`), crea `teams\md` y te pide sus equipos. Si el formato aún no aparece, Showdown todavía no lo tiene: vuelve en unos días.
+
+Qué pasa con cada cosa:
+
+| | |
+|---|---|
+| Pokémon, movimientos, objetos y Megas nuevos | Salen de Showdown: con actualizarlo basta. |
+| Equipos rivales | Cada regulación tiene su carpeta (`teams\mc`, `teams\md`…). La app sólo enseña los de la activa, más los tuyos de `teams\`. Se importan de la hoja de VGCPastes: sólo los que tienen resultados en torneos (pestaña «Featured Teams»). La nueva regulación hereda la hoja y usa «Champions M-D Featured Teams» (o la que escribas en la opción R). |
+| Repeticiones | Se guardan todas juntas, pero cada regulación sólo usa las de sus formatos (el formato va en el nombre). |
+| Bancos de prueba y última calibración | Uno por regulación (`banco_hoja_md.json`…). M-C conserva los nombres de siempre. |
+| Juez y experiencia | Usan rasgos generales, no especies, así que sirven de una regulación a otra. Al cambiar se guarda una copia en `logs\regulaciones\<id>`; reentrénalos con la rutina mensual cuando haya repeticiones nuevas. |
+| Tu progreso (repaso, rating) | No se toca. |
+
+Al principio de una regulación casi no hay repeticiones de 1500+: espera 2-3 semanas antes de la opción 1 (rutina mensual) y la 9 (banco limpio).
+
+**Volver a una regulación anterior:** `python -m vgclab.regulacion --usar mc`. Funciona mientras el Showdown instalado siga conociendo ese formato; Showdown retira los formatos antiguos con el tiempo.
+
+**De dónde salen los equipos:** cada regulación guarda en `regulacion.json` una hoja pública de Google y el nombre de su pestaña (por defecto el [VGCPastes Repository](https://docs.google.com/spreadsheets/d/1axlwmzPA49rYkqXh7zHvAtSP-TKbM0ijGYBPRflLSWw/edit), pestaña «Champions M-C Featured Teams»: sólo equipos con resultados en torneos, oficiales u online). La opción 2 descarga el libro, busca la pestaña por su nombre (no hace falta el gid) e importa los equipos nuevos. Para usar todos los equipos de la regulación, con resultados o sin ellos: `python -m vgclab.regulacion --pestana "Champions M-C"`. Los equipos sin resultados que había antes están apartados en `teams_apartados\mc_sin_resultados` (la app no los usa). Para otra hoja: `--hoja "<enlace>"`.
+
+**De dónde salen las repeticiones:** del buscador de repeticiones públicas de Pokémon Showdown, filtrando por los formatos de la regulación activa. Al cambiar de regulación no hay que tocar nada: las opciones 1 y 3 ya buscan las del formato nuevo.
+
+**Ver la regulación activa:** `python -m vgclab.regulacion` (o la cabecera de `mantenimiento.bat`).
 
 ## 10. Uso responsable
 

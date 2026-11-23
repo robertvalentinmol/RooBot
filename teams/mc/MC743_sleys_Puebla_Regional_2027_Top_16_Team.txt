@@ -1,0 +1,54 @@
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Moonblast  
+- Dazzling Gleam  
+- Calm Mind  
+- Protect  
+
+Basculegion @ Choice Scarf  
+Ability: Adaptability  
+Level: 50  
+Jolly Nature  
+- Wave Crash  
+- Last Respects  
+- Flip Turn  
+- Soak  
+
+Volcarona @ Grassy Seed  
+Ability: Flame Body  
+Level: 50  
+Timid Nature  
+- Heat Wave  
+- Giga Drain  
+- Quiver Dance  
+- Protect  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Impish Nature  
+- Fake Out  
+- Flare Blitz  
+- Throat Chop  
+- Parting Shot  
+
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Wood Hammer  
+- U-turn  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Fake Out  
+- Zap Cannon  
+- Focus Blast  
+- Protect  
+

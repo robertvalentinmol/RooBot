@@ -1,0 +1,54 @@
+Staraptor @ Staraptite  
+Ability: Intimidate  
+Level: 50  
+Jolly Nature  
+- Brave Bird  
+- Close Combat  
+- Roost  
+- Protect  
+
+Indeedee @ Focus Sash  
+Ability: Psychic Surge  
+Level: 50  
+Timid Nature  
+- Expanding Force  
+- Hyper Voice  
+- Imprison  
+- Trick Room  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Dragon Claw  
+- Stomping Tantrum  
+- Rock Slide  
+- Earthquake  
+
+Whimsicott @ Occa Berry  
+Ability: Prankster  
+Level: 50  
+Timid Nature  
+- Moonblast  
+- Tailwind  
+- Encore  
+- Charm  
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Solar Beam  
+- Weather Ball  
+- Protect  
+
+Glimmora @ Life Orb  
+Ability: Toxic Debris  
+Level: 50  
+Modest Nature  
+- Power Gem  
+- Sludge Bomb  
+- Earth Power  
+- Spiky Shield  
+

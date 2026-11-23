@@ -1,0 +1,54 @@
+Rillaboom @ Sitrus Berry  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Fake Out  
+- Wood Hammer  
+- Grassy Glide  
+- U-turn  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Dire Claw  
+- Protect  
+- Throat Chop  
+
+Lycanroc-Dusk @ Focus Sash  
+Ability: Tough Claws  
+Level: 50  
+Adamant Nature  
+- Rock Slide  
+- Accelerock  
+- Close Combat  
+- Protect  
+
+Volcarona @ Grassy Seed  
+Ability: Flame Body  
+Level: 50  
+Modest Nature  
+- Heat Wave  
+- Quiver Dance  
+- Protect  
+- Bug Buzz  
+
+Froslass @ Froslassite  
+Ability: Cursed Body  
+Level: 50  
+Timid Nature  
+- Blizzard  
+- Shadow Ball  
+- Aurora Veil  
+- Protect  
+
+Garchomp @ Garchompite Z  
+Ability: Rough Skin  
+Level: 50  
+Timid Nature  
+- Protect  
+- Earth Power  
+- Power Gem  
+- Draco Meteor  
+

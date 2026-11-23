@@ -1,0 +1,54 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Protect  
+- Hurricane  
+- Heat Wave  
+- Weather Ball  
+
+Venusaur @ Wide Lens  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Protect  
+- Earth Power  
+- Sludge Bomb  
+- Sleep Powder  
+
+Sableye @ Light Clay  
+Ability: Prankster  
+Level: 50  
+Calm Nature  
+- Snarl  
+- Reflect  
+- Light Screen  
+- Will-O-Wisp  
+
+Pelipper @ Sitrus Berry  
+Ability: Drizzle  
+Level: 50  
+Modest Nature  
+- Protect  
+- Tailwind  
+- Weather Ball  
+- Hurricane  
+
+Garchomp @ Life Orb  
+Ability: Rough Skin  
+Level: 50  
+Jolly Nature  
+- Protect  
+- Dragon Claw  
+- Stomping Tantrum  
+- Rock Slide  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Protect  
+- Flash Cannon  
+- Dragon Pulse  
+- Electro Shot  
+

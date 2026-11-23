@@ -1,0 +1,54 @@
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Modest Nature  
+- Muddy Water  
+- Ice Beam  
+- Shadow Ball  
+- Protect  
+
+Raichu @ Raichunite X  
+Ability: Lightning Rod  
+Level: 50  
+Jolly Nature  
+- Volt Tackle  
+- Volt Switch  
+- Fake Out  
+- Feint  
+
+Pelipper @ Choice Scarf  
+Ability: Drizzle  
+Level: 50  
+Timid Nature  
+- Hurricane  
+- Weather Ball  
+- Wide Guard  
+- Rain Dance  
+
+Sneasler @ Electric Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Close Combat  
+- Poison Jab  
+- Swords Dance  
+- Protect  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Electro Shot  
+- Dragon Pulse  
+- Snarl  
+- Protect  
+
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Leech Life  
+- Iron Head  
+- Sucker Punch  
+- Protect  
+

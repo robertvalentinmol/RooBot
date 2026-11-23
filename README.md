@@ -73,10 +73,16 @@ Necesitas **Python 3.10+**, **Node.js 20+** y **Git**.
 ```bat
 instalar.bat          :: descarga y compila la versión probada de Pokémon Showdown e instala numpy y pyyaml
 app.bat               :: abre la app en http://127.0.0.1:8765 (solo en tu PC)
-mantenimiento.bat     :: menú: importar equipos, sprites, actualizar y medir el evaluador, experimentos
+mantenimiento.bat     :: menú: importar equipos, sprites, actualizar y medir el evaluador, experimentos, nueva regulación (R)
 ```
 
+Pruebas automáticas (no necesitan el simulador): `pip install pytest` y `python -m pytest tests`.
+
 Los sprites no van en el repositorio. Ejecuta una vez `mantenimiento.bat` → opción 2 con internet para descargarlos, o deja que la app los baje cuando los necesite.
+
+### Cambiar de regulación
+
+La regulación activa (formato de Showdown, carpeta de equipos rivales y versión de Showdown probada) está en `regulacion.json`, y todo el programa la lee de ahí. Cuando salga una nueva, `mantenimiento.bat` → **R** actualiza Showdown, la registra, crea su carpeta de equipos e importa sus equipos con resultados en torneos (pestaña «Featured Teams» del VGCPastes Repository) (la hoja y la pestaña también están en `regulacion.json`). Las repeticiones se buscan solas en Showdown con el formato nuevo. Los bancos de prueba van por regulación y las repeticiones se filtran por formato. Más detalles en el [manual](docs/MANUAL_ES.md#cambiar-de-regulación).
 
 ## Estructura
 

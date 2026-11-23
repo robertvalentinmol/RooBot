@@ -1,0 +1,54 @@
+Rillaboom @ Miracle Seed  
+Ability: Grassy Surge  
+Level: 50  
+Adamant Nature  
+- Grassy Glide  
+- Wood Hammer  
+- Fake Out  
+- U-turn  
+
+Blaziken @ Blazikenite  
+Ability: Speed Boost  
+Level: 50  
+Adamant Nature  
+- Detect  
+- Flare Blitz  
+- Close Combat  
+- Rock Slide  
+
+Kingambit @ Black Glasses  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Sucker Punch  
+- Kowtow Cleave  
+- Swords Dance  
+- Protect  
+
+Sneasler @ Grassy Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Rock Slide  
+- Close Combat  
+- Dire Claw  
+- Protect  
+
+Primarina @ Leftovers  
+Ability: Liquid Voice  
+Level: 50  
+Modest Nature  
+- Protect  
+- Calm Mind  
+- Hyper Voice  
+- Moonblast  
+
+Raichu @ Raichunite Y  
+Ability: Lightning Rod  
+Level: 50  
+Timid Nature  
+- Fake Out  
+- Zap Cannon  
+- Focus Blast  
+- Protect  
+

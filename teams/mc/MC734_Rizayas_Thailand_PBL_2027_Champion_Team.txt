@@ -1,0 +1,54 @@
+Golisopod @ Golisopite  
+Ability: Emergency Exit  
+Level: 50  
+Adamant Nature  
+- Leech Life  
+- Sucker Punch  
+- Iron Head  
+- Protect  
+
+Basculegion-F @ Focus Sash  
+Ability: Swift Swim  
+Level: 50  
+Modest Nature  
+- Muddy Water  
+- Shadow Ball  
+- Ice Beam  
+- Protect  
+
+Raichu @ Raichunite X  
+Ability: Lightning Rod  
+Level: 50  
+Jolly Nature  
+- Volt Tackle  
+- Volt Switch  
+- Fake Out  
+- Feint  
+
+Pelipper @ Damp Rock  
+Ability: Drizzle  
+Level: 50  
+Bold Nature  
+- Hurricane  
+- Weather Ball  
+- Helping Hand  
+- Wide Guard  
+
+Sneasler @ Electric Seed  
+Ability: Unburden  
+Level: 50  
+Adamant Nature  
+- Dire Claw  
+- Protect  
+- Swords Dance  
+- Close Combat  
+
+Archaludon @ Leftovers  
+Ability: Stamina  
+Level: 50  
+Calm Nature  
+- Electro Shot  
+- Dragon Pulse  
+- Snarl  
+- Protect  
+

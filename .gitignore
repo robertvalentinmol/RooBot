@@ -16,7 +16,16 @@ node_modules/
 
 # Restos locales
 _a_borrar/
+*.zip
 limpiar_v*.bat
 checkpoints/
 Mantenimiento.pdf
 *.lnk
+.pytest_cache/
+
+# Notas y utilidades locales para trabajar con Claude
+Claude outputs/
+empaquetar_roobot.bat
+
+# PDFs sueltos en la raiz (guias exportadas, etc.)
+/*.pdf

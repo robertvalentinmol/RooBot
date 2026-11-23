@@ -1,0 +1,54 @@
+Sinistcha @ Occa Berry  
+Ability: Hospitality  
+Level: 50  
+Bold Nature  
+- Protect  
+- Matcha Gotcha  
+- Rage Powder  
+- Trick Room  
+
+Floette-Eternal @ Floettite  
+Ability: Flower Veil  
+Level: 50  
+Modest Nature  
+- Protect  
+- Moonblast  
+- Dazzling Gleam  
+- Calm Mind  
+
+Kingambit @ Life Orb  
+Ability: Defiant  
+Level: 50  
+Adamant Nature  
+- Protect  
+- Kowtow Cleave  
+- Sucker Punch  
+- Swords Dance  
+
+Incineroar @ Sitrus Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Snarl  
+- Parting Shot  
+
+Sneasler @ Focus Sash  
+Ability: Poison Touch  
+Level: 50  
+Jolly Nature  
+- Fake Out  
+- Close Combat  
+- Poison Jab  
+- Quick Guard  
+
+Delphox @ Delphoxite  
+Ability: Blaze  
+Level: 50  
+Timid Nature  
+- Protect  
+- Heat Wave  
+- Psyshock  
+- Nasty Plot  
+

@@ -1,0 +1,60 @@
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+EVs: 18 HP / 24 Def / 11 SpA / 13 Spe  
+Modest Nature  
+- Heat Wave  
+- Solar Beam  
+- Weather Ball  
+- Protect  
+
+Whimsicott @ Bright Powder  
+Ability: Prankster  
+Level: 50  
+EVs: 2 HP / 32 SpA / 32 Spe  
+Timid Nature  
+- Tailwind  
+- Moonblast  
+- Encore  
+- Protect  
+
+Garchomp @ Life Orb  
+Ability: Rough Skin  
+Level: 50  
+EVs: 6 HP / 28 Atk / 32 Spe  
+Jolly Nature  
+- Dragon Claw  
+- Earthquake  
+- Rock Slide  
+- Protect  
+
+Gholdengo @ Focus Sash  
+Ability: Good as Gold  
+Level: 50  
+EVs: 1 HP / 1 Def / 32 SpA / 32 Spe  
+Modest Nature  
+- Make It Rain  
+- Shadow Ball  
+- Thunderbolt  
+- Power Gem  
+
+Sneasler @ White Herb  
+Ability: Unburden  
+Level: 50  
+EVs: 2 HP / 32 Atk / 32 Spe  
+Jolly Nature  
+- Dire Claw  
+- Close Combat  
+- Upper Hand  
+- Feint  
+
+Gardevoir @ Gardevoirite  
+Ability: Trace  
+Level: 50  
+EVs: 22 HP / 25 SpA / 19 Spe  
+Modest Nature  
+- Hyper Voice  
+- Expanding Force  
+- Trick Room  
+- Imprison  
+

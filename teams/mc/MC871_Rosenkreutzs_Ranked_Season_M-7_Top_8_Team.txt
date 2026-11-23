@@ -1,0 +1,60 @@
+Dragonite @ Dragoninite  
+Ability: Inner Focus  
+Level: 50  
+EVs: 2 HP / 32 SpA / 32 Spe  
+Modest Nature  
+- Dragon Pulse  
+- Heat Wave  
+- Tailwind  
+- Protect  
+
+Kingambit @ Chople Berry  
+Ability: Defiant  
+Level: 50  
+EVs: 32 HP / 18 Atk / 16 Def  
+Adamant Nature  
+- Kowtow Cleave  
+- Iron Head  
+- Sucker Punch  
+- Protect  
+
+Basculegion (M) @ Focus Sash  
+Ability: Adaptability  
+Level: 50  
+EVs: 32 Atk / 2 Def / 32 Spe  
+Adamant Nature  
+- Liquidation  
+- Last Respects  
+- Aqua Jet  
+- Protect  
+
+Mudsdale @ Life Orb  
+Ability: Inner Focus  
+Level: 50  
+EVs: 2 HP / 32 Atk / 32 Spe  
+Adamant Nature  
+- High Horsepower  
+- Heavy Slam  
+- Rock Slide  
+- Protect  
+
+Weavile @ Wide Lens  
+Ability: Pickpocket  
+Level: 50  
+EVs: 6 HP / 32 Atk / 28 Spe  
+Jolly Nature  
+- Triple Axel  
+- Throat Chop  
+- Low Kick  
+- Fake Out  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+EVs: 21 HP / 30 SpA / 15 Spe  
+Modest Nature  
+- Hyper Voice  
+- Hyper Beam  
+- Quick Attack  
+- Protect  
+

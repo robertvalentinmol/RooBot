@@ -1,0 +1,54 @@
+Incineroar @ Chople Berry  
+Ability: Intimidate  
+Level: 50  
+Careful Nature  
+- Fake Out  
+- Flare Blitz  
+- Parting Shot  
+- Helping Hand  
+
+Charizard @ Charizardite Y  
+Ability: Drought  
+Level: 50  
+Timid Nature  
+- Ancient Power  
+- Heat Wave  
+- Weather Ball  
+- Protect  
+
+Venusaur @ Life Orb  
+Ability: Chlorophyll  
+Level: 50  
+Modest Nature  
+- Earth Power  
+- Sludge Bomb  
+- Leaf Storm  
+- Protect  
+
+Sylveon @ Fairy Feather  
+Ability: Pixilate  
+Level: 50  
+Modest Nature  
+- Hyper Voice  
+- Quick Attack  
+- Moonblast  
+- Detect  
+
+Garchomp @ Choice Scarf  
+Ability: Rough Skin  
+Level: 50  
+Adamant Nature  
+- Dragon Claw  
+- Earthquake  
+- Rock Slide  
+- Stomping Tantrum  
+
+Dragonite @ Dragoninite  
+Ability: Inner Focus  
+Level: 50  
+Modest Nature  
+- Dragon Pulse  
+- Tailwind  
+- Heat Wave  
+- Protect  
+
