@@ -1,0 +1,105 @@
+/* RooBot · modo doble pantalla. Sólo afecta a /abajo y /arriba (clases en <html>); / no cambia. */
+
+/* ============================================================ ventana de abajo: controles */
+html.pantalla-abajo body{padding-bottom:46px}
+html.pantalla-abajo .app{grid-template-columns:minmax(0,1fr)}
+/* el campo sigue existiendo (se copia arriba) pero fuera de la vista, a su tamaño de siempre */
+html.pantalla-abajo #fieldCard{position:fixed;left:-10000px;top:0;width:640px;pointer-events:none}
+
+/* barra de pestañas fija abajo */
+#pantTabs{display:none}
+html.pantalla-abajo #pantTabs{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:50;
+  height:44px;background:var(--bg2,#121c2c);border-top:1px solid var(--line,#2a3c5c)}
+html.pantalla-abajo #pantTabs button{background:none;border:0;color:var(--muted,#93a4bc);font:600 12.5px/1 inherit;font-family:inherit;cursor:pointer}
+html.pantalla-abajo #pantTabs button.on{color:var(--ink,#eaf0f8);box-shadow:inset 0 3px 0 var(--gold,#ffcb3d)}
+
+/* cabecera mínima: título y botón de nueva posición en una línea */
+html.pantalla-abajo #topbar{display:flex;align-items:center;gap:8px;padding:6px 10px;min-height:0;position:sticky;top:0;z-index:20}
+html.pantalla-abajo #topbar .mode{flex:1;min-width:0}
+html.pantalla-abajo #modeTitle{font-size:15px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.pantalla-abajo #modeDesc{display:none}
+html.pantalla-abajo #topbar .tb-r{display:flex;align-items:center;gap:6px;padding:0;margin:0}
+html.pantalla-abajo #topbar .tb-r > *:not(#newBtn){display:none}
+html.pantalla-abajo #newBtn{padding:6px 12px;font-size:13px;min-height:0}
+html.pantalla-abajo main{padding:6px 8px 8px;gap:8px}
+html.pantalla-abajo main .card + .card{margin-top:8px}
+
+/* pestaña por pestaña */
+html.pantalla-abajo #rail{display:none}
+html.pantalla-abajo aside{display:none}
+html.pantalla-abajo #resultCard{display:none !important}
+/* main = <section> (todas las tarjetas) + <aside> (registro y hojas) */
+html.pantalla-abajo[data-pest="porque"] main > section > *:not(#resultCard),
+html.pantalla-abajo[data-pest="registro"] main > section,
+html.pantalla-abajo[data-pest="hojas"] main > section,
+html.pantalla-abajo[data-pest="menu"] main{display:none !important}
+html.pantalla-abajo[data-pest="porque"] #resultCard{display:block !important}
+html.pantalla-abajo[data-pest="registro"] aside,
+html.pantalla-abajo[data-pest="hojas"] aside{display:block}
+/* «Menú»: la navegación y las opciones de la cabecera (fase, equipo, rival, modo) */
+html.pantalla-abajo[data-pest="menu"] #rail{display:flex;flex-direction:column;position:static;height:auto;border:0;padding:8px}
+html.pantalla-abajo[data-pest="menu"] #topbar{flex-wrap:wrap;position:static}
+html.pantalla-abajo[data-pest="menu"] #topbar .tb-r{flex-wrap:wrap}
+html.pantalla-abajo[data-pest="menu"] #topbar .tb-r > *{display:revert}
+html.pantalla-abajo[data-pest="menu"] #topbar .tb-r > [hidden]{display:none}
+
+/* la jugada: los dos Pokémon uno debajo de otro, cuatro movimientos en 2×2, sin desplazar */
+html.pantalla-abajo #controlsCard{border-radius:12px}
+html.pantalla-abajo #controls{padding:4px 8px 6px}
+html.pantalla-abajo .slot{padding:4px 0 6px}
+html.pantalla-abajo .slot-h{margin-bottom:4px;gap:6px}
+html.pantalla-abajo .slot-h .ico{display:none}
+html.pantalla-abajo .slot-h h3{font-size:clamp(12px,3.4vh,14px)}
+html.pantalla-abajo .moves{grid-template-columns:1fr 1fr;gap:4px}
+html.pantalla-abajo .mv{padding:clamp(3px,1.2vh,7px) 7px}
+html.pantalla-abajo .mv .n{font-size:clamp(12px,3.3vh,14px)}
+html.pantalla-abajo .mv .s{font-size:clamp(9.5px,2.6vh,11px);gap:4px}
+html.pantalla-abajo #controls .row{margin-top:4px;gap:4px;flex-wrap:wrap}
+html.pantalla-abajo #controls .row .lab{font-size:11px}
+html.pantalla-abajo #controls .btn.sw{padding:2px 6px;font-size:11.5px;min-height:0}
+html.pantalla-abajo #controls .btn.sw img{height:22px}
+html.pantalla-abajo .megachk{font-size:11.5px}
+
+/* ajustes para que quepan los dos Pokémon y el botón de confirmar (≈ 330 px de alto útiles) */
+html.pantalla-abajo #topbar{padding:4px 8px}
+html.pantalla-abajo #newBtn{padding:5px 10px;font-size:12.5px}
+html.pantalla-abajo main{padding:4px 6px 6px}
+html.pantalla-abajo .slot{position:relative;padding:3px 0 4px}
+html.pantalla-abajo .slot-h{margin-bottom:3px;min-height:22px}
+html.pantalla-abajo .mv{padding:3px 7px 2px;line-height:1.15;min-height:0}
+html.pantalla-abajo .mv .s{margin-top:1px}
+/* «Megaevolucionar» como un interruptor pequeño a la derecha del nombre */
+html.pantalla-abajo .slot .row:has(.megachk){position:absolute;top:2px;right:0;margin:0}
+html.pantalla-abajo .megachk{font-size:0;gap:4px;padding:2px 6px}
+html.pantalla-abajo .megachk::after{content:'Mega';font-size:11px}
+html.pantalla-abajo #controls .row:has(.sw){margin-top:3px}
+html.pantalla-abajo #controls .btn.sw{padding:1px 6px}
+html.pantalla-abajo #controls .btn.sw img{display:none}
+/* confirmar: sin el texto de ayuda, botones en una línea */
+html.pantalla-abajo #summary{padding:4px 0 0;margin:0}
+html.pantalla-abajo #summary > .muted{display:none}
+html.pantalla-abajo #summary .row{margin:0;gap:6px}
+html.pantalla-abajo #summary .btn{padding:6px 12px;font-size:13px}
+html.pantalla-abajo .slot .row:has(.megachk){top:0}
+html.pantalla-abajo .megachk{padding:1px 6px}
+html.pantalla-abajo .megachk input{transform:scale(.8)}
+
+/* movimientos en una sola línea (nombre + detalles; el PP sobra aquí) para dejar sitio al objetivo */
+html.pantalla-abajo .mv{display:flex;align-items:baseline;gap:6px;padding:4px 7px;overflow:hidden}
+html.pantalla-abajo .mv .n{white-space:nowrap;flex:none}
+html.pantalla-abajo .mv .s{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+html.pantalla-abajo .mv .s .pp{display:none}
+html.pantalla-abajo #controls .row .lab{font-size:10.5px;min-width:0}
+html.pantalla-abajo #controls .row .btn{padding:2px 8px;font-size:12px;min-height:0}
+/* el botón de confirmar siempre a la vista, justo encima de las pestañas */
+html.pantalla-abajo #summary{position:sticky;bottom:44px;z-index:5;background:var(--panel,#172338);padding:5px 0 4px;
+  box-shadow:0 -8px 12px -8px #0008}
+/* avisos del movimiento («✗ fallará», «⚠ …»): sólo el símbolo, a la derecha (el texto sigue en el title) */
+html.pantalla-abajo .mv{padding-right:22px}
+html.pantalla-abajo .mv .fo{top:50%;right:4px;transform:translateY(-50%);display:inline-block;font-size:0;padding:0 4px;line-height:16px}
+html.pantalla-abajo .mv .fo::first-letter{font-size:11px}
+html.pantalla-abajo #summary{margin-top:4px}
+/* para que «confirmar» se pegue a la ventana y no a su tarjeta (que recorta con overflow) */
+html.pantalla-abajo #controlsCard,html.pantalla-abajo #controls{overflow:visible}
+/* los equipos sólo en «Hojas» */
+html.pantalla-abajo[data-pest="registro"] #teambar{display:none}

@@ -7,6 +7,8 @@
 <link rel="icon" type="image/png" href="/img/roobot.png">
 <link rel="apple-touch-icon" href="/img/roobot.png">
 <link rel="manifest" href="/manifest.webmanifest">
+<script>/* modo doble pantalla: el papel de la ventana, antes del primer pintado */(function(){var p=location.pathname,c=document.documentElement.classList;if(p==='/arriba')c.add('pantalla-arriba');else if(p==='/abajo')c.add('pantalla-abajo');})();</script>
+<link rel="stylesheet" href="/pantallas.css">
 <meta name="theme-color" content="#0d1420">
 <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3094,7 +3096,10 @@ async function init(){
   }
 }
 fitStage();
-init().catch(e => setStatus('⚠ No puedo hablar con el servidor de la app: '+esc(e.message)));
+// la ventana de arriba del modo doble pantalla sólo muestra el campo: no arranca la app
+if (!document.documentElement.classList.contains('pantalla-arriba'))
+  init().catch(e => setStatus('⚠ No puedo hablar con el servidor de la app: '+esc(e.message)));
 </script>
+<script src="/pantallas.js"></script>
 </body>
 </html>
