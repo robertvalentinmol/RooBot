@@ -31,6 +31,7 @@ from .engine_client import EngineError, EnginePool
 from .explicar import explain_endgame, duel_matrix, explain_selection, selection_weaknesses, explain_lookahead, explain_position, explain_preview, explain_best, classify, CATEGORIAS, _k
 from .rutas import ROOT
 from .regulacion import REG, carpetas_de_otras
+from .pantallas import Buzon, servir_eventos
 from . import revision as revisar
 from . import sprites
 
@@ -275,6 +276,7 @@ def difficulty_from(q: List[float], prior: List[float], valid: List[int]) -> flo
 
 class App:
     def __init__(self, workers: int, rivals: List[str], logs: Path):
+        self.buzon = Buzon()            # modo doble pantalla: ventana de arriba ↔ ventana de abajo
         self.pool = EnginePool(workers)
         self.lock = threading.Lock()          # el motor principal atiende una petición a la vez
         self.positions: Dict[str, Dict[str, Any]] = {}
@@ -2074,9 +2076,26 @@ def make_handler(app: App):
 
         def do_GET(self):
             u = urlparse(self.path)
-            if u.path in ("/", "/index.html"):
+            if u.path in ("/", "/index.html", "/arriba", "/abajo"):
                 self._send(200, (WEB / "index.html").read_bytes().replace(b"__REGULACION__", REG.nombre.encode("utf-8")),
                            "text/html; charset=utf-8")
+            elif u.path in ("/pantallas.js", "/pantallas.css"):   # modo doble pantalla
+                tipo = "text/javascript; charset=utf-8" if u.path.endswith(".js") else "text/css; charset=utf-8"
+                self._send(200, (WEB / u.path[1:]).read_bytes(), tipo)
+            elif u.path == "/api/pantallas/eventos":
+                rol = parse_qs(u.query).get("rol", [""])[0]
+                if rol not in ("arriba", "abajo"):
+                    self._send(400, b"rol desconocido", "text/plain")
+                    return
+                self.send_response(200)
+                self.send_header("Content-Type", "text/event-stream; charset=utf-8")
+                self.send_header("Cache-Control", "no-store")
+                self.end_headers()
+
+                def escribir(datos: bytes):
+                    self.wfile.write(datos)
+                    self.wfile.flush()
+                servir_eventos(app.buzon, rol, escribir, lambda: True)
             elif u.path == "/manifest.webmanifest":      # RooBot instalable como app (Chrome en Android)
                 self._send(200, (WEB / "manifest.webmanifest").read_bytes(), "application/manifest+json")
             elif u.path == "/sw.js":
@@ -2127,6 +2146,13 @@ def make_handler(app: App):
                 if u.path == "/api/shutdown":
                     self._json({"ok": True})
                     threading.Thread(target=self.server.shutdown, daemon=True).start()
+                    return
+                if u.path == "/api/pantallas/campo":
+                    self._json({"v": app.buzon.publicar_campo(body)})
+                    return
+                if u.path == "/api/pantallas/toque":
+                    app.buzon.publicar_toque({k: body[k] for k in ("ruta", "id", "clave") if k in body})
+                    self._json({"ok": True})
                     return
                 if u.path == "/api/new":
                     self._json(app.new_position(body["team"], body.get("rival") or "", body.get("kind", "mixto"),

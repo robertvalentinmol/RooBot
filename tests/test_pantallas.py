@@ -83,3 +83,85 @@ def test_servir_eventos_escribe_sse_y_cierra():
     assert escrito[0].startswith(b"data: {")
     assert json.loads(escrito[0][len(b"data: "):].decode("utf-8"))["tipo"] in ("campo", "abajo")
     assert b.conectados("arriba") == 0
+
+
+# ------------------------------------------------------------------ rutas HTTP
+import threading
+import types
+import urllib.error
+import urllib.request
+from http.server import ThreadingHTTPServer
+
+from vgclab.app import make_handler
+
+
+@pytest.fixture
+def servidor():
+    app = types.SimpleNamespace(buzon=Buzon())
+    srv = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(app))
+    srv.daemon_threads = True
+    hilo = threading.Thread(target=srv.serve_forever, daemon=True)
+    hilo.start()
+    yield f"http://127.0.0.1:{srv.server_address[1]}", app
+    srv.shutdown()
+    srv.server_close()
+
+
+def _post(url, datos):
+    req = urllib.request.Request(url, data=json.dumps(datos).encode(), method="POST",
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=5) as r:
+        return json.loads(r.read())
+
+
+def _primer_evento(url, tipo, timeout=5):
+    with urllib.request.urlopen(url, timeout=timeout) as r:
+        assert r.headers["Content-Type"].startswith("text/event-stream")
+        for linea in r:
+            if linea.startswith(b"data:"):
+                ev = json.loads(linea[5:])
+                if ev.get("tipo") == tipo:
+                    return ev
+
+
+def test_arriba_y_abajo_sirven_la_app(servidor):
+    base, _ = servidor
+    for ruta in ("/arriba", "/abajo"):
+        with urllib.request.urlopen(base + ruta, timeout=5) as r:
+            assert r.status == 200 and b"<title>RooBot</title>" in r.read()
+
+
+def test_eventos_sse_entregan_el_ultimo_campo(servidor):
+    base, _ = servidor
+    assert _post(base + "/api/pantallas/campo", {"html": "<b>x</b>", "visible": True, "t": 0}) == {"v": 1}
+    ev = _primer_evento(base + "/api/pantallas/eventos?rol=arriba", "campo")
+    assert ev["html"] == "<b>x</b>" and ev["visible"] is True
+
+
+def test_toque_llega_a_abajo(servidor):
+    base, app = servidor
+    recibido = {}
+    hilo = threading.Thread(target=lambda: recibido.update(
+        ev=_primer_evento(base + "/api/pantallas/eventos?rol=abajo", "toque")), daemon=True)
+    hilo.start()
+    for _ in range(50):                      # esperar a que la ventana de abajo esté conectada
+        if app.buzon.conectados("abajo"):
+            break
+        threading.Event().wait(0.05)
+    assert _post(base + "/api/pantallas/toque", {"ruta": [0, 1]}) == {"ok": True}
+    hilo.join(5)
+    assert recibido["ev"]["ruta"] == [0, 1]
+
+
+def test_rol_invalido_400(servidor):
+    base, _ = servidor
+    with pytest.raises(urllib.error.HTTPError) as e:
+        urllib.request.urlopen(base + "/api/pantallas/eventos?rol=x", timeout=5)
+    assert e.value.code == 400
+
+
+def test_pantallas_js_y_css(servidor):
+    base, _ = servidor
+    for ruta, tipo in (("/pantallas.js", "text/javascript"), ("/pantallas.css", "text/css")):
+        with urllib.request.urlopen(base + ruta, timeout=5) as r:
+            assert r.headers["Content-Type"].startswith(tipo)
