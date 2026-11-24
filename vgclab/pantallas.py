@@ -16,8 +16,8 @@ ROLES = ("arriba", "abajo")
 class Suscripcion:
     """Una ventana conectada: sus eventos esperan en una cola hasta que los lee."""
 
-    def __init__(self, buzon: "Buzon", rol: str):
-        self.buzon, self.rol = buzon, rol
+    def __init__(self, buzon: "Buzon", rol: str, cid: Optional[str] = None):
+        self.buzon, self.rol, self.cid = buzon, rol, cid
         self._cola: "queue.Queue[dict]" = queue.Queue()
         self._cerrada = False
 
@@ -42,10 +42,13 @@ class Buzon:
         self._subs: Dict[str, List[Suscripcion]] = {r: [] for r in ROLES}
         self._campo: Optional[Dict[str, Any]] = None
         self._v = 0
+        self._cid_ultimo: Optional[str] = None     # la ventana de abajo que publicó el último campo
 
     # ---- lo que manda cada ventana
-    def publicar_campo(self, datos: dict) -> int:
+    def publicar_campo(self, datos: dict, cid: Optional[str] = None) -> int:
         with self._lock:
+            if cid:
+                self._cid_ultimo = cid
             self._v += 1
             self._campo = {"html": datos.get("html", ""), "visible": bool(datos.get("visible", True)),
                            "t": datos.get("t", 0), "v": self._v}
@@ -59,15 +62,18 @@ class Buzon:
             return dict(self._campo) if self._campo else None
 
     def publicar_toque(self, toque: dict) -> None:
+        """El toque va a la ventana de abajo que publicó el último campo (la que se ve arriba); si no se sabe
+        cuál es, a todas."""
         with self._lock:
-            for s in self._subs["abajo"]:
+            destino = [s for s in self._subs["abajo"] if self._cid_ultimo and s.cid == self._cid_ultimo]
+            for s in destino or self._subs["abajo"]:
                 s.poner({"tipo": "toque", **toque})
 
     # ---- conexiones
-    def suscribir(self, rol: str) -> Suscripcion:
+    def suscribir(self, rol: str, cid: Optional[str] = None) -> Suscripcion:
         if rol not in ROLES:
             raise ValueError(f"rol desconocido: {rol!r}")
-        s = Suscripcion(self, rol)
+        s = Suscripcion(self, rol, cid)
         with self._lock:
             self._subs[rol].append(s)
             if rol == "arriba":
@@ -98,10 +104,10 @@ class Buzon:
 
 
 def servir_eventos(buzon: Buzon, rol: str, escribir: Callable[[bytes], None], seguir: Callable[[], bool],
-                   latido: float = 15.0) -> None:
+                   latido: float = 15.0, cid: Optional[str] = None) -> None:
     """Flujo SSE de una ventana: un «data:» por evento y un comentario de latido si no pasa nada.
     Termina cuando `seguir()` es falso o el navegador cierra la conexión; siempre da de baja la ventana."""
-    s = buzon.suscribir(rol)
+    s = buzon.suscribir(rol, cid)
     try:
         while seguir():
             ev = s.siguiente(latido)

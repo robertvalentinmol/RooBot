@@ -186,3 +186,61 @@ def test_arriba_sabe_en_pocos_segundos_que_abajo_se_cerro(servidor):
         time.sleep(0.1)
     assert eventos, "arriba no se enteró de que abajo se cerró"
     assert time.time() - t0 <= 5
+
+
+# ------------------------------------------------------------------ revisión final
+def test_toques_solo_a_la_ultima_ventana_de_abajo_que_publico():
+    b = Buzon()
+    vieja, nueva = b.suscribir("abajo", cid="A"), b.suscribir("abajo", cid="B")
+    b.publicar_campo({"html": "<a>", "visible": True, "t": 0}, cid="A")
+    b.publicar_campo({"html": "<b>", "visible": True, "t": 0}, cid="B")
+    b.publicar_toque({"ruta": [1]})
+    assert _de_tipo(_eventos(nueva, 5), "toque") == [{"tipo": "toque", "ruta": [1]}]
+    assert _de_tipo(_eventos(vieja, 5, timeout=0.05), "toque") == []
+
+
+def test_sin_publicador_conocido_el_toque_va_a_todas():
+    b = Buzon()
+    s1, s2 = b.suscribir("abajo"), b.suscribir("abajo")
+    b.publicar_toque({"ruta": [0]})
+    assert _de_tipo(_eventos(s1, 5), "toque") and _de_tipo(_eventos(s2, 5), "toque")
+
+
+def test_http_cid_de_abajo_recibe_el_toque(servidor):
+    base, app = servidor
+    recibido = {}
+    hilo = threading.Thread(target=lambda: recibido.update(
+        ev=_primer_evento(base + "/api/pantallas/eventos?rol=abajo&cid=X1", "toque")), daemon=True)
+    hilo.start()
+    for _ in range(50):
+        if app.buzon.conectados("abajo"):
+            break
+        threading.Event().wait(0.05)
+    _post(base + "/api/pantallas/campo", {"html": "<i>", "visible": True, "t": 0, "cid": "X1"})
+    _post(base + "/api/pantallas/toque", {"ruta": [2]})
+    hilo.join(5)
+    assert recibido["ev"]["ruta"] == [2]
+
+
+def _post_crudo(url, cuerpo, cabeceras):
+    req = urllib.request.Request(url, data=cuerpo, method="POST", headers=cabeceras)
+    return urllib.request.urlopen(req, timeout=5)
+
+
+def test_otra_web_no_puede_publicar_ni_tocar(servidor):
+    """Una página de otro origen no puede meter HTML en la ventana de arriba ni mandar toques."""
+    base, app = servidor
+    for ruta in ("/api/pantallas/campo", "/api/pantallas/toque"):
+        with pytest.raises(urllib.error.HTTPError) as e:     # origen ajeno
+            _post_crudo(base + ruta, b'{"html":"<img src=x onerror=alert(1)>","ruta":[0]}',
+                        {"Content-Type": "application/json", "Origin": "https://malo.example"})
+        assert e.value.code == 403
+        with pytest.raises(urllib.error.HTTPError) as e:     # text/plain: el truco sin preflight
+            _post_crudo(base + ruta, b'{"html":"x","ruta":[0]}', {"Content-Type": "text/plain"})
+        assert e.value.code == 403
+    assert app.buzon.ultimo_campo() is None
+    # la propia app (mismo origen) sí puede
+    host = base.replace("http://", "")
+    r = _post_crudo(base + "/api/pantallas/campo", b'{"html":"<p>","visible":true,"t":0}',
+                    {"Content-Type": "application/json", "Origin": f"http://{host}"})
+    assert json.loads(r.read())["v"] == 1

@@ -81,13 +81,54 @@ function morph(destino, html, crear) {
   igualar(destino, crear(html));
 }
 
-if (typeof module !== 'undefined') module.exports = { rolDe, rutaDe, resolverRuta, morph };
+const ESPERA = 'Abre RooBot en la pantalla de abajo (Chrome → 127.0.0.1:8765/abajo)';
+
+/** Qué dice arriba la pantalla de espera: el aviso si no hay ventana abajo; si la hay pero está en una página sin
+ *  campo (Inicio, Mi progreso…), otra línea; con campo, nada (null). */
+function mensajeEspera(abajoConectada, campoVisible) {
+  if (!abajoConectada) return ESPERA;
+  if (!campoVisible) return 'Elige un ejercicio en la pantalla de abajo';
+  return null;
+}
+
+/** Envía de uno en uno y, mientras hay uno en vuelo, guarda sólo el último valor: así las copias del campo no pueden
+ *  llegar desordenadas al servidor y nunca se queda arriba un estado viejo. Un fallo no corta la cadena. */
+function ultimoGana(fn) {
+  let enVuelo = false, hay = false, siguiente;
+  const lanzar = d => {
+    enVuelo = true;
+    let pr;
+    try { pr = Promise.resolve(fn(d)); } catch (e) { pr = Promise.resolve(); }
+    pr.catch(() => {}).then(() => {
+      enVuelo = false;
+      if (hay) { hay = false; lanzar(siguiente); }
+    });
+  };
+  return d => { if (enVuelo) { hay = true; siguiente = d; } else lanzar(d); };
+}
+
+/** Envía todos los valores, en orden y de uno en uno (los toques: el orden decide Lead 1 y Lead 2). */
+function enCola(fn) {
+  const cola = [];
+  let enVuelo = false;
+  const siguiente = () => {
+    if (!cola.length) { enVuelo = false; return; }
+    enVuelo = true;
+    const d = cola.shift();
+    let pr;
+    try { pr = Promise.resolve(fn(d)); } catch (e) { pr = Promise.resolve(); }
+    pr.catch(() => {}).then(siguiente);
+  };
+  return d => { cola.push(d); if (!enVuelo) siguiente(); };
+}
+
+if (typeof module !== 'undefined') module.exports = { rolDe, rutaDe, resolverRuta, morph, mensajeEspera, ultimoGana, enCola, ESPERA };
 
 /* ---------------------------------------------------------------- en el navegador */
 
 function enviar(url, datos) {
   return fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(datos)})
-    .catch(() => {});
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); });
 }
 
 /* Ventana de abajo: la app de siempre con los controles en pestañas; publica el campo y recibe los toques. */
@@ -128,7 +169,36 @@ function iniciarAbajo() {
   const nuevo = $('#newBtn');
   if (nuevo) nuevo.addEventListener('click', () => abrir('jugada'));
 
-  // copia del campo para la ventana de arriba: como mucho una por fotograma y sólo si cambió
+  // team preview (ejercicio y partida contra el bot): tus 6 también se eligen aquí abajo, no sólo tocando arriba
+  const tp = $('#tp'), tarjetas = $('#controlsCard');
+  const eleccion = document.createElement('div');
+  eleccion.id = 'pantTP';
+  if (tarjetas) tarjetas.before(eleccion);
+  let firmaTP = '';
+  const pintarTP = () => {
+    const mias = tp && tp.classList.contains('on') ? Array.from(tp.querySelectorAll('.tprow.me .tpc')) : [];
+    const datos = mias.map(c => {
+      const nombre = (c.querySelector('.n') || {}).textContent || '?';
+      const marca = c.classList.contains('sel') ? ((c.querySelector('.badge.n') || {}).textContent || '✓') : '';
+      return [nombre, marca];
+    });
+    const firma = JSON.stringify(datos);
+    if (firma === firmaTP) return;
+    firmaTP = firma;
+    eleccion.innerHTML = datos.map(([n, m], i) =>
+      `<button type="button" data-i="${i}" class="${m ? 'on' : ''}"><span>${n}</span>${m ? `<b>${m}</b>` : ''}</button>`).join('');
+  };
+  eleccion.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    const mias = tp ? tp.querySelectorAll('.tprow.me .tpc') : [];
+    if (b && mias[+b.dataset.i]) mias[+b.dataset.i].click();
+  });
+  if (tp) new MutationObserver(pintarTP).observe(tp, {subtree: true, childList: true, attributes: true, characterData: true});
+  pintarTP();
+
+  // copia del campo para la ventana de arriba: como mucho una por fotograma, sólo si cambió y de una en una
+  const cid = Math.random().toString(36).slice(2);   // esta ventana: los toques de arriba vienen sólo a la última que publicó
+  const enviarCampo = ultimoGana(d => enviar('/api/pantallas/campo', d));
   let ultimo = '', pendiente = false;
   const publicar = () => {
     pendiente = false;
@@ -137,7 +207,7 @@ function iniciarAbajo() {
     const firma = (visible ? '1' : '0') + html;
     if (firma === ultimo) return;
     ultimo = firma;
-    enviar('/api/pantallas/campo', {html, visible, t: Date.now()});
+    enviarCampo({html, visible, t: Date.now(), cid});
   };
   const programar = () => {
     if (pendiente) return;
@@ -148,7 +218,7 @@ function iniciarAbajo() {
   programar();
 
   // toques que llegan de arriba (y, al reconectar tras reiniciar el servidor, el campo otra vez)
-  const es = new EventSource('/api/pantallas/eventos?rol=abajo');
+  const es = new EventSource('/api/pantallas/eventos?rol=abajo&cid=' + cid);
   es.onopen = () => { ultimo = ''; programar(); };
   es.onmessage = e => {
     let ev;
@@ -160,15 +230,13 @@ function iniciarAbajo() {
   };
 }
 
-const ESPERA = 'Abre RooBot en la pantalla de abajo (Chrome → 127.0.0.1:8765/abajo)';
-
 /* Ventana de arriba: sólo el campo, copiado de la ventana de abajo; los toques vuelven abajo. */
 function iniciarArriba() {
   const campo = document.querySelector('#fieldCard');
   const capa = document.createElement('div');
   capa.id = 'pantEspera';
   capa.innerHTML = `<div class="pe-caja"><img src="/img/roobot-192.png" alt="" width="72" height="72">
-    <p>${ESPERA}</p><button type="button" class="btn">Usar solo esta pantalla</button></div>`;
+    <p></p><button type="button" class="btn">Usar solo esta pantalla</button></div>`;
   document.body.appendChild(capa);
   capa.querySelector('button').onclick = () => {
     try { localStorage.removeItem('roobot.pantallas'); } catch (e) { /* nada */ }
@@ -176,8 +244,11 @@ function iniciarArriba() {
   };
 
   let abajoConectada = false, campoVisible = false, hayCampo = false;
+  const texto = capa.querySelector('p');
   const espera = () => {
-    const mostrar = !abajoConectada || !campoVisible;
+    const msg = mensajeEspera(abajoConectada, campoVisible);
+    const mostrar = msg !== null;
+    if (mostrar) texto.textContent = msg;
     capa.classList.toggle('on', mostrar);
     document.documentElement.classList.toggle('pantalla-atenuada', mostrar && hayCampo);
   };
@@ -209,12 +280,13 @@ function iniciarArriba() {
   };
   es.onerror = () => { abajoConectada = false; espera(); };   // servidor reiniciándose: EventSource reconecta solo
 
-  // los toques en el campo no se ejecutan aquí: se mandan abajo
+  // los toques en el campo no se ejecutan aquí: se mandan abajo, en orden
+  const tocar = enCola(r => enviar('/api/pantallas/toque', r));
   campo.addEventListener('click', e => {
     e.preventDefault();
     e.stopPropagation();
     const r = rutaDe(e.target, campo);
-    if (r) enviar('/api/pantallas/toque', r);
+    if (r) tocar(r);
   }, true);
 }
 

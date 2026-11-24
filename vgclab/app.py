@@ -2071,6 +2071,15 @@ def make_handler(app: App):
             self.end_headers()
             self.wfile.write(body)
 
+        def _mismo_origen(self) -> bool:
+            """Modo doble pantalla: sólo la propia app puede publicar el campo o mandar toques. Exigir JSON obliga a
+            otra web a pasar por un preflight CORS (que no se concede), y un Origin ajeno se rechaza."""
+            if not (self.headers.get("Content-Type") or "").startswith("application/json"):
+                return False
+            origen = self.headers.get("Origin")
+            puerto = self.server.server_address[1]
+            return origen is None or origen in (f"http://127.0.0.1:{puerto}", f"http://localhost:{puerto}")
+
         def _json(self, obj, code=200):
             self._send(code, json.dumps(obj, ensure_ascii=False).encode("utf-8"), "application/json; charset=utf-8")
 
@@ -2083,7 +2092,8 @@ def make_handler(app: App):
                 tipo = "text/javascript; charset=utf-8" if u.path.endswith(".js") else "text/css; charset=utf-8"
                 self._send(200, (WEB / u.path[1:]).read_bytes(), tipo)
             elif u.path == "/api/pantallas/eventos":
-                rol = parse_qs(u.query).get("rol", [""])[0]
+                q = parse_qs(u.query)
+                rol, cid = q.get("rol", [""])[0], (q.get("cid", [""])[0] or None)
                 if rol not in ("arriba", "abajo"):
                     self._send(400, b"rol desconocido", "text/plain")
                     return
@@ -2096,7 +2106,7 @@ def make_handler(app: App):
                     self.wfile.write(datos)
                     self.wfile.flush()
                 # latido cada 2 s: una ventana cerrada se detecta al fallar la escritura (≤ 5 s)
-                servir_eventos(app.buzon, rol, escribir, lambda: True, latido=2.0)
+                servir_eventos(app.buzon, rol, escribir, lambda: True, latido=2.0, cid=cid)
             elif u.path == "/manifest.webmanifest":      # RooBot instalable como app (Chrome en Android)
                 self._send(200, (WEB / "manifest.webmanifest").read_bytes(), "application/manifest+json")
             elif u.path == "/sw.js":
@@ -2141,6 +2151,9 @@ def make_handler(app: App):
 
         def do_POST(self):
             u = urlparse(self.path)
+            if u.path.startswith("/api/pantallas/") and not self._mismo_origen():
+                self._send(403, b"solo desde RooBot", "text/plain")
+                return
             try:
                 n = int(self.headers.get("Content-Length") or 0)
                 body = json.loads(self.rfile.read(n) or b"{}")
@@ -2149,7 +2162,7 @@ def make_handler(app: App):
                     threading.Thread(target=self.server.shutdown, daemon=True).start()
                     return
                 if u.path == "/api/pantallas/campo":
-                    self._json({"v": app.buzon.publicar_campo(body)})
+                    self._json({"v": app.buzon.publicar_campo(body, body.get("cid"))})
                     return
                 if u.path == "/api/pantallas/toque":
                     app.buzon.publicar_toque({k: body[k] for k in ("ruta", "id", "clave") if k in body})
